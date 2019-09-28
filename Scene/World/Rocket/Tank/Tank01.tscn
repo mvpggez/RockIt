@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scene/World/Rocket/Tank/tank.gd" type="Script" id=1]
+[ext_resource path="res://Asset/Rocket/Tank/Tank01.gltf" type="PackedScene" id=2]
+
+[node name="Tank" type="Spatial"]
+script = ExtResource( 1 )
+mesh_resource = ExtResource( 2 )
+mesh_offset = Vector3( 0, 1.7, 0 )
+mesh_height = 3.5

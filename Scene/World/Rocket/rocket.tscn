@@ -3,6 +3,42 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends RigidBody
 
+export (Resource) var default_head = null
+export (Resource) var default_tank = null
+export (Resource) var default_thruster = null
+export (Resource) var default_booster = null
+
+func _ready():
+	add_child(default_head.instance())
+	add_child(default_tank.instance())
+	add_child(default_thruster.instance())
+	
+	rebuildRocket()
+	#booster = default_booster.instance()
+
+func rebuildRocket():
+	#clear all parts
+	for child in $\"Head\".get_children():
+		child.free()
+	for child in $\"Tank\".get_children():
+		child.free()
+	for child in $\"Thruster\".get_children():
+		child.free()
+	#for child in $\"Booster\".get_children():
+	#	child.free()
+	#instance 3d objects
+	var height = 0.0
+	$\"Thruster\".add_child($\"Thruster\".mesh_resource.instance())
+	$\"Thruster\".translate($\"Thruster\".mesh_offset)
+	height += $\"Thruster\".mesh_height
+	
+	$\"Tank\".add_child($\"Tank\".mesh_resource.instance())
+	$\"Tank\".translate($\"Tank\".mesh_offset+Vector3(0, height, 0))
+	height += $\"Tank\".mesh_height
+	
+	$\"Head\".add_child($\"Head\".mesh_resource.instance())
+	$\"Head\".translate($\"Head\".mesh_offset+Vector3(0, height, 0))
+
 func _integrate_forces(state):
 	if Input.is_action_pressed(\"ui_up\"):
 		#add_central_force needs the force in global space
@@ -16,7 +52,7 @@ func _integrate_forces(state):
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 2, 5, 2 )
 
-[sub_resource type="PrismMesh" id=3]
+[sub_resource type="PrismMesh" id=5]
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 1, 2.5, 1 )
@@ -28,15 +64,19 @@ axis_lock_angular_y = true
 script = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+visible = false
 mesh = SubResource( 2 )
 material/0 = null
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45323, 0 )
-mesh = SubResource( 3 )
+visible = false
+mesh = SubResource( 5 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 shape = SubResource( 4 )
 
 [node name="Camera" type="Camera" parent="."]
