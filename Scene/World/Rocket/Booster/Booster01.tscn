@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scene/World/Rocket/Booster/booster.gd" type="Script" id=1]
+
+[node name="Booster" type="Spatial"]
+script = ExtResource( 1 )
+fuel_consumption = 200.0
+thrust = 70.0
