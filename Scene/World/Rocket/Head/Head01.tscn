@@ -7,3 +7,4 @@
 script = ExtResource( 1 )
 mesh_resource = ExtResource( 2 )
 mesh_offset = Vector3( 0, 0.4, 0 )
+thrust = 2.0

@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+func _process(delta):
+	#Simple debug-output
+	var rocket = get_node(\"../Rocket\")
+	var s = \"\"
+	s += \"FPS: \"+str(Engine.get_frames_per_second() )+\"\\n\"
+	s += \"Height: \"+str(rocket.get_height())+\"\\n\"
+	s += \"Fuel: \"+str(rocket.get_fuel())+\"\\n\"
+	$RichTextLabel.text = s
+"
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 4.81152
+margin_top = 1.75809
+margin_right = 272.812
+margin_bottom = 220.758
+color = Color( 0, 0, 0, 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 14.3785
+margin_top = 10.7887
+margin_right = 271.379
+margin_bottom = 215.789

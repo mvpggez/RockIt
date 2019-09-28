@@ -8,13 +8,21 @@ export (Resource) var default_tank = null
 export (Resource) var default_thruster = null
 export (Resource) var default_booster = null
 
+var time = 0.0 #time passed since creation of this node
+var time_last_integrate_forces = 0.0 #timestamp of the last time, integrate forces was called
+var height = 0.0 #Height of the Rocket from ground to the top of the tank
+var fuel_remaining = 0.0 #Remaining fuel
+
 func _ready():
 	add_child(default_head.instance())
 	add_child(default_tank.instance())
 	add_child(default_thruster.instance())
+	#add_child(default_booster.instance())
 	
 	rebuildRocket()
-	#booster = default_booster.instance()
+
+func _physics_process(delta):
+	time += delta
 
 func rebuildRocket():
 	#clear all parts
@@ -26,8 +34,12 @@ func rebuildRocket():
 		child.free()
 	#for child in $\"Booster\".get_children():
 	#	child.free()
-	#instance 3d objects
-	var height = 0.0
+	
+	#reset height
+	height = 0.0
+	
+	#instance 3d parts
+	#note, that every part translates by its own offset and the height of the parts underneath
 	$\"Thruster\".add_child($\"Thruster\".mesh_resource.instance())
 	$\"Thruster\".translate($\"Thruster\".mesh_offset)
 	height += $\"Thruster\".mesh_height
@@ -38,21 +50,46 @@ func rebuildRocket():
 	
 	$\"Head\".add_child($\"Head\".mesh_resource.instance())
 	$\"Head\".translate($\"Head\".mesh_offset+Vector3(0, height, 0))
+	
+	#Set startvalue for fuel
+	fuel_remaining = $\"Tank\".capacity
 
 func _integrate_forces(state):
-	if Input.is_action_pressed(\"ui_up\"):
-		#add_central_force needs the force in global space
-		add_central_force(self.transform.basis.xform(Vector3(0,20,0))) #TODO: fix constant values
-	#Version 1: Apply force from Thrusters on the head
-	if Input.is_action_pressed(\"ui_right\"):	
-		add_force(self.transform.basis.xform(Vector3(2,0,0)), Vector3(0.0, 3, 0.0)) #TODO: fix constant values
-	if Input.is_action_pressed(\"ui_left\"):
-		add_force(self.transform.basis.xform(Vector3(-2,0,0)), Vector3(0.0, 3, 0.0)) #TODO: fix constant values"
+	#custom delta-implementation
+	var delta = time - time_last_integrate_forces
+	time_last_integrate_forces = time
+	
+	#keep integrate_forces updated
+	add_central_force(self.transform.basis.xform(Vector3(0,0.01,0))) 
+	
+	#you can only control the rocket as long as you have fuel
+	if fuel_remaining > 0: 
+		if not Input.is_action_pressed(\"ui_down\"):
+			#add_central_force needs the force in global space
+			add_central_force(self.transform.basis.xform(Vector3(0,$\"Thruster\".thrust,0))) #TODO: fix constant values
+			fuel_remaining -= $\"Thruster\".fuel_consumption*delta
+			
+		#Version 1: Apply force from Thrusters on the head
+		if Input.is_action_pressed(\"ui_right\"):	
+			add_force(self.transform.basis.xform(Vector3($\"Head\".thrust,0,0)), Vector3(0.0, 3, 0.0)) #TODO: fix constant values
+			fuel_remaining -= $\"Head\".fuel_consumption*delta
+		if Input.is_action_pressed(\"ui_left\"):
+			add_force(self.transform.basis.xform(Vector3(-$\"Head\".thrust,0,0)), Vector3(0.0, 3, 0.0)) #TODO: fix constant values
+			fuel_remaining -= $\"Head\".fuel_consumption*delta
+	
+		if fuel_remaining < 0:
+			fuel_remaining = 0
+			
+func get_fuel():
+	return fuel_remaining
+	
+func get_height():
+	return translation.y"
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 2, 5, 2 )
 
-[sub_resource type="PrismMesh" id=5]
+[sub_resource type="PrismMesh" id=3]
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 1, 2.5, 1 )
@@ -72,7 +109,7 @@ material/0 = null
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45323, 0 )
 visible = false
-mesh = SubResource( 5 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
