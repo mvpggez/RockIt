@@ -66,20 +66,20 @@ func _integrate_forces(state):
 	if fuel_remaining > 0: 
 		if not Input.is_action_pressed(\"ui_down\"):
 			#add_central_force needs the force in global space
-			add_central_force(self.transform.basis.xform(Vector3(0,$\"Thruster\".thrust,0))) #TODO: fix constant values
+			add_central_force(self.transform.basis.xform(Vector3(0,$\"Thruster\".thrust,0))) 
 			fuel_remaining -= $\"Thruster\".fuel_consumption*delta
 			
 		if Input.is_action_pressed(\"ui_up\"):
 			#add_central_force needs the force in global space
-			add_central_force(self.transform.basis.xform(Vector3(0,$\"Booster\".thrust,0))) #TODO: fix constant values
+			add_central_force(self.transform.basis.xform(Vector3(0,$\"Booster\".thrust,0))) 
 			fuel_remaining -= $\"Booster\".fuel_consumption*delta
 			
 		#Version 1: Apply force from Thrusters on the head
 		if Input.is_action_pressed(\"ui_right\"):	
-			add_force(self.transform.basis.xform(Vector3($\"Head\".thrust,0,0)), Vector3(0.0, 3, 0.0)) #TODO: fix constant values
+			add_force(self.transform.basis.xform(Vector3($\"Head\".thrust,0,0)), Vector3(0.0, height, 0.0)) 
 			fuel_remaining -= $\"Head\".fuel_consumption*delta
 		if Input.is_action_pressed(\"ui_left\"):
-			add_force(self.transform.basis.xform(Vector3(-$\"Head\".thrust,0,0)), Vector3(0.0, 3, 0.0)) #TODO: fix constant values
+			add_force(self.transform.basis.xform(Vector3(-$\"Head\".thrust,0,0)), Vector3(0.0, height, 0.0)) 
 			fuel_remaining -= $\"Head\".fuel_consumption*delta
 	
 		if fuel_remaining < 0:
@@ -89,7 +89,18 @@ func get_fuel():
 	return fuel_remaining
 	
 func get_height():
-	return translation.y"
+	return translation.y
+	
+func get_velocity():
+	return linear_velocity
+	
+func get_acceleration():
+	return linear_velocity #TODO: Change
+	
+func get_center():
+	var center = translation
+	center += transform.basis.xform(Vector3(0,height/2,0))
+	return center"
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 2, 5, 2 )
@@ -120,6 +131,3 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 shape = SubResource( 4 )
-
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.0272 )
