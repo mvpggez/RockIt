@@ -8,3 +8,4 @@ script = ExtResource( 1 )
 mesh_resource = ExtResource( 2 )
 mesh_offset = Vector3( 0, 1.7, 0 )
 mesh_height = 3.5
+capacity = 150.0

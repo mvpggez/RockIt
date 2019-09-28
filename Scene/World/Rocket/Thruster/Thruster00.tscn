@@ -8,4 +8,5 @@ script = ExtResource( 1 )
 mesh_resource = ExtResource( 2 )
 mesh_offset = Vector3( 0, 0.5, 0 )
 mesh_height = 1.0
-fuel_consumption = 10.0
+fuel_consumption = 3.0
+thrust = 10.2
