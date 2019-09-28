@@ -14,7 +14,17 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-"
+
+func _integrate_forces(state):
+	
+	if Input.is_action_pressed(\"ui_up\"):
+		#add_central_force needs the force in global space
+		add_central_force(self.transform.basis.xform(Vector3(0,20,0))) #TODO: fix constant values
+	#Version 1: Apply force from Thrusters on the head
+	if Input.is_action_pressed(\"ui_right\"):	
+		add_force(self.transform.basis.xform(Vector3(2,0,0)), Vector3(0.0, 3, 0.0)) #TODO: fix constant values
+	if Input.is_action_pressed(\"ui_left\"):
+		add_force(self.transform.basis.xform(Vector3(-2,0,0)), Vector3(0.0, 3, 0.0)) #TODO: fix constant values"
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 2, 5, 2 )
@@ -25,6 +35,8 @@ size = Vector3( 2, 5, 2 )
 extents = Vector3( 1, 2.5, 1 )
 
 [node name="Rocket" type="RigidBody"]
+axis_lock_linear_z = true
+axis_lock_angular_x = true
 script = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
@@ -40,4 +52,4 @@ material/0 = null
 shape = SubResource( 3 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.9408 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.0272 )
