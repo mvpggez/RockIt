@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://Scene/World/Rocket/part.gd\"
+
+export var capacity = 100.0 #Capacity of the Fueltank"
+
+[node name="Tank" type="Spatial"]
+script = SubResource( 1 )
