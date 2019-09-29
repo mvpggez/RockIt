@@ -1,19 +1,49 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Asset/Obstacle/balloon00.gltf" type="PackedScene" id=1]
+[ext_resource path="res://Asset/Obstacle/AirTaxi00.gltf" type="PackedScene" id=1]
+[ext_resource path="res://Asset/Obstacle/spinning.tres" type="Material" id=2]
 
-[sub_resource type="SphereShape" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Spatial
+
+var time = 0.0
+
+func _process(delta):
+	time += delta
+	$Rotor00.get_surface_material(0).set_shader_param(\"time\", time)
+	$Rotor00.get_surface_material(0).set_shader_param(\"frequency\", 2)
+"
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 0.232286, 0.664132, 0.264065 )
+extents = Vector3( 2.2, 0.2, 2.2 )
+
+[sub_resource type="SphereShape" id=3]
+radius = 1.1
 
 [node name="Obstacle" type="StaticBody"]
 
 [node name="Scene Root" parent="." instance=ExtResource( 1 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+script = SubResource( 1 )
+
+[node name="Rotor00" parent="Scene Root" index="1"]
+material/0 = ExtResource( 2 )
+
+[node name="Rotor00001" parent="Scene Root" index="2"]
+material/0 = ExtResource( 2 )
+
+[node name="Rotor00002" parent="Scene Root" index="3"]
+material/0 = ExtResource( 2 )
+
+[node name="Rotor00003" parent="Scene Root" index="4"]
+material/0 = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.151741, 1.38437, 0 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
-transform = Transform( 0.941308, 0, -0.337549, 0, 1, 0, 0.337549, 0, 0.941308, 0, -1.40281, 0 )
-shape = SubResource( 2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.382367, 0 )
+shape = SubResource( 3 )
+
+[editable path="Scene Root"]
