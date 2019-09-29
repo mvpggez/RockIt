@@ -20,12 +20,11 @@ func _physics_process(delta):
 		for grandchild in child.get_children():
 			var distance = (grandchild.get_global_transform().origin-position).length()
 			if distance >= despawn_distance:
-				child.current_count -= 1
-				grandchild.free()
+				child.free_obstacle(grandchild)
 		#elif distance >= rocket_distance_near and child.get_global_transform().origin.y>position.y:
 		#	count+=1
 
-func spawn_obstacle(spawner, obstacle_resource, spawn_distance_near, spawn_distance_far):
+func spawn_obstacle(spawner, obstacle_resource, spawn_distance_near, spawn_distance_far, min_scale, max_scale):
 	var position = get_node(\"../Rocket\").get_global_transform().origin
 	var instance = obstacle_resource.instance()
 	
@@ -52,6 +51,8 @@ func spawn_obstacle(spawner, obstacle_resource, spawn_distance_near, spawn_dista
 	spawner.current_count += 1
 	instance.translate(generated_position)
 	instance.rotate_y(randf()*PI*2)
+	var temp_scale = randf()*(max_scale-min_scale)+min_scale 
+	instance.global_scale(Vector3(temp_scale,temp_scale,temp_scale))
 "
 
 [node name="ObstacleManager" type="Spatial"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends RigidBody
@@ -12,6 +12,8 @@ var time = 0.0 #time passed since creation of this node
 var time_last_integrate_forces = 0.0 #timestamp of the last time, integrate forces was called
 var height = 0.0 #Height of the Rocket from ground to the top of the tank
 var fuel_remaining = 0.0 #Remaining fuel
+var booster_fuel_remaining = 0.0
+var durability = 0 #How many obstacles can be destroyed?
 
 func _ready():
 	add_child(default_head.instance())
@@ -53,6 +55,10 @@ func rebuildRocket():
 	
 	#Set startvalue for fuel
 	fuel_remaining = $\"Tank\".capacity
+	#Set startvalue for fuel
+	booster_fuel_remaining = $\"Booster\".capacity
+	#Set startvalue for durability
+	durability = $\"Head\".durability
 
 func _integrate_forces(state):
 	#custom delta-implementation
@@ -68,12 +74,6 @@ func _integrate_forces(state):
 			#add_central_force needs the force in global space
 			add_central_force(self.transform.basis.xform(Vector3(0,$\"Thruster\".thrust,0))) 
 			fuel_remaining -= $\"Thruster\".fuel_consumption*delta
-			
-		if Input.is_action_pressed(\"ui_up\"):
-			#add_central_force needs the force in global space
-			add_central_force(self.transform.basis.xform(Vector3(0,$\"Booster\".thrust,0))) 
-			fuel_remaining -= $\"Booster\".fuel_consumption*delta
-			
 		#Version 1: Apply force from Thrusters on the head
 		if Input.is_action_pressed(\"ui_right\"):	
 			add_force(self.transform.basis.xform(Vector3($\"Head\".thrust,0,0)), Vector3(0.0, height, 0.0)) 
@@ -84,9 +84,25 @@ func _integrate_forces(state):
 	
 		if fuel_remaining < 0:
 			fuel_remaining = 0
+	if booster_fuel_remaining > 0:
+		if Input.is_action_pressed(\"ui_up\"):
+			#add_central_force needs the force in global space
+			add_central_force(self.transform.basis.xform(Vector3(0,$\"Booster\".thrust,0))) 
+			booster_fuel_remaining -= $\"Booster\".fuel_consumption*delta
+			if booster_fuel_remaining < 0:
+				booster_fuel_remaining = 0
+			
+	for collider in get_colliding_bodies():
+		if collider.is_in_group(\"Obstacle\"):
+			if durability > 0:
+				collider.get_parent().free_obstacle(collider)
+				durability-=1
 			
 func get_fuel():
 	return fuel_remaining
+	
+func get_booster_fuel():
+	return booster_fuel_remaining
 	
 func get_height():
 	return translation.y
@@ -100,7 +116,13 @@ func get_acceleration():
 func get_center():
 	var center = translation
 	center += transform.basis.xform(Vector3(0,height/2,0))
-	return center"
+	return center
+
+func _on_Head_body_entered(body):
+	pass
+	#if body.is_in_group(\"Obstacle\"):
+		#body.get_parent().free_obstacle(body)
+"
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 2, 5, 2 )
@@ -110,7 +132,12 @@ size = Vector3( 2, 5, 2 )
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 1, 2.5, 1 )
 
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 1.5, 0.5, 1 )
+
 [node name="Rocket" type="RigidBody"]
+contacts_reported = 1
+contact_monitor = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -131,3 +158,10 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 shape = SubResource( 4 )
+
+[node name="Area" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0 )
+shape = SubResource( 5 )
+[connection signal="body_entered" from="Area" to="." method="_on_Head_body_entered"]
