@@ -97,6 +97,8 @@ func _integrate_forces(state):
 		if fuel_remaining < 0:
 			fuel_remaining = 0
 			set_particle_mode(ParticleMode.HALT)
+	else:
+		set_particle_mode(ParticleMode.HALT)
 	if booster_fuel_remaining > 0:
 		if Input.is_action_pressed(\"ui_up\"):
 			#add_central_force needs the force in global space
