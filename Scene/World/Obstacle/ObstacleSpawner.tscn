@@ -10,6 +10,8 @@ export var min_distance = 1.0 #minimum distance between two obstacles, not activ
 export (Resource) var obstacle_resource = null 
 export var rocket_distance_near = 30 #Begin of the spawn-area
 export var rocket_distance_far = 70 #End of the spawn-area, begin of the despawn area
+export var min_scale = 1.0
+export var max_scale = 1.0
 
 var current_count = 0
 
@@ -17,7 +19,12 @@ func _ready():
 	randomize()
 	if min_height == 0:
 		for i in range(max_count):
-			get_parent().spawn_obstacle(self, obstacle_resource, rocket_distance_near, 5)
+			get_parent().spawn_obstacle(self, 
+										obstacle_resource, 
+										rocket_distance_near, 
+										5,
+										min_scale,
+										max_scale)
 
 	
 func free_obstacle(obstacle):
@@ -32,8 +39,14 @@ func _physics_process(delta):
 	#spawn on given condition
 	if position.y > min_height and position.y < max_height and current_count<max_count:
 		for i in range(max_count-current_count):
-			get_parent().spawn_obstacle(self, obstacle_resource, rocket_distance_far, rocket_distance_near)
-"
+			get_parent().spawn_obstacle(self, 
+										obstacle_resource, 
+										rocket_distance_far, 
+										rocket_distance_near,
+										min_scale,
+										max_scale)
+
+	"
 
 [node name="ObstacleSpawner" type="Spatial"]
 script = SubResource( 1 )
