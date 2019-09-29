@@ -5,6 +5,14 @@ script/source = "extends Spatial
 
 export var despawn_distance = 70.0
 
+#Concept:
+#The obstacle spawner spawns and despawns the obstacles under the following conditions:
+#An obstacle is spawned iff the rocket is between min- and max-height and there are 
+#less than max_count obstacles between rocket_distance_near and rocket_distance_far
+#It is spawned to a random location between rocket_distance_near and rocket_distance_far
+#above the player, where the min_distance to the other obstacles is respected
+#An obstacle is despawned iff its distance to the rocket exceeds rocket_distance_far
+
 func _physics_process(delta):
 	var position = get_node(\"../Rocket\").get_global_transform().origin
 	#despawn on given condition
@@ -27,7 +35,6 @@ func spawn_obstacle(spawner, obstacle_resource, spawn_distance_near, spawn_dista
 									 sin(acos(x_temp)),
 									 0.0)*(randf()*(spawn_distance_far-spawn_distance_near)+spawn_distance_near)
 	generated_position+=position
-	
 	
 	for child in get_children():
 		for grandchild in child.get_children():
