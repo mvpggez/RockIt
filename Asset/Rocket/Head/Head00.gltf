@@ -1,6 +1,6 @@
 {
     "asset" : {
-        "generator" : "Khronos glTF Blender I/O v0.9.73",
+        "generator" : "Khronos glTF Blender I/O v0.9.36",
         "version" : "2.0"
     },
     "scene" : 0,
@@ -21,21 +21,21 @@
     "materials" : [
         {
             "doubleSided" : true,
-            "name" : "Wei\u00df",
+            "name" : "white",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    0.800000011920929,
-                    0.800000011920929,
-                    0.800000011920929,
+                    1,
+                    1,
+                    1,
                     1
                 ],
-                "metallicFactor" : 0,
-                "roughnessFactor" : 0.5
+                "metallicFactor" : 1,
+                "roughnessFactor" : 0.7583333253860474
             }
         },
         {
             "doubleSided" : true,
-            "name" : "Blau",
+            "name" : "blue",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
                     0.005416117142885923,
@@ -43,7 +43,7 @@
                     0.8000000715255737,
                     1
                 ],
-                "metallicFactor" : 0,
+                "metallicFactor" : 1,
                 "roughnessFactor" : 0.5
             }
         }
