@@ -51,7 +51,7 @@ target = NodePath("../Rocket")
 [node name="ObstacleManager" parent="." instance=ExtResource( 8 )]
 
 [node name="ObstacleSpawner" parent="ObstacleManager" instance=ExtResource( 9 )]
-max_count = 2
+max_count = 20
 min_distance = 15.0
 obstacle_resource = ExtResource( 10 )
 

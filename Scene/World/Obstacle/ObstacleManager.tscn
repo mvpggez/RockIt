@@ -20,8 +20,7 @@ func _physics_process(delta):
 		for grandchild in child.get_children():
 			var distance = (grandchild.get_global_transform().origin-position).length()
 			if distance >= despawn_distance:
-				child.current_count -= 1
-				grandchild.free()
+				child.free_obstacle(grandchild)
 		#elif distance >= rocket_distance_near and child.get_global_transform().origin.y>position.y:
 		#	count+=1
 

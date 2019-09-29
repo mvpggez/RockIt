@@ -16,6 +16,13 @@ var current_count = 0
 func _ready():
 	randomize()
 	
+func free_obstacle(obstacle):
+	current_count-=1
+	for child in obstacle.get_children():
+		if child is CollisionShape:
+			child.disabled = true
+	obstacle.queue_free()
+	
 func _physics_process(delta):
 	var position = get_node(\"../../Rocket\").get_global_transform().origin
 
