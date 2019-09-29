@@ -11,44 +11,19 @@ export (Resource) var obstacle_resource = null
 export var rocket_distance_near = 30 #Begin of the spawn-area
 export var rocket_distance_far = 70 #End of the spawn-area, begin of the despawn area
 
-#Concept:
-#The obstacle spawner spawns and despawns the obstacles under the following conditions:
-#An obstacle is spawned iff the rocket is between min- and max-height and there are 
-#less than max_count obstacles between rocket_distance_near and rocket_distance_far
-#It is spawned to a random location between rocket_distance_near and rocket_distance_far
-#above the player, where the min_distance to the other obstacles is respected
-#An obstacle is despawned iff its distance to the rocket exceeds rocket_distance_far
+var current_count = 0
 
+func _ready():
+	randomize()
+	
 func _physics_process(delta):
-	var count = 0
-	var position = get_node(\"../Rocket\").get_global_transform().origin
-	#despawn on given condition
-	for child in get_children():
-		var distance = (child.get_global_transform().origin-position).length()
-		if distance >= rocket_distance_far:
-			child.free()
-		elif distance >= rocket_distance_near and child.get_global_transform().origin.y>position.y:
-			count+=1
+	var position = get_node(\"../../Rocket\").get_global_transform().origin
+
 	
 	#spawn on given condition
-	if position.y > min_height and position.y < max_height and count<max_count:
-		for i in range(max_count-count):
-			var instance = obstacle_resource.instance()
-			add_child(instance)
-			
-			#generate random position
-			var x_temp = randf()*2-1
-			var generated_position = Vector3(x_temp,
-											 sin(acos(x_temp)),
-											 0.0)*(randf()*(rocket_distance_far-rocket_distance_near)+rocket_distance_near)
-			
-			#Alternative random distribution:
-			#var random_angle = randf()*PI
-			#var generated_position = Vector3(cos(random_angle),
-			#								 sin(random_angle),
-			#								 0.0)*(randf()*(rocket_distance_far-rocket_distance_near)+rocket_distance_near)
-			
-			instance.translate(generated_position+position)
+	if position.y > min_height and position.y < max_height and current_count<max_count:
+		for i in range(max_count-current_count):
+			get_parent().spawn_obstacle(self, obstacle_resource, rocket_distance_far, rocket_distance_near)
 "
 
 [node name="ObstacleSpawner" type="Spatial"]
