@@ -55,14 +55,6 @@ max_count = 20
 min_distance = 15.0
 obstacle_resource = ExtResource( 10 )
 
-[node name="ObstacleSpawner3" parent="ObstacleManager" instance=ExtResource( 9 )]
-max_height = 50.0
-max_count = 2
-min_distance = 15.0
-obstacle_resource = ExtResource( 10 )
-rocket_distance_near = 3
-rocket_distance_far = 50
-
 [node name="ObstacleSpawner2" parent="ObstacleManager" instance=ExtResource( 9 )]
 max_count = 1
 min_distance = 15.0

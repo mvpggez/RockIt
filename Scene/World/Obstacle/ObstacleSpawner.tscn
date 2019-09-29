@@ -3,7 +3,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Spatial
 
-export var min_height = 0.0 #minimum height for the obstacles
+export var min_height = 0.0 #minimum height for the obstacles, 0.0, obstacles will be spawned on launch
 export var max_height = 1000.0 #maximum height for the obstacles
 export var max_count = 5 #Maximum count of obstacles in the spawn area
 export var min_distance = 1.0 #minimum distance between two obstacles, not active!
@@ -15,6 +15,10 @@ var current_count = 0
 
 func _ready():
 	randomize()
+	if min_height == 0:
+		for i in range(max_count):
+			get_parent().spawn_obstacle(self, obstacle_resource, rocket_distance_near, 5)
+
 	
 func free_obstacle(obstacle):
 	current_count-=1
@@ -25,8 +29,6 @@ func free_obstacle(obstacle):
 	
 func _physics_process(delta):
 	var position = get_node(\"../../Rocket\").get_global_transform().origin
-
-	
 	#spawn on given condition
 	if position.y > min_height and position.y < max_height and current_count<max_count:
 		for i in range(max_count-current_count):
