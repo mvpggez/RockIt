@@ -19,6 +19,11 @@ var fuel_remaining = 0.0 #Remaining fuel
 var booster_fuel_remaining = 0.0
 var durability = 0 #How many obstacles can be destroyed?
 
+
+enum ParticleMode {HALT, WAITING, LAUNCHING, NORMAL, BOOST}
+var particle_mode = ParticleMode.HALT
+
+
 func _ready():
 	add_child(default_head.instance())
 	add_child(default_tank.instance())
@@ -78,6 +83,9 @@ func _integrate_forces(state):
 			#add_central_force needs the force in global space
 			add_central_force(self.transform.basis.xform(Vector3(0,$\"Thruster\".thrust,0))) 
 			fuel_remaining -= $\"Thruster\".fuel_consumption*delta
+			set_particle_mode(ParticleMode.NORMAL)
+		else:
+			set_particle_mode(ParticleMode.HALT)
 		#Version 1: Apply force from Thrusters on the head
 		if Input.is_action_pressed(\"ui_right\"):	
 			add_force(self.transform.basis.xform(Vector3($\"Head\".thrust,0,0)), Vector3(0.0, height, 0.0)) 
@@ -88,11 +96,13 @@ func _integrate_forces(state):
 	
 		if fuel_remaining < 0:
 			fuel_remaining = 0
+			set_particle_mode(ParticleMode.HALT)
 	if booster_fuel_remaining > 0:
 		if Input.is_action_pressed(\"ui_up\"):
 			#add_central_force needs the force in global space
 			add_central_force(self.transform.basis.xform(Vector3(0,$\"Booster\".thrust,0))) 
 			booster_fuel_remaining -= $\"Booster\".fuel_consumption*delta
+			set_particle_mode(ParticleMode.BOOST)
 			if booster_fuel_remaining < 0:
 				booster_fuel_remaining = 0
 			
@@ -122,11 +132,38 @@ func get_center():
 	center += transform.basis.xform(Vector3(0,height/2,0))
 	return center
 
-func _on_Head_body_entered(body):
-	pass
-	#if body.is_in_group(\"Obstacle\"):
-		#body.get_parent().free_obstacle(body)
-"
+func set_particle_mode(value):
+	print(\"test\")
+	if particle_mode == value:
+		return
+	if particle_mode == ParticleMode.NORMAL:
+		for emitter in $normal.get_children():
+			emitter.emitting = false
+	elif particle_mode == ParticleMode.WAITING:
+		for emitter in $waiting.get_children():
+			emitter.emitting = false
+	elif particle_mode == ParticleMode.LAUNCHING:
+		for emitter in $launching.get_children():
+			emitter.emitting = false
+	elif particle_mode == ParticleMode.BOOST:
+		for emitter in $fast.get_children():
+			emitter.emitting = false
+				
+	if value == ParticleMode.NORMAL:
+		for emitter in $normal.get_children():
+			emitter.emitting = true
+	elif value == ParticleMode.WAITING:
+		for emitter in $waiting.get_children():
+			emitter.emitting = true
+	elif value == ParticleMode.LAUNCHING:
+		for emitter in $launching.get_children():
+			emitter.emitting = true
+	elif value == ParticleMode.BOOST:
+		for emitter in $fast.get_children():
+			emitter.emitting = true
+			
+			
+	particle_mode = value"
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 2, 5, 2 )
