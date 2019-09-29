@@ -1,0 +1,48 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type spatial;
+render_mode skip_vertex_transform;
+
+uniform float time = 0.0;
+uniform float frequency = 0.0;
+
+mat4 rotationMatrix(vec3 axis, float angle)
+{
+    axis = normalize(axis);
+    float s = sin(angle);
+    float c = cos(angle);
+    float oc = 1.0 - c;
+    
+    return mat4(vec4(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0),
+                vec4(oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0),
+                vec4(oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0),
+                vec4(0.0,                                0.0,                                0.0,                                1.0));
+}
+mat4 rotationMatrixY(float angle)
+{
+    float s = sin(angle);
+    float c = cos(angle);
+    
+    return mat4(vec4(c, 0,  s,  0.0),
+                vec4(0.0,  1, 0,  0.0),
+                vec4(-s,  0,  c, 0.0),
+                vec4(0.0, 0.0, 0.0,1.0));
+}
+
+void vertex()
+{
+	VERTEX = (rotationMatrixY(time*6.28*frequency)*vec4(VERTEX, 1)).xyz;
+    VERTEX = (MODELVIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+    NORMAL = (MODELVIEW_MATRIX * vec4(NORMAL, 0.0)).xyz;
+}
+
+void fragment()
+{
+	ALBEDO = vec3(0.1, 0.1, 0.1);
+}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/time = 0.0
+shader_param/frequency = 0.0
