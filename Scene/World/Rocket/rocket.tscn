@@ -12,6 +12,7 @@ var time = 0.0 #time passed since creation of this node
 var time_last_integrate_forces = 0.0 #timestamp of the last time, integrate forces was called
 var height = 0.0 #Height of the Rocket from ground to the top of the tank
 var fuel_remaining = 0.0 #Remaining fuel
+var booster_fuel_remaining = 0.0
 var durability = 0 #How many obstacles can be destroyed?
 
 func _ready():
@@ -54,6 +55,8 @@ func rebuildRocket():
 	
 	#Set startvalue for fuel
 	fuel_remaining = $\"Tank\".capacity
+	#Set startvalue for fuel
+	booster_fuel_remaining = $\"Booster\".capacity
 	#Set startvalue for durability
 	durability = $\"Head\".durability
 
@@ -71,12 +74,6 @@ func _integrate_forces(state):
 			#add_central_force needs the force in global space
 			add_central_force(self.transform.basis.xform(Vector3(0,$\"Thruster\".thrust,0))) 
 			fuel_remaining -= $\"Thruster\".fuel_consumption*delta
-			
-		if Input.is_action_pressed(\"ui_up\"):
-			#add_central_force needs the force in global space
-			add_central_force(self.transform.basis.xform(Vector3(0,$\"Booster\".thrust,0))) 
-			fuel_remaining -= $\"Booster\".fuel_consumption*delta
-			
 		#Version 1: Apply force from Thrusters on the head
 		if Input.is_action_pressed(\"ui_right\"):	
 			add_force(self.transform.basis.xform(Vector3($\"Head\".thrust,0,0)), Vector3(0.0, height, 0.0)) 
@@ -87,6 +84,13 @@ func _integrate_forces(state):
 	
 		if fuel_remaining < 0:
 			fuel_remaining = 0
+	if booster_fuel_remaining > 0:
+		if Input.is_action_pressed(\"ui_up\"):
+			#add_central_force needs the force in global space
+			add_central_force(self.transform.basis.xform(Vector3(0,$\"Booster\".thrust,0))) 
+			booster_fuel_remaining -= $\"Booster\".fuel_consumption*delta
+			if booster_fuel_remaining < 0:
+				booster_fuel_remaining = 0
 			
 	for collider in get_colliding_bodies():
 		if collider.is_in_group(\"Obstacle\"):
@@ -96,6 +100,9 @@ func _integrate_forces(state):
 			
 func get_fuel():
 	return fuel_remaining
+	
+func get_booster_fuel():
+	return booster_fuel_remaining
 	
 func get_height():
 	return translation.y
