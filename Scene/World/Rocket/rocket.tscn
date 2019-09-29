@@ -1,4 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Asset/Rocket/Particles/new_spheremesh.tres" type="SphereMesh" id=1]
+[ext_resource path="res://Asset/Rocket/Particles/gradient_smoke_soft.tres" type="Gradient" id=2]
+[ext_resource path="res://Asset/Rocket/Particles/gradient_smoke.tres" type="Gradient" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends RigidBody
@@ -132,8 +136,15 @@ size = Vector3( 2, 5, 2 )
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 1, 2.5, 1 )
 
-[sub_resource type="BoxShape" id=5]
-extents = Vector3( 1.5, 0.5, 1 )
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 1, 0.64093, 0.132813, 1, 1, 0.967773, 0.625, 1 )
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0.0417707, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.997952, 0.621 ), -0.955493, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=7]
+min_value = -1.0
+_data = [ Vector2( 0.00346667, 0.3366 ), 0.0, 0.0, 0, 0, Vector2( 0.622005, 0.6182 ), 0.0, 0.0, 0, 0, Vector2( 0.988021, 0.6006 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Rocket" type="RigidBody"]
 contacts_reported = 1
@@ -159,9 +170,76 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 shape = SubResource( 4 )
 
-[node name="Area" type="Area" parent="."]
+[node name="waiting" type="Spatial" parent="."]
 
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0 )
-shape = SubResource( 5 )
-[connection signal="body_entered" from="Area" to="." method="_on_Head_body_entered"]
+[node name="CPUParticles_right" type="CPUParticles" parent="waiting"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376674, 0 )
+emitting = false
+speed_scale = 0.9
+local_coords = false
+mesh = ExtResource( 1 )
+spread = 180.0
+gravity = Vector3( 2, -0.5, 0.5 )
+angular_velocity = 8.40779e-45
+color_ramp = ExtResource( 2 )
+
+[node name="CPUParticles_left" type="CPUParticles" parent="waiting"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376674, 0 )
+emitting = false
+speed_scale = 0.9
+local_coords = false
+mesh = ExtResource( 1 )
+spread = 180.0
+gravity = Vector3( -2, -0.5, 0 )
+angular_velocity = 0.030303
+
+[node name="prep" type="Spatial" parent="."]
+
+[node name="CPUParticles_right" type="CPUParticles" parent="prep"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376674, 0 )
+emitting = false
+amount = 16
+local_coords = false
+mesh = ExtResource( 1 )
+spread = 180.0
+gravity = Vector3( 5, -2, 0.5 )
+angular_velocity = 0.0185445
+color_ramp = ExtResource( 3 )
+
+[node name="CPUParticles_left" type="CPUParticles" parent="prep"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376674, 0 )
+emitting = false
+amount = 16
+speed_scale = 1.1
+local_coords = false
+mesh = ExtResource( 1 )
+spread = 180.0
+gravity = Vector3( -5, -2, 0 )
+angular_velocity = 4.58869e-41
+scale_amount_random = 1.0
+color_ramp = ExtResource( 3 )
+
+[node name="normal" type="Spatial" parent="."]
+
+[node name="CPUParticles2" type="CPUParticles" parent="normal"]
+emitting = false
+amount = 16
+speed_scale = 2.0
+local_coords = false
+mesh = ExtResource( 1 )
+scale_amount = 0.6
+color_ramp = SubResource( 5 )
+
+[node name="fast" type="Spatial" parent="."]
+
+[node name="CPUParticles2" type="CPUParticles" parent="fast"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.68903, 0 )
+emitting = false
+amount = 4
+speed_scale = 4.0
+local_coords = false
+mesh = ExtResource( 1 )
+spread = 7.46
+scale_amount_curve = SubResource( 6 )
+hue_variation = 0.56
+hue_variation_curve = SubResource( 7 )
