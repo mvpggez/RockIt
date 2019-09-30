@@ -39,65 +39,65 @@ func set_price(price):
 	"
 
 [sub_resource type="DynamicFont" id=2]
-size = 43
-use_filter = true
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 43
-use_filter = true
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 22
-use_filter = true
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=5]
 size = 30
 use_filter = true
 font_data = ExtResource( 2 )
 
+[sub_resource type="DynamicFont" id=3]
+size = 30
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 25
+use_filter = true
+font_data = ExtResource( 3 )
+
 [node name="Button" type="TextureButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -632.0
-margin_bottom = -361.0
+margin_right = -743.0
+margin_bottom = -429.0
 texture_normal = ExtResource( 1 )
+expand = true
 script = SubResource( 1 )
 
 [node name="Level" type="Label" parent="."]
-margin_left = 310.558
-margin_top = 25.5198
-margin_right = 369.558
-margin_bottom = 78.5198
+margin_left = 215.93
+margin_top = 19.2085
+margin_right = 274.93
+margin_bottom = 72.2085
 custom_fonts/font = SubResource( 2 )
 text = "00"
 align = 1
 
 [node name="Category" type="Label" parent="."]
-margin_left = 34.0
-margin_top = 29.0
-margin_right = 304.0
-margin_bottom = 82.0
+margin_left = 19.6525
+margin_top = 22.6771
+margin_right = 285.652
+margin_bottom = 58.6771
 custom_fonts/font = SubResource( 3 )
 text = "Name"
 
 [node name="StatNames" type="Label" parent="."]
-margin_left = 34.3366
-margin_top = 74.9513
-margin_right = 231.337
-margin_bottom = 165.951
+margin_left = 21.368
+margin_top = 56.5791
+margin_right = 218.368
+margin_bottom = 147.579
 custom_fonts/font = SubResource( 4 )
 text = "Stat1: 
 Stat2: 
 Stat3: "
 
 [node name="StatValues" type="Label" parent="."]
-margin_left = 97.5885
-margin_top = 75.0
-margin_right = 194.588
-margin_bottom = 166.0
+margin_left = 84.6199
+margin_top = 56.6278
+margin_right = 181.619
+margin_bottom = 147.628
 custom_fonts/font = SubResource( 4 )
 text = "100
 20
@@ -105,10 +105,10 @@ text = "100
 align = 2
 
 [node name="StatChanges" type="Label" parent="."]
-margin_left = 201.252
-margin_top = 75.0
-margin_right = 276.252
-margin_bottom = 192.0
+margin_left = 188.283
+margin_top = 56.6278
+margin_right = 263.283
+margin_bottom = 173.628
 custom_fonts/font = SubResource( 4 )
 text = "+10
 +1
@@ -116,10 +116,10 @@ text = "+10
 "
 
 [node name="Price" type="Label" parent="."]
-margin_left = 161.0
-margin_top = 164.0
-margin_right = 362.0
-margin_bottom = 200.0
+margin_left = 52.666
+margin_top = 118.821
+margin_right = 253.666
+margin_bottom = 148.821
 custom_fonts/font = SubResource( 5 )
 text = "1000 $"
 align = 2

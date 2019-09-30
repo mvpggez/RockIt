@@ -5,17 +5,76 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
+func _ready():
+	var rocket = get_parent().get_world().get_node(\"Rocket\")
+	update_head_button(rocket)
+	update_tank_button(rocket)
+	update_thruster_button(rocket)
+	update_booster_button(rocket)
 
-# Called when the node enters the scene tree for the first time.
-#func _ready():
-	#$Head.scale = Vector2(0.5, 0.5)
+func update_head_button(rocket):
+	var current_head = rocket.get_head()
+	var next_head = rocket.get_head_by_level(rocket.head_level+1)
+	$HeadButton.set_category(\"Head\")
+	$HeadButton.set_level(rocket.head_level)
+	$HeadButton.set_price(next_head.price)
+	$HeadButton.set_stats([\"Mobility\", \"Durability\", \"Consumption\"],
+					[current_head.thrust,current_head.durability,current_head.fuel_consumption],
+					[next_head.thrust-current_head.thrust,next_head.durability-current_head.durability,next_head.fuel_consumption-current_head.fuel_consumption])
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func update_tank_button(rocket):
+	var current_tank = rocket.get_tank()
+	var next_tank = rocket.get_tank_by_level(rocket.tank_level+1)
+	$TankButton.set_category(\"Tank\")
+	$TankButton.set_level(rocket.tank_level)
+	$TankButton.set_price(next_tank.price)
+	$TankButton.set_stats([\"Capacity\"],
+					[current_tank.capacity],
+					[next_tank.capacity-current_tank.capacity])
+
+func update_thruster_button(rocket):
+	var current_thruster = rocket.get_thruster()
+	var next_thruster = rocket.get_thruster_by_level(rocket.thruster_level+1)
+	$ThrusterButton.set_category(\"Thruster\")
+	$ThrusterButton.set_level(rocket.thruster_level)
+	$ThrusterButton.set_price(next_thruster.price)
+	$ThrusterButton.set_stats([\"Thrust\", \"Consumption\"],
+					[current_thruster.thrust,current_thruster.fuel_consumption],
+					[next_thruster.thrust-current_thruster.thrust,next_thruster.fuel_consumption-current_thruster.fuel_consumption])
+
+func update_booster_button(rocket):
+	var current_booster = rocket.get_booster()
+	var next_booster = rocket.get_booster_by_level(rocket.booster_level+1)
+	$BoosterButton.set_category(\"Booster\")
+	$BoosterButton.set_level(rocket.booster_level)
+	$BoosterButton.set_price(next_booster.price)
+	$BoosterButton.set_stats([\"Thrust\", \"Capacity\", \"Consumption\"],
+					[current_booster.thrust,current_booster.capacity,current_booster.fuel_consumption],
+					[next_booster.thrust-current_booster.thrust,next_booster.capacity-current_booster.capacity,next_booster.fuel_consumption-current_booster.fuel_consumption])
+
+
+func _on_HeadButton_pressed():
+	var rocket = get_parent().get_world().get_node(\"Rocket\")
+	rocket.upgrade_head()
+	update_head_button(rocket)
+
+
+func _on_TankButton_pressed():
+	var rocket = get_parent().get_world().get_node(\"Rocket\")
+	rocket.upgrade_tank()
+	update_tank_button(rocket)
+
+
+func _on_ThrusterButton_pressed():
+	var rocket = get_parent().get_world().get_node(\"Rocket\")
+	rocket.upgrade_thruster()
+	update_thruster_button(rocket)
+
+
+func _on_BoosterButton_pressed():
+	var rocket = get_parent().get_world().get_node(\"Rocket\")
+	rocket.upgrade_booster()
+	update_booster_button(rocket)
 "
 
 [node name="UI_shop" type="Control"]
@@ -23,34 +82,30 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = SubResource( 1 )
 
-[node name="Head" parent="." instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 61.3504
-margin_top = 32.6565
-margin_right = 453.35
-margin_bottom = 272.656
+[node name="HeadButton" parent="." instance=ExtResource( 1 )]
+margin_left = 75.1222
+margin_top = 111.879
+margin_right = -667.878
+margin_bottom = -317.121
 
-[node name="Booster" parent="." instance=ExtResource( 1 )]
-anchor_left = 1.0
-anchor_top = 1.0
-margin_left = -460.782
-margin_top = -293.125
-margin_right = -68.7822
-margin_bottom = -53.1254
+[node name="TankButton" parent="." instance=ExtResource( 1 )]
+margin_left = 614.856
+margin_top = 90.7816
+margin_right = -128.144
+margin_bottom = -338.218
 
-[node name="Thruster" parent="." instance=ExtResource( 1 )]
-anchor_top = 1.0
-anchor_right = 0.0
-margin_left = 60.6177
-margin_top = -293.372
-margin_right = 452.618
-margin_bottom = -53.3719
+[node name="ThrusterButton" parent="." instance=ExtResource( 1 )]
+margin_left = 97.9774
+margin_top = 352.737
+margin_right = -645.023
+margin_bottom = -76.2629
 
-[node name="Tank" parent="." instance=ExtResource( 1 )]
-anchor_left = 1.0
-anchor_bottom = 0.0
-margin_left = -451.0
-margin_top = 36.0
-margin_right = -59.0
-margin_bottom = 275.0
+[node name="BoosterButton" parent="." instance=ExtResource( 1 )]
+margin_left = 639.469
+margin_top = 366.802
+margin_right = -103.531
+margin_bottom = -62.1982
+[connection signal="pressed" from="HeadButton" to="." method="_on_HeadButton_pressed"]
+[connection signal="pressed" from="TankButton" to="." method="_on_TankButton_pressed"]
+[connection signal="pressed" from="ThrusterButton" to="." method="_on_ThrusterButton_pressed"]
+[connection signal="pressed" from="BoosterButton" to="." method="_on_BoosterButton_pressed"]
