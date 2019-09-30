@@ -52,42 +52,46 @@ target = NodePath("../Rocket")
 [node name="ObstacleManager" parent="." instance=ExtResource( 4 )]
 
 [node name="ObstacleSpawner" parent="ObstacleManager" instance=ExtResource( 5 )]
-max_height = 50.0
-max_count = 30
+max_height = 60.0
+max_count = 35
 min_distance = 25.0
-min_distance_to_rocket = 20
+min_distance_to_rocket = 30
 obstacle_resource = ExtResource( 6 )
 rocket_distance_near = 50
-min_scale = 0.4
-max_scale = 0.4
+min_scale = 0.8
+max_scale = 1.6
 
 [node name="ObstacleSpawner2" parent="ObstacleManager" instance=ExtResource( 5 )]
-min_height = 50.0
-max_height = 300.0
-max_count = 20
-min_distance = 35.0
+min_height = 60.0
+max_height = 600.0
+max_count = 40
+min_distance = 40.0
 obstacle_resource = ExtResource( 7 )
 rocket_distance_near = 40
 rocket_distance_far = 80
+min_scale = 4.0
+max_scale = 4.0
 
 [node name="ObstacleSpawner3" parent="ObstacleManager" instance=ExtResource( 5 )]
-min_height = 300.0
-max_height = 600.0
-max_count = 18
-min_distance = 30.0
-obstacle_resource = ExtResource( 6 )
+min_height = 600.0
+max_height = 1200.0
+max_count = 35
+min_distance = 45.0
+obstacle_resource = ExtResource( 7 )
 rocket_distance_near = 40
 rocket_distance_far = 80
-min_scale = 0.6
-max_scale = 0.6
+min_scale = 3.0
+max_scale = 3.0
 
 [node name="ObstacleSpawner4" parent="ObstacleManager" instance=ExtResource( 5 )]
-min_height = 600.0
-max_count = 10
-min_distance = 60.0
+min_height = 1200.0
+max_height = 2000.0
+max_count = 30
+min_distance = 50.0
 obstacle_resource = ExtResource( 7 )
-rocket_distance_near = 60
-rocket_distance_far = 100
-max_scale = 6.0
+rocket_distance_near = 40
+rocket_distance_far = 80
+min_scale = 3.0
+max_scale = 3.0
 
 [node name="UI_flying" parent="." instance=ExtResource( 8 )]
