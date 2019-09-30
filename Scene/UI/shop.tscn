@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scene/UI/part_button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Asset/UI/launch_button_placeholder.png" type="Texture" id=2]
+[ext_resource path="res://third_party/dejavu-sans/dejavu-sans-fonts-ttf-2.35/ttf/DejaVuSans-Bold.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
@@ -107,7 +109,16 @@ func _on_BoosterButton_pressed():
 	rocket.upgrade_booster()
 	get_parent().substract_money(rocket.get_booster().price)
 	update_booster_button(rocket)
+
+
+func _on_LaunchButton_pressed():
+	get_parent().launch()
 "
+
+[sub_resource type="DynamicFont" id=2]
+size = 33
+use_filter = true
+font_data = ExtResource( 3 )
 
 [node name="UI_shop" type="Control"]
 anchor_right = 1.0
@@ -137,7 +148,24 @@ margin_left = 639.469
 margin_top = 366.802
 margin_right = -103.531
 margin_bottom = -62.1982
+
+[node name="LaunchButton" type="TextureButton" parent="."]
+margin_left = 404.132
+margin_top = 462.801
+margin_right = 614.132
+margin_bottom = 589.801
+texture_normal = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="LaunchButton"]
+margin_left = 21.9467
+margin_top = 43.2348
+margin_right = 185.947
+margin_bottom = 82.2348
+custom_fonts/font = SubResource( 2 )
+text = "ROCK IT!"
 [connection signal="pressed" from="HeadButton" to="." method="_on_HeadButton_pressed"]
 [connection signal="pressed" from="TankButton" to="." method="_on_TankButton_pressed"]
 [connection signal="pressed" from="ThrusterButton" to="." method="_on_ThrusterButton_pressed"]
 [connection signal="pressed" from="BoosterButton" to="." method="_on_BoosterButton_pressed"]
+[connection signal="pressed" from="LaunchButton" to="." method="_on_LaunchButton_pressed"]
