@@ -17,7 +17,7 @@ size = Vector2( 40, 40 )
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )
-money_ranges = PoolVector2Array( 1, 100, 1, 200, 1, 300 )
+money_ranges = PoolVector2Array( 1.2, 0, 1, 200, 1.1, 300, 1.2, 600 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
 collision_layer = 3
