@@ -385,6 +385,7 @@ durability = 5
 price = 3520
 mesh_resource = ExtResource( 10 )
 mesh_offset = Vector3( 0, 0.74, 0 )
+mesh_height = 1.73
 thrust = 3.6
 fuel_consumption = 13.0
 durability = 5
