@@ -7,7 +7,7 @@
 [ext_resource path="res://Scene/World/Obstacle/ObstacleSpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scene/World/Obstacle/ballon00.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scene/World/Obstacle/ballon01.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/environment_1_export_1_raw.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/environment_2_moon_export.tscn" type="PackedScene" id=8]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 20, 2, 20 )
@@ -18,6 +18,7 @@ size = Vector2( 40, 40 )
 [node name="Spatial" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.111594 )
 script = ExtResource( 1 )
+finish_height = 2000
 money_ranges = PoolVector2Array( 1, 100, 1, 200, 1, 300 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
@@ -96,5 +97,5 @@ obstacle_resource = ExtResource( 7 )
 rocket_distance_near = 40
 rocket_distance_far = 80
 
-[node name="Scene Root" parent="." instance=ExtResource( 8 )]
-transform = Transform( 0.933632, 0, -0.358232, 0, 1, 0, 0.358232, 0, 0.933632, 16.32, -2.21051, -2.07323 )
+[node name="environment_2_moon" parent="." instance=ExtResource( 8 )]
+transform = Transform( 0.951268, 0, -0.308366, 0, 1, 0, 0.308366, 0, 0.951268, 16.1754, -2.33496, -2.86249 )
