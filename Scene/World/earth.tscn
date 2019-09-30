@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scene/World/world.gd" type="Script" id=1]
 [ext_resource path="res://Scene/World/Rocket/rocket.tscn" type="PackedScene" id=2]
@@ -7,7 +7,10 @@
 [ext_resource path="res://Scene/World/Obstacle/ObstacleSpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scene/World/Obstacle/ballon00.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scene/World/Obstacle/ballon01.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/environment_1_export_1_raw.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scene/World/Obstacle/ballon02.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scene/World/Obstacle/satelite00.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scene/World/Obstacle/yellow_box_mad_man_not_included00.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/environment_1_export_1_raw.tscn" type="PackedScene" id=11]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 20, 2, 20 )
@@ -75,20 +78,26 @@ min_height = 300.0
 max_height = 600.0
 max_count = 18
 min_distance = 30.0
-obstacle_resource = ExtResource( 6 )
+obstacle_resource = ExtResource( 8 )
 rocket_distance_near = 40
 rocket_distance_far = 80
-min_scale = 0.6
-max_scale = 0.6
 
 [node name="ObstacleSpawner4" parent="ObstacleManager" instance=ExtResource( 5 )]
 min_height = 600.0
-max_count = 10
-min_distance = 60.0
-obstacle_resource = ExtResource( 7 )
+max_count = 20
+min_distance = 30.0
+obstacle_resource = ExtResource( 9 )
 rocket_distance_near = 60
 rocket_distance_far = 100
-max_scale = 6.0
+min_scale = 2.0
+max_scale = 2.0
 
-[node name="Scene Root" parent="." instance=ExtResource( 8 )]
+[node name="SecretObstacleSpawner5" parent="ObstacleManager" instance=ExtResource( 5 )]
+min_height = 600.0
+max_count = 1
+obstacle_resource = ExtResource( 10 )
+rocket_distance_near = 60
+rocket_distance_far = 80
+
+[node name="Scene Root" parent="." instance=ExtResource( 11 )]
 transform = Transform( 0.933632, 0, -0.358232, 0, 1, 0, 0.358232, 0, 0.933632, 16.32, -2.21051, -2.07323 )

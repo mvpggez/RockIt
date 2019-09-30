@@ -1,13 +1,15 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scene/World/world.gd" type="Script" id=1]
 [ext_resource path="res://Scene/World/Rocket/rocket.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scene/camera.gd" type="Script" id=3]
 [ext_resource path="res://Scene/World/Obstacle/ObstacleManager.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scene/World/Obstacle/ObstacleSpawner.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scene/World/Obstacle/ballon00.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scene/World/Obstacle/ballon01.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/environment_2_moon_export.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scene/World/Obstacle/satelite00.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scene/World/Obstacle/meteor00.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scene/World/Obstacle/spermwhale00.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scene/World/Obstacle/ufo00.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/environment_2_moon_export.tscn" type="PackedScene" id=10]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 20, 2, 20 )
@@ -58,8 +60,6 @@ max_count = 20
 min_distance = 30.0
 min_distance_to_rocket = 20
 obstacle_resource = ExtResource( 6 )
-min_scale = 0.4
-max_scale = 0.4
 
 [node name="ObstacleSpawner2" parent="ObstacleManager" instance=ExtResource( 5 )]
 min_height = 50.0
@@ -87,15 +87,28 @@ min_distance = 20.0
 obstacle_resource = ExtResource( 7 )
 rocket_distance_near = 40
 rocket_distance_far = 80
+min_scale = 1.2
+max_scale = 1.8
+
+[node name="SecretObstacleSpawner6" parent="ObstacleManager" instance=ExtResource( 5 )]
+min_height = 800.0
+max_height = 1500.0
+max_count = 1
+min_distance = 6.0
+obstacle_resource = ExtResource( 8 )
+rocket_distance_near = 50
+rocket_distance_far = 80
+min_scale = 1.5
+max_scale = 1.5
 
 [node name="ObstacleSpawner5" parent="ObstacleManager" instance=ExtResource( 5 )]
 min_height = 1500.0
 max_height = 2500.0
 max_count = 14
 min_distance = 15.0
-obstacle_resource = ExtResource( 7 )
+obstacle_resource = ExtResource( 9 )
 rocket_distance_near = 40
 rocket_distance_far = 80
 
-[node name="environment_2_moon" parent="." instance=ExtResource( 8 )]
+[node name="environment_2_moon" parent="." instance=ExtResource( 10 )]
 transform = Transform( 0.951268, 0, -0.308366, 0, 1, 0, 0.308366, 0, 0.951268, 16.1754, -2.33496, -2.86249 )
