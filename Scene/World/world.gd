@@ -2,6 +2,9 @@ extends Spatial
 
 var maximum_height = 0.0
 
+export var finish_height = 1000
+
+
 export (PoolVector2Array) var money_ranges = PoolVector2Array()	#x is money/height, y is min_height, must be in descending order
 
 var over = false
@@ -12,8 +15,8 @@ func _physics_process(delta):
 		if $Rocket.get_velocity().y < -30:
 			failed()
 		
-		if $Rocket.get_height() >= 1000:
-			won()
+		if $Rocket.get_height() >= finish_height:
+			win()
 	
 
 func calculate_reward(height):
@@ -30,7 +33,8 @@ func failed():
 	get_parent().add_money(calculate_reward(maximum_height))
 	get_parent().restart()
 	
-func won():
+func win():
 	over = true
 	get_parent().add_money(calculate_reward(1000))
+	get_parent().win()
 	get_parent().restart()

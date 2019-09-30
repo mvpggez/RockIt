@@ -16,6 +16,7 @@ extents = Vector3( 20, 2, 20 )
 size = Vector2( 40, 40 )
 
 [node name="Spatial" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.111594 )
 script = ExtResource( 1 )
 money_ranges = PoolVector2Array( 1.2, 0, 1, 200, 1.1, 300, 1.2, 600 )
 

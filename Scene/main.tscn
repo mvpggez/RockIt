@@ -8,16 +8,24 @@
 script/source = "extends Node
 
 
+#Savegame-relevant data
 export var money = 0
-
 var head_level = 0
 var tank_level = 0
 var thruster_level = 0
 var booster_level = 0
+var reached_moon = false
+var highscore = 0
+
+
 
 enum Phase {SHOP, LAUNCHING, FLYING, RESULT}
 var phase = null
 onready var world = $Spatial
+
+onready var earth = preload(\"res://Scene/World/earth.tscn\")
+onready var moon = preload(\"res://Scene/World/moon.tscn\")
+
 func _ready():
 	set_phase(Phase.SHOP)
 
@@ -48,14 +56,14 @@ func set_phase(new_phase):
 
 func add_money(value):
 	print(\"Recieved \",value,\"$\")
-	money += value
+	money += int(value)
 	$\"UI_shop/Money\".text = str(money)
 
 func is_affordable(value):
 	return money >= value
 	
 func substract_money(value):
-	money -= value
+	money -= int(value)
 	$\"UI_shop/Money\".text = str(money)
 
 func get_world():
@@ -71,10 +79,15 @@ func launch():
 
 func restart():
 	world.queue_free()
-	world = load(\"res://Scene/World/earth.tscn\").instance()
+	if reached_moon:
+		world = moon.instance()
+	else:
+		world = earth.instance()
 	add_child(world)
 	set_phase(Phase.SHOP)
 	
+func win():
+	reached_moon = true
 "
 
 [node name="Main" type="Node"]
