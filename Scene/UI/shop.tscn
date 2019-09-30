@@ -5,75 +5,107 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
 
+
 func _ready():
+	update_all()
+	
+func update_all():
 	var rocket = get_parent().get_world().get_node(\"Rocket\")
 	update_head_button(rocket)
 	update_tank_button(rocket)
 	update_thruster_button(rocket)
 	update_booster_button(rocket)
+	
+
+func update_button(button, current, next, category, level, price, statnames, statvalues, statchanges):
+	button.set_category(category)
+	button.set_level(level)
+	button.set_price(price)
+	button.set_stats(statnames, statvalues, statchanges)
+	if get_parent().is_affordable(price):
+		button.disabled = false
+		button.get_node(\"Price\").set(\"custom_colors/font_color\",Color(1,1,1))
+	else:
+		button.disabled = true
+		button.get_node(\"Price\").set(\"custom_colors/font_color\",Color(1,0,0))
 
 func update_head_button(rocket):
 	var current_head = rocket.get_head()
 	var next_head = rocket.get_head_by_level(rocket.head_level+1)
-	$HeadButton.set_category(\"Head\")
-	$HeadButton.set_level(rocket.head_level)
-	$HeadButton.set_price(next_head.price)
-	$HeadButton.set_stats([\"Mobility\", \"Durability\", \"Consumption\"],
-					[current_head.thrust,current_head.durability,current_head.fuel_consumption],
-					[next_head.thrust-current_head.thrust,next_head.durability-current_head.durability,next_head.fuel_consumption-current_head.fuel_consumption])
+	update_button($HeadButton, 
+				  current_head, 
+				  next_head,
+				  \"Head\",
+				  rocket.head_level,
+				  next_head.price,
+				  [\"Mobility\", \"Durability\", \"Consumption\"],
+				  [current_head.thrust,current_head.durability,current_head.fuel_consumption],
+				  [next_head.thrust-current_head.thrust,next_head.durability-current_head.durability,next_head.fuel_consumption-current_head.fuel_consumption])
 
 func update_tank_button(rocket):
 	var current_tank = rocket.get_tank()
 	var next_tank = rocket.get_tank_by_level(rocket.tank_level+1)
-	$TankButton.set_category(\"Tank\")
-	$TankButton.set_level(rocket.tank_level)
-	$TankButton.set_price(next_tank.price)
-	$TankButton.set_stats([\"Capacity\"],
-					[current_tank.capacity],
-					[next_tank.capacity-current_tank.capacity])
-
+	update_button($TankButton, 
+				  current_tank, 
+				  next_tank,
+				  \"Tank\",
+				  rocket.tank_level,
+				  next_tank.price,
+				  [\"Capacity\"],
+				  [current_tank.capacity],
+				  [next_tank.capacity-current_tank.capacity])
+	
 func update_thruster_button(rocket):
 	var current_thruster = rocket.get_thruster()
 	var next_thruster = rocket.get_thruster_by_level(rocket.thruster_level+1)
-	$ThrusterButton.set_category(\"Thruster\")
-	$ThrusterButton.set_level(rocket.thruster_level)
-	$ThrusterButton.set_price(next_thruster.price)
-	$ThrusterButton.set_stats([\"Thrust\", \"Consumption\"],
-					[current_thruster.thrust,current_thruster.fuel_consumption],
-					[next_thruster.thrust-current_thruster.thrust,next_thruster.fuel_consumption-current_thruster.fuel_consumption])
+	update_button($ThrusterButton, 
+				  current_thruster, 
+				  next_thruster,
+				  \"Thruster\",
+				  rocket.thruster_level,
+				  next_thruster.price,
+				  [\"Thrust\", \"Consumption\"],
+				  [current_thruster.thrust,current_thruster.fuel_consumption],
+				  [next_thruster.thrust-current_thruster.thrust,next_thruster.fuel_consumption-current_thruster.fuel_consumption])
 
 func update_booster_button(rocket):
 	var current_booster = rocket.get_booster()
 	var next_booster = rocket.get_booster_by_level(rocket.booster_level+1)
-	$BoosterButton.set_category(\"Booster\")
-	$BoosterButton.set_level(rocket.booster_level)
-	$BoosterButton.set_price(next_booster.price)
-	$BoosterButton.set_stats([\"Thrust\", \"Capacity\", \"Consumption\"],
-					[current_booster.thrust,current_booster.capacity,current_booster.fuel_consumption],
-					[next_booster.thrust-current_booster.thrust,next_booster.capacity-current_booster.capacity,next_booster.fuel_consumption-current_booster.fuel_consumption])
-
+	update_button($BoosterButton, 
+				  current_booster, 
+				  next_booster,
+				  \"Booster\",
+				  rocket.booster_level,
+				  next_booster.price,
+				  [\"Thrust\", \"Capacity\", \"Consumption\"],
+				  [current_booster.thrust,current_booster.capacity,current_booster.fuel_consumption],
+				  [next_booster.thrust-current_booster.thrust,next_booster.capacity-current_booster.capacity,next_booster.fuel_consumption-current_booster.fuel_consumption])
 
 func _on_HeadButton_pressed():
 	var rocket = get_parent().get_world().get_node(\"Rocket\")
 	rocket.upgrade_head()
+	get_parent().substract_money(rocket.get_head().price)
 	update_head_button(rocket)
 
 
 func _on_TankButton_pressed():
 	var rocket = get_parent().get_world().get_node(\"Rocket\")
 	rocket.upgrade_tank()
+	get_parent().substract_money(rocket.get_tank().price)
 	update_tank_button(rocket)
 
 
 func _on_ThrusterButton_pressed():
 	var rocket = get_parent().get_world().get_node(\"Rocket\")
 	rocket.upgrade_thruster()
+	get_parent().substract_money(rocket.get_thruster().price)
 	update_thruster_button(rocket)
 
 
 func _on_BoosterButton_pressed():
 	var rocket = get_parent().get_world().get_node(\"Rocket\")
 	rocket.upgrade_booster()
+	get_parent().substract_money(rocket.get_booster().price)
 	update_booster_button(rocket)
 "
 
