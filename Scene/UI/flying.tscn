@@ -1,22 +1,53 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://test3.png" type="Texture" id=2]
+[ext_resource path="res://test5.png" type="Texture" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
 
 var time = 0.0
+var border_height = 27
+var maximum_fuel = 1000
+var maximum_booster_fuel = 1000
+var minimum_fuel_bar_height = 0.0
+var minimum_booster_fuel_bar_height = 0.0
+
+func _ready():
+	minimum_fuel_bar_height = $fuel_bar.rect_size.y
+	minimum_booster_fuel_bar_height = $booster_fuel_bar.rect_size.y
+	
+
+func set_fuel_bar(rocket):
+	#setup fuel bar
+	var fuel_bar_space = rect_size.y+2*$fuel_bar.margin_bottom-minimum_fuel_bar_height
+	$fuel_bar.margin_top = $fuel_bar.margin_bottom-minimum_fuel_bar_height-fuel_bar_space*rocket.get_tank().capacity/maximum_fuel
+	var border_part = border_height/$fuel_bar.rect_size.y
+	$fuel_bar.value = (rocket.get_fuel()/rocket.get_tank().capacity*(1-border_part*2)+border_part)*100
+
+func set_booster_fuel_bar(rocket):
+	#setup booster bar
+	var booster_fuel_bar_space = rect_size.y+2*$booster_fuel_bar.margin_bottom-minimum_booster_fuel_bar_height
+	$booster_fuel_bar.margin_top = $booster_fuel_bar.margin_bottom-minimum_booster_fuel_bar_height-booster_fuel_bar_space*rocket.get_booster().capacity/maximum_booster_fuel
+	var border_part = border_height/$booster_fuel_bar.rect_size.y
+	$booster_fuel_bar.value = (rocket.get_booster_fuel()/rocket.get_booster().capacity*(1-border_part*2)+border_part)*100
+
+func set_height_bar(rocket):
+	#setup height bar
+	$height_bar.value = rocket.get_height()/10
 
 func _process(delta):
-	time += delta
 	var rocket = get_node(\"../Rocket\")
+	set_fuel_bar(rocket)
+	set_booster_fuel_bar(rocket)
+	set_height_bar(rocket)
+	time += delta
 	
-	#set fuel bar
-	$fuel_bar.value = rocket.get_fuel()/rocket.get_node(\"Tank\").capacity*100
-	if $fuel_bar.value < 25:
-		$fuel_bar.tint_progress = Color(1.0, sin(time*PI*4)/2+0.5, sin(time*PI*4)/2+0.5)
-	#set height bar
-	$height_bar.value = rocket.get_height()/10
+	#if $fuel_bar.value < 25:
+	#	var c = Color(1.0, sin(time*PI*4)/2+0.5, sin(time*PI*4)/2+0.5)
+	#	$fuel_bar.tint_progress = c
+	#	$fuel_bar.tint_under = c
 	
 "
 
@@ -25,7 +56,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = SubResource( 1 )
 
-[node name="fuel_bar" type="TextureProgress" parent="."]
+[node name="fuel_bar_" type="TextureProgress" parent="."]
+visible = false
 anchor_bottom = 1.0
 margin_left = 57.2789
 margin_top = 1.43195
@@ -46,3 +78,41 @@ editable = false
 scrollable = false
 tick_count = 10
 ticks_on_borders = true
+
+[node name="fuel_bar" type="TextureProgress" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 126.0
+margin_top = -198.0
+margin_right = 219.0
+margin_bottom = -81.0
+value = 19.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+fill_mode = 3
+nine_patch_stretch = true
+stretch_margin_left = 20
+stretch_margin_top = 46
+stretch_margin_right = 20
+stretch_margin_bottom = 46
+
+[node name="booster_fuel_bar" type="TextureProgress" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 216.492
+margin_top = -173.254
+margin_right = 298.492
+margin_bottom = -81.2538
+value = 19.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+fill_mode = 3
+nine_patch_stretch = true
+stretch_margin_left = 16
+stretch_margin_top = 46
+stretch_margin_right = 16
+stretch_margin_bottom = 46
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
