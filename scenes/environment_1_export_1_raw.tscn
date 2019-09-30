@@ -24,12 +24,6 @@
 [node name="WorldEnvironment" type="WorldEnvironment" parent="general_scene_stuff"]
 environment = ExtResource( 1 )
 
-[node name="Camera" type="Camera" parent="general_scene_stuff"]
-transform = Transform( 0.970303, -0.0242435, 0.240675, 0.00626889, 0.997151, 0.0751707, -0.241812, -0.0714296, 0.96769, -10.4389, 8.10537, 27.7544 )
-current = true
-fov = 29.0
-far = 2557.0
-
 [node name="sun" type="DirectionalLight" parent="general_scene_stuff"]
 transform = Transform( 0.277116, -0.494065, 0.824079, -0.714281, 0.467725, 0.520611, -0.642658, -0.732894, -0.223287, -4.64163, 6.88776, 2.7987 )
 light_color = Color( 1, 0.984314, 0.862745, 1 )
