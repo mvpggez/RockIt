@@ -1,0 +1,528 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://resources/environments/env_earth.tres" type="Environment" id=1]
+[ext_resource path="res://asset_scenes/bird_anim.tscn" type="PackedScene" id=2]
+[ext_resource path="res://asset_scenes/tower_anim.tscn" type="PackedScene" id=3]
+[ext_resource path="res://asset_scenes/launch_pad.tscn" type="PackedScene" id=4]
+[ext_resource path="res://asset_scenes/tent.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addon_sample_files/pattern_tree_3.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addon_sample_files/pattern_tree_1.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addon_sample_files/pattern_tree_2.tscn" type="PackedScene" id=8]
+[ext_resource path="res://asset_scenes/rock_1.tscn" type="PackedScene" id=9]
+[ext_resource path="res://asset_scenes/rock_2.tscn" type="PackedScene" id=10]
+[ext_resource path="res://asset_scenes/rock_3.tscn" type="PackedScene" id=11]
+[ext_resource path="res://asset_scenes/flower_1.tscn" type="PackedScene" id=12]
+[ext_resource path="res://asset_scenes/flower_2.tscn" type="PackedScene" id=13]
+[ext_resource path="res://asset_scenes/floor_base.tscn" type="PackedScene" id=14]
+[ext_resource path="res://asset_scenes/rock_face_1.tscn" type="PackedScene" id=15]
+[ext_resource path="res://asset_scenes/rock_face_2.tscn" type="PackedScene" id=16]
+
+[node name="Scene Root" type="Spatial"]
+
+[node name="general_scene_stuff" type="Spatial" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="general_scene_stuff"]
+environment = ExtResource( 1 )
+
+[node name="Camera" type="Camera" parent="general_scene_stuff"]
+transform = Transform( 0.970303, -0.0242435, 0.240675, 0.00626889, 0.997151, 0.0751707, -0.241812, -0.0714296, 0.96769, -10.4389, 8.10537, 27.7544 )
+current = true
+fov = 29.0
+far = 2557.0
+
+[node name="sun" type="DirectionalLight" parent="general_scene_stuff"]
+transform = Transform( 0.277116, -0.494065, 0.824079, -0.714281, 0.467725, 0.520611, -0.642658, -0.732894, -0.223287, -4.64163, 6.88776, 2.7987 )
+light_color = Color( 1, 0.984314, 0.862745, 1 )
+shadow_enabled = true
+shadow_bias = 0.0
+directional_shadow_depth_range = 1
+directional_shadow_max_distance = 50.0
+
+[node name="assets2" type="Spatial" parent="."]
+
+[node name="assets" type="Spatial" parent="."]
+
+[node name="specials" type="Spatial" parent="assets"]
+
+[node name="animated" type="Spatial" parent="assets/specials"]
+editor/display_folded = true
+
+[node name="bird_1_animated" parent="assets/specials/animated" instance=ExtResource( 2 )]
+transform = Transform( 0.244088, 0, -0.258535, 0, 0.355555, 0, 0.258535, 0, 0.244088, -13.378, 2.59167, 7.23404 )
+
+[node name="bird_1_animated2" parent="assets/specials/animated" instance=ExtResource( 2 )]
+transform = Transform( 0.232279, 0.0126406, -0.0778591, -0.0169672, 0.244475, -0.0109275, 0.0770321, 0.0157324, 0.232366, -16.1595, 3.1087, 4.66998 )
+
+[node name="tower_animated" parent="assets/specials/animated" instance=ExtResource( 3 )]
+
+[node name="launch_pad" parent="assets/specials" instance=ExtResource( 4 )]
+
+[node name="tent_" parent="assets/specials" instance=ExtResource( 5 )]
+transform = Transform( 0.426925, 0, -0.253954, 0, 0.496747, 0, 0.253954, 0, 0.426925, -13.8823, 2.27931, 3.92226 )
+
+[node name="groups" type="Spatial" parent="assets"]
+editor/display_folded = true
+
+[node name="tree_3" type="Spatial" parent="assets/groups"]
+editor/display_folded = true
+
+[node name="pattern_tree_70" parent="assets/groups/tree_3" instance=ExtResource( 6 )]
+transform = Transform( 0.132294, 0.0087454, 0.180945, -0.0347033, 0.221132, 0.0146848, -0.177801, -0.0366535, 0.131767, -9.80441, 1.78094, 6.61816 )
+
+[node name="pattern_tree_71" parent="assets/groups/tree_3" instance=ExtResource( 6 )]
+transform = Transform( 0.144135, 0.0115854, 0.146598, -0.00194732, 0.205405, -0.0143183, -0.147042, 0.00863615, 0.14389, -14.6307, 2.36133, 3.67383 )
+
+[node name="pattern_tree_72" parent="assets/groups/tree_3" instance=ExtResource( 6 )]
+transform = Transform( -0.0544991, 0.00416821, -0.158538, 0.0351259, 0.163792, -0.00776853, 0.154654, -0.0357324, -0.0541034, -19.1544, 1.66321, 8.25928 )
+
+[node name="pattern_tree_73" parent="assets/groups/tree_3" instance=ExtResource( 6 )]
+transform = Transform( -0.201569, 0.0221187, 0.0972329, 0.0120453, 0.223078, -0.0257758, -0.0989868, -0.0178953, -0.201134, -18.8238, 1.70117, 7.92334 )
+
+[node name="pattern_tree_74" parent="assets/groups/tree_3" instance=ExtResource( 6 )]
+transform = Transform( 0.129921, 0.00730302, 0.127471, -0.0216644, 0.180484, 0.0117406, -0.125829, -0.0235341, 0.129596, -21.683, 1.32227, 8.86646 )
+
+[node name="tree_1" type="Spatial" parent="assets/groups"]
+editor/display_folded = true
+
+[node name="pattern_tree_1" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( 0.142146, -0.0188548, 0.0797462, 0.0264658, 0.161678, -0.00894831, -0.0775534, 0.0206157, 0.143111, -10.1101, 1.85651, 6.61694 )
+
+[node name="pattern_tree_52" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( -0.280571, 0.0220859, -0.0455297, 0.0156474, 0.281805, 0.0402752, 0.0481238, 0.0371368, -0.278542, -18.0438, 1.8653, 6.95117 )
+
+[node name="pattern_tree_53" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( 0.0125243, 0.00078597, 0.191716, 0.00994035, 0.191864, -0.00143595, -0.19146, 0.0100127, 0.0124665, -18.4328, 1.81372, 7.2229 )
+
+[node name="pattern_tree_54" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( -0.128823, 0.0149854, 0.0813433, 0.0251647, 0.15052, 0.0121237, -0.0787911, 0.023573, -0.129124, -19.5541, 1.61328, 9.24268 )
+
+[node name="pattern_tree_55" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( -0.000878219, -9.29137e-05, -0.211467, -0.049747, 0.205535, 0.000116291, 0.205533, 0.049747, -0.00087543, -20.9245, 1.32275, 10.3782 )
+
+[node name="pattern_tree_56" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( -0.221637, 0.0139961, 0.169491, 0.0270647, 0.277774, 0.0124536, -0.167901, 0.0263002, -0.221729, -22.1746, 1.43896, 7.66394 )
+
+[node name="pattern_tree_57" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( -0.245787, 0.00527053, 7.64692e-05, 0.00525207, 0.244572, 0.0244093, 0.000447227, 0.0244053, -0.244628, -14.1311, 2.42078, 2.99646 )
+
+[node name="pattern_tree_58" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( 0.0941289, 0.00109668, -0.168837, 0.0185565, 0.192064, 0.0115931, 0.167817, -0.0218527, 0.0934187, -18.0771, 2.70483, 3.27869 )
+
+[node name="pattern_tree_59" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( -0.195824, 0.0208919, 0.177633, 0.00745446, 0.26412, -0.022846, -0.178702, -0.0118759, -0.195605, -17.7055, 2.60217, 3.37378 )
+
+[node name="pattern_tree_60" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( -0.0648774, -0.00661846, 0.182931, -0.0170616, 0.193454, 0.000948235, -0.182254, -0.0157541, -0.0652072, -18.8981, 2.76245, 4.39258 )
+
+[node name="pattern_tree_61" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( 0.0592792, -0.00135195, 0.149013, -0.00945639, 0.160013, 0.00521362, -0.148719, -0.0107134, 0.0590649, -10.5435, 1.35181, 2.11011 )
+
+[node name="pattern_tree_62" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( 0.20222, 0.0025805, -0.0262003, 0.00149662, 0.201489, 0.0313962, 0.0262845, -0.0313257, 0.199784, -9.28979, 1.40674, 5.06335 )
+
+[node name="pattern_tree_63" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( -0.104361, -0.0049874, -0.179869, -0.0156246, 0.207398, 0.00331474, 0.179259, 0.0151737, -0.104428, -11.4005, 2.0177, 6.4624 )
+
+[node name="pattern_tree_64" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( 0.238084, 0.00572708, -0.0112903, -0.00645444, 0.23783, -0.0154665, 0.0108909, 0.0157503, 0.23765, -13.3544, 2.03937, 5.40003 )
+
+[node name="pattern_tree_65" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( 0.226272, -8.89299e-05, -0.128196, 0.00683103, 0.259703, 0.0118769, 0.128014, -0.013701, 0.22596, -15.7513, 2.50153, 2.69116 )
+
+[node name="pattern_tree_66" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( -0.138993, 0.0209559, 0.128145, 0.0351947, 0.186768, 0.00763134, -0.124986, 0.0292874, -0.140356, -15.8944, 2.48682, 2.87036 )
+
+[node name="pattern_tree_67" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( -0.283516, 0.0122071, -0.0511768, 0.0200689, 0.284372, -0.0433495, 0.0486345, -0.0461836, -0.280448, -14.6141, 2.44879, 2.44971 )
+
+[node name="pattern_tree_68" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( 0.256181, -0.0363424, -0.024096, 0.0369143, 0.257189, 0.00455781, 0.0232105, -0.00791607, 0.258705, -18.1531, 2.67065, 3.49097 )
+
+[node name="pattern_tree_69" parent="assets/groups/tree_1" instance=ExtResource( 7 )]
+transform = Transform( -0.0959992, 0.00519323, 0.146124, -0.011106, 0.17404, -0.0134817, -0.145794, -0.0166772, -0.0951896, -18.6225, 2.75848, 3.56787 )
+
+[node name="tree_2" type="Spatial" parent="assets/groups"]
+editor/display_folded = true
+
+[node name="pattern_tree_2" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.198788, -0.00450879, -0.00541424, 0.00477975, 0.198599, 0.0101062, 0.0051766, -0.01023, 0.198582, -21.1171, 1.34985, 9.92749 )
+
+[node name="pattern_tree_3" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.0656727, -0.00664172, 0.141432, -0.00685384, 0.155872, 0.00413729, -0.141422, -0.00446988, -0.065878, -20.8279, 1.42987, 9.90674 )
+
+[node name="pattern_tree_4" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.114688, 0.00626728, 0.256339, 0.00532974, 0.280809, -0.00448099, -0.25636, 0.00303424, -0.114771, -19.4041, 1.6236, 8.71948 )
+
+[node name="pattern_tree_5" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.155413, 0.0135081, 0.0985882, -0.0104372, 0.184037, -0.00876293, -0.0989604, 0.0018039, 0.155753, -19.6972, 1.63116, 8.80396 )
+
+[node name="pattern_tree_6" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.0316713, -0.00365632, 0.24848, -0.0298223, 0.248736, -0.000141064, -0.246711, -0.0295976, -0.0318813, -9.3284, 1.54938, 6.33228 )
+
+[node name="pattern_tree_7" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.108575, -0.00334699, -0.277277, -0.0324567, 0.295881, 0.00913767, 0.275391, 0.0335519, -0.108241, -11.1365, 2.11884, 6.28589 )
+
+[node name="pattern_tree_8" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.00235624, 0.000344497, -0.109571, -0.0144763, 0.108637, 3.0256e-05, 0.108611, 0.0144723, 0.0023811, -14.8456, 2.3642, 3.69995 )
+
+[node name="pattern_tree_9" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.110821, -0.00593556, -0.12306, 0.0203674, 0.164124, 0.0104254, 0.121508, -0.0220972, 0.110489, -15.244, 2.37573, 3.71289 )
+
+[node name="pattern_tree_10" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.187, 0.015318, 0.0491498, 0.0168174, 0.19319, 0.00377534, -0.0486572, 0.00790153, -0.187588, -9.255, 1.45422, 5.66724 )
+
+[node name="pattern_tree_11" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.185644, 0.018025, 0.0470084, 0.0170645, 0.191496, -0.0060371, -0.0473655, -0.00165622, -0.186419, -11.781, 2.27258, 3.7536 )
+
+[node name="pattern_tree_12" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.0777483, 0.00537098, -0.277111, -0.0143144, 0.287501, 0.00155619, 0.276793, 0.0133596, 0.077918, -11.1045, 2.13269, 3.69495 )
+
+[node name="pattern_tree_13" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.0334158, 0.00306539, -0.2158, 0.0458029, 0.213498, -0.00405973, 0.210905, -0.0458802, -0.0333096, -9.49609, 1.49835, 4.73639 )
+
+[node name="pattern_tree_18" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.0407781, -0.0039384, 0.226179, -0.00427106, 0.22977, 0.00477097, -0.226173, -0.00504907, 0.0406891, -21.8032, 0.986389, 10.5522 )
+
+[node name="pattern_tree_14" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.261302, -0.0044491, 0.113447, -0.00609926, 0.283721, 0.0251753, -0.11337, -0.0255186, 0.260125, -14.3051, 2.4314, 2.79354 )
+
+[node name="pattern_tree_15" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.148883, -0.0149789, -0.0523923, -0.0236779, 0.155075, 0.0229499, 0.0490783, 0.0293764, -0.147865, -13.6581, 2.42896, 2.82537 )
+
+[node name="pattern_tree_16" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.0626216, -0.000522571, 0.288739, 0.025429, 0.294294, 0.00604764, -0.287618, 0.026133, -0.0623311, -13.0853, 2.42725, 2.82537 )
+
+[node name="pattern_tree_17" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.13998, -0.0103575, -0.0839555, -0.000700808, 0.162461, -0.018874, 0.0845891, -0.0157938, -0.139088, -20.2559, 2.6936, 4.80896 )
+
+[node name="pattern_tree_19" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.0824312, -0.00527105, 0.148451, 0.0141524, 0.169283, -0.00184773, -0.147869, 0.0132635, 0.0825789, -20.0756, 2.94702, 4.04522 )
+
+[node name="pattern_tree_20" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.14557, -0.0203561, -0.261441, 0.0589396, 0.293911, 0.00993323, 0.255522, -0.0561976, 0.14665, -19.6194, 2.79736, 4.48013 )
+
+[node name="pattern_tree_21" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.047838, -0.00055955, -0.158147, 0.00618621, 0.165091, -0.00245539, 0.158027, -0.00663213, -0.0477782, -18.1238, 2.50586, 2.67686 )
+
+[node name="pattern_tree_22" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.273857, 0.0198528, 0.056622, 0.0140194, 0.278411, -0.0298105, -0.0583408, -0.0262883, -0.272952, -17.4661, 2.51025, 2.52836 )
+
+[node name="pattern_tree_23" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.0790337, -0.00915597, -0.276107, -0.00470678, 0.287098, -0.0108677, 0.276219, 0.00751193, 0.0788166, -17.3282, 2.54565, 3.33452 )
+
+[node name="pattern_tree_24" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.111484, 0.0116735, -0.2034, -0.00534475, 0.231948, 0.0103824, 0.203664, -0.000302942, 0.111612, -15.7159, 2.18262, 1.23425 )
+
+[node name="pattern_tree_25" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.166183, -0.0235397, -0.0313879, -0.0229121, 0.169118, -0.00552364, 0.0318489, -0.00116412, -0.167751, -15.334, 2.27783, 1.51004 )
+
+[node name="pattern_tree_26" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.131109, 0.00110814, -0.232149, 0.000660004, 0.266613, 0.000899905, 0.232151, -0.000132153, -0.13111, -21.2848, 2.28613, 4.14069 )
+
+[node name="pattern_tree_27" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.112601, -0.00275268, 0.137798, 0.011156, 0.177173, 0.0126552, -0.137374, 0.0166443, -0.111921, -21.7303, 2.09155, 5.23326 )
+
+[node name="pattern_tree_28" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.138009, -0.0113488, -0.11163, -0.0157032, 0.177167, 0.00140244, 0.111101, 0.0109436, -0.138468, -21.3378, 2.23193, 5.90152 )
+
+[node name="pattern_tree_29" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.252871, 0.000462776, -0.0184383, 0.00131132, 0.253272, -0.0116272, 0.0183974, -0.0116917, -0.252604, -20.2665, 2.33862, 6.09246 )
+
+[node name="pattern_tree_30" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.102381, -0.0136441, 0.142415, 0.0279219, 0.173662, -0.0034351, -0.140316, 0.0246023, 0.103229, -19.6937, 2.44604, 5.66816 )
+
+[node name="pattern_tree_31" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.220117, 0.00511751, -0.00446857, -0.00480852, 0.219677, 0.0147163, 0.00479949, -0.0146117, 0.219684, -21.6318, 1.96289, 6.7154 )
+
+[node name="pattern_tree_32" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.072246, 0.0027618, -0.287217, -0.0488373, 0.291968, -0.00947696, 0.283048, 0.0496716, 0.0716749, -21.4939, 1.86719, 7.20335 )
+
+[node name="pattern_tree_33" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.0112163, 0.000313789, 0.204586, -0.0197987, 0.20393, -0.00139823, -0.203626, -0.0198456, -0.0111332, -13.6256, 1.84619, 0.810364 )
+
+[node name="pattern_tree_34" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.177492, 0.0195892, -0.177509, -0.0392089, 0.248436, -0.0117888, 0.174229, 0.0359524, 0.17818, -12.7316, 1.83679, 1.23553 )
+
+[node name="pattern_tree_35" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.105824, -0.00173877, 0.165449, -0.0214859, 0.194876, -0.0116947, -0.164057, -0.0244005, -0.10519, -12.1598, 1.85938, 1.6358 )
+
+[node name="pattern_tree_36" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.101419, -0.00554727, -0.152808, -0.000881958, 0.183383, -0.00607183, 0.152906, -0.0026216, -0.101388, -9.18396, 0.837708, 3.46411 )
+
+[node name="pattern_tree_37" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.0477886, -0.00509669, 0.187311, 0.0241069, 0.191867, -0.000929738, -0.185823, 0.0235803, 0.0480506, -10.0403, 1.36145, 3.02551 )
+
+[node name="pattern_tree_38" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.246398, 0.0319147, 0.117787, 0.04369, 0.270871, 0.0180016, -0.113945, 0.0348473, -0.247803, -19.287, 2.85559, 3.85675 )
+
+[node name="pattern_tree_39" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.124919, -0.00608308, -0.236594, -0.00856417, 0.267236, -0.0113927, 0.236517, 0.0128894, 0.124547, -19.027, 2.83398, 3.67224 )
+
+[node name="pattern_tree_40" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.195184, -0.0170483, 0.121809, -0.0233682, 0.229457, -0.00533014, -0.120756, -0.0168475, -0.195855, -17.323, 2.4021, 2.10297 )
+
+[node name="pattern_tree_41" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.124404, -0.00309829, 0.171504, -0.031698, 0.208628, -0.0192239, -0.168578, -0.0369421, -0.122949, -20.0775, 2.61487, 5.13931 )
+
+[node name="pattern_tree_42" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.194988, 0.00961113, -0.169026, 0.0149092, 0.257787, -0.00254101, 0.168641, -0.0116776, -0.195208, -21.4696, 2.18896, 5.46033 )
+
+[node name="pattern_tree_43" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.0882343, 0.00172131, -0.236358, -0.00137095, 0.252289, 0.00132554, 0.23636, 0.00082077, 0.0882411, -21.799, 1.55225, 3.75494 )
+
+[node name="pattern_tree_44" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.194658, -0.0222908, -0.065195, 0.0328077, 0.201802, 0.0289587, 0.0605882, -0.0376573, 0.193779, -21.0081, 2.0686, 3.34772 )
+
+[node name="pattern_tree_45" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.0990643, -0.012008, 0.148502, 0.0333297, 0.1756, -0.00803487, -0.14521, 0.0321128, 0.0994655, -20.5502, 2.2168, 3.17203 )
+
+[node name="pattern_tree_46" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.186515, -0.00947164, 0.138765, 0.000879923, 0.232202, 0.0146666, -0.139085, -0.0112326, 0.186179, -22.4125, 1.4375, 6.81653 )
+
+[node name="pattern_tree_47" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.27592, 0.0147083, -0.00271183, -0.0147719, 0.275844, -0.00687352, 0.00234125, 0.00700842, 0.276226, -22.6059, 1.24707, 7.1593 )
+
+[node name="pattern_tree_48" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.158605, -0.0096698, 0.131711, -0.0194891, 0.205296, -0.00839636, -0.13062, -0.0188897, -0.158677, -22.6249, 1.1532, 7.66516 )
+
+[node name="pattern_tree_49" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.0233454, -0.00050267, -0.156251, 0.0172809, 0.157007, -0.00308704, 0.155293, -0.0175473, -0.0231459, -21.9499, 1.57092, 7.48499 )
+
+[node name="pattern_tree_50" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.0897108, 0.0386223, -0.255324, -0.020274, 0.268405, 0.0477245, 0.257431, 0.0345975, -0.0852178, -11.4987, 1.3042, 1.12781 )
+
+[node name="pattern_tree_51" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.0522849, 0.0079895, -0.163749, -0.0346423, 0.168532, -0.00283837, 0.160242, 0.0338277, 0.0528156, -11.036, 1.4422, 1.81274 )
+
+[node name="pattern_tree_52" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.18461, 0.00289317, 0.072876, -0.00240792, 0.197989, -0.0139599, -0.0728937, -0.0138675, -0.184105, -18.1695, 2.43774, 4.48174 )
+
+[node name="pattern_tree_53" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.105848, 0.00224533, 0.166612, 0.0172775, 0.196175, -0.0136201, -0.165729, 0.0218855, 0.104992, -18.4437, 2.44092, 4.77037 )
+
+[node name="pattern_tree_54" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.159532, 0.0116956, -0.0336158, 0.00685254, 0.161582, 0.023697, 0.0349264, 0.0217191, -0.158195, -17.7943, 2.29004, 4.94355 )
+
+[node name="pattern_tree_55" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.136155, -0.0120884, 0.131128, -0.0146556, 0.188837, 0.0021909, -0.130866, -0.0085708, -0.136673, -19.0643, 2.49463, 5.18888 )
+
+[node name="pattern_tree_56" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.070452, -0.00283618, 0.152385, 0.00276735, 0.167826, 0.004403, -0.152386, 0.00435898, -0.0703714, -12.2382, 2.24707, 2.63452 )
+
+[node name="pattern_tree_57" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.164606, 0.0226819, -0.0350593, -0.0186825, 0.16752, 0.0206626, 0.0373442, -0.0161712, 0.164872, -11.8774, 2.21826, 2.93758 )
+
+[node name="pattern_tree_58" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.0177533, -0.000265991, -0.166018, 0.0099034, 0.166666, -0.00132605, 0.165723, -0.00998824, -0.0177057, -11.2858, 2.0603, 2.99531 )
+
+[node name="pattern_tree_59" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.0298924, 0.0179318, 0.148444, 0.0155292, 0.150191, -0.0212699, -0.148715, 0.0192877, 0.027617, -16.8853, 2.53198, 3.20593 )
+
+[node name="pattern_tree_60" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.121126, 0.00699048, 0.0960003, -0.0107717, 0.154321, 0.00235367, -0.0956498, -0.00852653, 0.121305, -17.8877, 2.52856, 3.84717 )
+
+[node name="pattern_tree_61" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.116033, 0.0055476, 0.0346959, -0.00374609, 0.120986, -0.00681676, -0.0349364, 0.00545212, 0.115965, -17.514, 2.46362, 3.90491 )
+
+[node name="pattern_tree_62" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.166966, 0.0156732, 0.059044, -0.0225717, 0.175507, 0.0172405, -0.0567658, -0.0236868, 0.166812, -18.3595, 1.74463, 7.66711 )
+
+[node name="pattern_tree_63" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.0170024, 0.00150533, -0.161029, 0.00570846, 0.161816, 0.00211543, 0.160934, -0.00589877, 0.0169374, -8.90784, 1.2782, 6.02637 )
+
+[node name="pattern_tree_64" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.162361, -0.00843025, -0.0481602, -0.00823169, 0.169352, -0.00189321, 0.0481945, 0.000525212, -0.162569, -8.83588, 1.07434, 6.96948 )
+
+[node name="pattern_tree_65" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.0625365, 0.00154139, -0.141553, -0.00873726, 0.154413, 0.00554145, 0.141291, 0.0102309, -0.0623096, -9.63864, 1.30768, 7.57324 )
+
+[node name="pattern_tree_66" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.0930571, 0.0123459, -0.137905, 0.0180769, 0.16582, 0.00264677, 0.137272, -0.013467, -0.0938352, -9.37335, 1.15558, 7.83154 )
+
+[node name="pattern_tree_67" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.080065, 0.00572346, -0.132882, -0.0300961, 0.151857, -0.0115929, 0.129556, 0.0317397, 0.0794277, -20.1502, 1.4696, 11.1279 )
+
+[node name="pattern_tree_68" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.116717, 2.08476e-05, -0.141744, 0.0185861, 0.182027, 0.0153312, 0.140521, -0.0240934, 0.115706, -17.1697, 2.20483, 1.45743 )
+
+[node name="pattern_tree_69" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.0554314, -0.00573719, 0.188524, 0.00191449, 0.196504, 0.00541713, -0.188602, 0.000308508, 0.0554636, -16.4474, 2.21021, 1.36429 )
+
+[node name="pattern_tree_70" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.00216809, 0.000193506, -0.190943, -0.0332842, 0.188032, -0.000187375, 0.18802, 0.0332842, 0.00216863, -16.4853, 2.41895, 2.13466 )
+
+[node name="pattern_tree_71" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.197442, -0.00676454, -0.00525972, 0.00640837, 0.1971, -0.0129305, 0.00568827, 0.0127478, 0.197134, -15.6301, 2.44678, 2.07123 )
+
+[node name="pattern_tree_72" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.243305, -0.00147342, -0.116715, 0.00724066, 0.269123, -0.0184914, 0.116499, -0.0198038, -0.242606, -14.6634, 1.91724, 0.694702 )
+
+[node name="pattern_tree_73" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.243004, -0.00709133, 0.287239, -0.023551, 0.375419, -0.0106559, -0.28636, -0.0248578, -0.242874, -14.6338, 2.32581, 1.63611 )
+
+[node name="pattern_tree_74" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.0932744, 0.00670164, -0.346763, -0.00329113, 0.35905, 0.00782439, 0.346812, 0.00520966, -0.093187, -17.0682, 1.6123, 0.849792 )
+
+[node name="pattern_tree_75" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.186938, -0.00515277, 0.356304, -0.0155109, 0.402094, -0.00232298, -0.356004, -0.0148133, -0.186995, -12.9845, 1.41699, 0.545441 )
+
+[node name="pattern_tree_76" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.382808, 0.0126491, 0.236002, -0.000693023, 0.449301, -0.0229572, -0.236339, 0.0191707, 0.382328, -22.0114, 1.77856, 4.80786 )
+
+[node name="pattern_tree_77" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.21308, 0.0334608, -0.235514, -0.0185607, 0.317557, 0.0283245, 0.237154, -0.00521069, 0.213823, -19.4865, 2.26392, 2.59564 )
+
+[node name="pattern_tree_78" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.417963, -0.0298487, -0.122375, -0.0441401, 0.431914, 0.0454087, 0.117976, 0.0558512, -0.41656, -19.945, 2.25684, 2.83264 )
+
+[node name="pattern_tree_79" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.35203, 0.00992531, -0.036138, -0.00966037, 0.353874, 0.00308723, 0.0362098, -0.00208376, 0.352156, -10.6199, 1.6178, -0.00244141 )
+
+[node name="pattern_tree_80" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( -0.202967, -0.00831469, -0.34328, -0.0519253, 0.394922, 0.0211357, 0.339432, 0.0554421, -0.202035, -9.72552, 1.46545, 0.928711 )
+
+[node name="pattern_tree_81" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.312615, -0.0456559, -0.130385, 0.0445964, 0.338656, -0.0116591, 0.130751, -0.00634884, 0.315716, -9.19348, 2.09229, -0.521362 )
+
+[node name="pattern_tree_82" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.320557, 0.0602929, 0.278024, -0.0885905, 0.419183, 0.0112383, -0.270341, -0.0658737, 0.325984, -8.57202, 1.60742, 0.833862 )
+
+[node name="pattern_tree_83" parent="assets/groups/tree_2" instance=ExtResource( 8 )]
+transform = Transform( 0.329567, 0.0438557, -0.162236, -0.0611227, 0.363947, -0.0257825, 0.15655, 0.0497734, 0.331471, -8.96588, 1.33813, 2.1875 )
+
+[node name="rock_1" type="Spatial" parent="assets/groups"]
+editor/display_folded = true
+
+[node name="rock_1_base2" parent="assets/groups/rock_1" instance=ExtResource( 9 )]
+transform = Transform( -0.479102, 0.218725, -0.472288, 0.0606683, 0.66101, 0.244582, 0.51693, 0.125141, -0.466432, -19.8897, 3.72765, 7.0146 )
+
+[node name="rock_1_base3" parent="assets/groups/rock_1" instance=ExtResource( 9 )]
+transform = Transform( 0.982976, 0.181971, -0.0253981, -0.183651, 0.968917, -0.165751, -0.00555307, 0.167593, 0.985841, -20.9018, 3.72448, 8.11632 )
+
+[node name="rock_1_base4" parent="assets/groups/rock_1" instance=ExtResource( 9 )]
+transform = Transform( 0.720922, -0.0162554, 0.00161109, 0.0162554, 0.706894, -0.141531, 0.00161109, 0.141531, 0.707079, -13.1847, 1.64939, 8.33123 )
+
+[node name="rock_1_base5" parent="assets/groups/rock_1" instance=ExtResource( 9 )]
+transform = Transform( 0.0543844, -0.0173645, -0.718843, -0.139404, 0.706964, -0.0276242, 0.70541, 0.14105, 0.0499609, -12.4759, 1.74949, 7.91315 )
+
+[node name="rock_1_base6" parent="assets/groups/rock_1" instance=ExtResource( 9 )]
+transform = Transform( 0.0378076, 0.0442164, -0.488707, -0.0745135, 0.484989, 0.0381154, 0.485013, 0.071063, 0.0439513, -15.351, 1.58842, 8.9909 )
+
+[node name="rock_2" type="Spatial" parent="assets/groups"]
+editor/display_folded = true
+
+[node name="rock_2_base2" parent="assets/groups/rock_2" instance=ExtResource( 10 )]
+transform = Transform( -0.970511, 0.15808, 0.181985, 0.183574, 0.973974, 0.132948, -0.156233, 0.162435, -0.974272, -10.5104, 1.97352, 6.31442 )
+
+[node name="rock_2_base3" parent="assets/groups/rock_2" instance=ExtResource( 10 )]
+transform = Transform( 0.313611, -0.0594931, 0.559916, 0.157908, 0.624479, -0.0220915, -0.540473, 0.147931, 0.318439, -12.6626, 3.73242, 4.53654 )
+
+[node name="rock_3" type="Spatial" parent="assets/groups"]
+editor/display_folded = true
+
+[node name="rock_3_base2" parent="assets/groups/rock_3" instance=ExtResource( 11 )]
+transform = Transform( 0.571139, -0.103039, -1.38194, -0.080666, 1.48971, -0.144412, 1.38343, 0.129402, 0.562105, -13.2329, 1.79035, 7.31411 )
+
+[node name="rock_3_base3" parent="assets/groups/rock_3" instance=ExtResource( 11 )]
+transform = Transform( 0.99393, -0.0350615, 0.104276, 0.0458232, 0.99366, -0.102668, -0.100016, 0.106823, 0.989235, -18.0906, 1.56412, 9.28662 )
+
+[node name="rock_3_base4" parent="assets/groups/rock_3" instance=ExtResource( 11 )]
+transform = Transform( 1.50092, 0.10921, -1.07922, -0.300743, 1.81212, -0.234882, 1.04221, 0.365635, 1.48645, -16.0952, 2.19328, 4.65148 )
+
+[node name="flower_1" type="Spatial" parent="assets/groups"]
+editor/display_folded = true
+
+[node name="flower_base2" parent="assets/groups/flower_1" instance=ExtResource( 12 )]
+transform = Transform( 0.102111, 0.031192, -0.106757, -0.0215602, 0.147729, 0.022541, 0.109111, -2.24986e-09, 0.104363, -12.4715, 1.80459, 7.6891 )
+
+[node name="flower_base3" parent="assets/groups/flower_1" instance=ExtResource( 12 )]
+transform = Transform( -0.0861811, 0.0357888, 0.159273, -0.0314862, 0.17308, -0.0559281, -0.160179, -0.0532776, -0.0746999, -15.3923, 2.1232, 5.02853 )
+
+[node name="flower_base4" parent="assets/groups/flower_1" instance=ExtResource( 12 )]
+transform = Transform( 0.087982, -0.0599868, -0.0919845, 0.0414634, 0.127287, -0.0433497, 0.101688, -2.0968e-09, 0.0972627, -12.4879, 1.8027, 7.69663 )
+
+[node name="flower_base5" parent="assets/groups/flower_1" instance=ExtResource( 12 )]
+transform = Transform( -0.068195, 0.0120087, 0.122497, 0.0738997, 0.115987, 0.0297699, -0.098431, 0.0787604, -0.0625182, -12.4412, 1.85043, 7.81844 )
+
+[node name="flower_base6" parent="assets/groups/flower_1" instance=ExtResource( 12 )]
+transform = Transform( -0.131372, 0.0391, -0.050973, 0.0194966, 0.134826, 0.0531733, 0.0612123, 0.040972, -0.126333, -15.6583, 2.04597, 5.36846 )
+
+[node name="flower_base7" parent="assets/groups/flower_1" instance=ExtResource( 12 )]
+transform = Transform( -0.0294827, 0.085242, 0.161669, 0.0782411, 0.153882, -0.0668674, -0.165171, 0.0576777, -0.0605325, -16.8892, 2.23677, 4.86754 )
+
+[node name="flower_base8" parent="assets/groups/flower_1" instance=ExtResource( 12 )]
+transform = Transform( 0, 0.0339598, 0.123059, 0, 0.123059, -0.0339598, -0.127659, 0, 0, -18.0237, 1.44118, 11.0077 )
+
+[node name="flower_base9" parent="assets/groups/flower_1" instance=ExtResource( 12 )]
+transform = Transform( 0, 0.0433937, 0.157245, 0, 0.157245, -0.0433937, -0.163122, 0, 0, -11.6382, 2.08562, 6.47699 )
+
+[node name="flower_base10" parent="assets/groups/flower_1" instance=ExtResource( 12 )]
+transform = Transform( -0.0982033, -0.0237959, -0.0862287, 2.96913e-09, 0.12805, -0.0353371, 0.0894519, -0.026124, -0.0946648, -12.4906, 3.76365, 4.48259 )
+
+[node name="flower_base11" parent="assets/groups/flower_1" instance=ExtResource( 12 )]
+transform = Transform( 0.129495, -0.0449022, 0.0763984, 0.0443858, 0.149951, 0.0128982, -0.0766995, 0.0109663, 0.13645, -15.6994, 2.06216, 5.38521 )
+
+[node name="flower_base12" parent="assets/groups/flower_1" instance=ExtResource( 12 )]
+transform = Transform( 0.0987292, -0.0526585, 0.0941552, 0.0969155, 0.0993572, -0.0460557, -0.0473869, 0.0934924, 0.101977, -15.6892, 2.06083, 5.40582 )
+
+[node name="flower_base13" parent="assets/groups/flower_1" instance=ExtResource( 12 )]
+transform = Transform( -0.114707, 0.0244753, 0.0886905, 3.28675e-09, 0.141748, -0.0391173, -0.0920057, -0.0305143, -0.110574, -12.6643, 3.77252, 4.36298 )
+
+[node name="flower_base14" parent="assets/groups/flower_1" instance=ExtResource( 12 )]
+transform = Transform( -0.189612, 0.0544912, -0.0551093, 0.052326, 0.197458, 0.0152081, 0.0571692, -1.52617e-08, -0.1967, -10.5887, 1.70585, 7.45382 )
+
+[node name="flower_2" type="Spatial" parent="assets/groups"]
+editor/display_folded = true
+
+[node name="flower_2_base2" parent="assets/groups/flower_2" instance=ExtResource( 13 )]
+transform = Transform( -0.0771664, -0.0567206, 0.134714, -0.0281927, 0.15525, 0.0492179, -0.143424, 4.92594e-09, -0.0821552, -15.4025, 2.13272, 5.05435 )
+
+[node name="flower_2_base3" parent="assets/groups/flower_2" instance=ExtResource( 13 )]
+transform = Transform( -0.0263987, -0.0219163, 0.162174, 0.0700569, 0.146943, 0.0312619, -0.147894, 0.0735184, -0.0141389, -16.9234, 2.23539, 4.87585 )
+
+[node name="flower_2_base4" parent="assets/groups/flower_2" instance=ExtResource( 13 )]
+transform = Transform( -0.087931, 0.0274857, -0.0752313, 0, 0.111719, 0.0408164, 0.080095, 0.0301748, -0.0825915, -12.4732, 3.75655, 4.49364 )
+
+[node name="flower_2_base5" parent="assets/groups/flower_2" instance=ExtResource( 13 )]
+transform = Transform( 0, -0.0392256, 0.107365, 0, 0.107365, 0.0392256, -0.114306, 0, 0, -18.0428, 1.44085, 11.014 )
+
+[node name="flower_2_base6" parent="assets/groups/flower_2" instance=ExtResource( 13 )]
+transform = Transform( -0.169778, 0.0683758, -0.0118422, 0.0468525, 0.136036, 0.11375, 0.0511892, 0.102269, -0.143391, -10.5696, 1.69446, 7.47568 )
+
+[node name="flower_2_base7" parent="assets/groups/flower_2" instance=ExtResource( 13 )]
+transform = Transform( -0.102708, -0.0282704, 0.0773791, -9.80983e-10, 0.12367, 0.0451828, -0.0823817, 0.0352459, -0.0964715, -12.6762, 3.77017, 4.37392 )
+
+[node name="flower_2_base8" parent="assets/groups/flower_2" instance=ExtResource( 13 )]
+transform = Transform( 0, -0.0501224, 0.13719, 0, 0.13719, 0.0501224, -0.146059, 0, 0, -11.6606, 2.08471, 6.48309 )
+
+[node name="floor" type="Spatial" parent="assets/groups"]
+
+[node name="floor " parent="assets/groups/floor" instance=ExtResource( 14 )]
+transform = Transform( 1.67563, 0.0239266, 0.592074, 0.0239266, 1.77168, -0.139311, -0.592074, 0.139311, 1.66999, -15.6908, -0.0119604, 6.8858 )
+
+[node name="floor 3" parent="assets/groups/floor" instance=ExtResource( 14 )]
+transform = Transform( 1.56792, -0.0866323, -0.832451, 0.0239266, 1.77168, -0.139311, 0.836612, 0.111691, 1.56411, -9.33171, -0.672239, 3.26154 )
+
+[node name="floor 2" parent="assets/groups/floor" instance=ExtResource( 14 )]
+transform = Transform( 1.67563, 0.0239266, 0.592074, 0.0239266, 1.77168, -0.139311, -0.592074, 0.139311, 1.66999, -23.8215, -0.299436, 6.8858 )
+
+[node name="rock_face_1" type="Spatial" parent="assets/groups"]
+editor/display_folded = true
+
+[node name="rock_face2" parent="assets/groups/rock_face_1" instance=ExtResource( 15 )]
+transform = Transform( 0.68726, 0.126432, 0.715325, -0.0270825, 0.988512, -0.148698, -0.725907, 0.0828212, 0.682788, -19.6051, 1.8696, 7.2393 )
+
+[node name="rock_face" parent="assets/groups/rock_face_1" instance=ExtResource( 15 )]
+transform = Transform( 0.922219, -0.0326911, -0.385283, -0.0270822, 0.988512, -0.148699, 0.385718, 0.147568, 0.910739, -11.6513, 1.86961, 5.36448 )
+
+[node name="rock_face_2" type="Spatial" parent="assets/groups"]
+editor/display_folded = true
+
+[node name="rock_face_base_2" parent="assets/groups/rock_face_2" instance=ExtResource( 16 )]
+transform = Transform( 4.48127, 0.124858, 0.013824, -0.121415, 4.43151, -0.666617, -0.0322417, 0.665981, 4.43314, -20.4184, 2.25879, -0.988045 )
+
+[node name="rock_face_base_3" parent="assets/groups/rock_face_2" instance=ExtResource( 16 )]
+transform = Transform( 3.12355, 0.752523, 4.43366, -0.148293, 5.41252, -0.814188, -4.49466, 0.344387, 3.10804, -26.8016, 2.37451, 6.87914 )
+
+[node name="rock_face_base_4" parent="assets/groups/rock_face_2" instance=ExtResource( 16 )]
+transform = Transform( 5.41698, 0.0284385, -0.797576, -0.148293, 5.41252, -0.814188, 0.784178, 0.827094, 5.35548, -3.60765, 2.37451, -3.38276 )
