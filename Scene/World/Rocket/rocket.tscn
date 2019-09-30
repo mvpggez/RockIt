@@ -57,10 +57,10 @@ enum ParticleMode {HALT, WAITING, LAUNCHING, NORMAL, BOOST}
 var particle_mode = ParticleMode.HALT
 
 #rocket levels (unsafe)
-export var previous_head_level = 0
-export var previous_tank_level = 0
-export var previous_thruster_level = 0
-export var previous_booster_level = 0
+var previous_head_level = 0
+var previous_tank_level = 0
+var previous_thruster_level = 0
+var previous_booster_level = 0
 export var head_level = 0
 export var tank_level = 0
 export var thruster_level = 0
@@ -69,6 +69,9 @@ export var min_tilt_power = 0.02
 export var max_tilt_power = 0.05
 export var tilt_height = 2
 var launch_tilted = false
+
+var launched = false
+
 func _ready():
 	rebuildRocket()
 
@@ -130,37 +133,38 @@ func _integrate_forces(state):
 	
 	#keep integrate_forces updated
 	add_central_force(self.transform.basis.xform(Vector3(0,0.01,0))) 
-	
-	#you can only control the rocket as long as you have fuel
-	if fuel_remaining > 0: 
-		if not Input.is_action_pressed(\"ui_down\"):
-			#add_central_force needs the force in global space
-			add_central_force(self.transform.basis.xform(Vector3(0,get_thruster().thrust,0))) 
-			fuel_remaining -= get_thruster().fuel_consumption*delta
-			set_particle_mode(ParticleMode.NORMAL)
+	if launched:
+		
+		#you can only control the rocket as long as you have fuel
+		if fuel_remaining > 0: 
+			if not Input.is_action_pressed(\"ui_down\"):
+				#add_central_force needs the force in global space
+				add_central_force(self.transform.basis.xform(Vector3(0,get_thruster().thrust,0))) 
+				fuel_remaining -= get_thruster().fuel_consumption*delta
+				set_particle_mode(ParticleMode.NORMAL)
+			else:
+				set_particle_mode(ParticleMode.HALT)
+			#Version 1: Apply force from Thrusters on the head
+			if Input.is_action_pressed(\"ui_right\"):	
+				add_force(self.transform.basis.xform(Vector3(get_head().thrust,0,0)), Vector3(0.0, height, 0.0)) 
+				fuel_remaining -= get_head().fuel_consumption*delta
+			if Input.is_action_pressed(\"ui_left\"):
+				add_force(self.transform.basis.xform(Vector3(-get_head().thrust,0,0)), Vector3(0.0, height, 0.0)) 
+				fuel_remaining -= get_head().fuel_consumption*delta
+		
+			if fuel_remaining < 0:
+				fuel_remaining = 0
+				set_particle_mode(ParticleMode.HALT)
 		else:
 			set_particle_mode(ParticleMode.HALT)
-		#Version 1: Apply force from Thrusters on the head
-		if Input.is_action_pressed(\"ui_right\"):	
-			add_force(self.transform.basis.xform(Vector3(get_head().thrust,0,0)), Vector3(0.0, height, 0.0)) 
-			fuel_remaining -= get_head().fuel_consumption*delta
-		if Input.is_action_pressed(\"ui_left\"):
-			add_force(self.transform.basis.xform(Vector3(-get_head().thrust,0,0)), Vector3(0.0, height, 0.0)) 
-			fuel_remaining -= get_head().fuel_consumption*delta
-	
-		if fuel_remaining < 0:
-			fuel_remaining = 0
-			set_particle_mode(ParticleMode.HALT)
-	else:
-		set_particle_mode(ParticleMode.HALT)
-	if booster_fuel_remaining > 0:
-		if Input.is_action_pressed(\"ui_up\"):
-			#add_central_force needs the force in global space
-			add_central_force(self.transform.basis.xform(Vector3(0,get_booster().thrust,0))) 
-			booster_fuel_remaining -= get_booster().fuel_consumption*delta
-			set_particle_mode(ParticleMode.BOOST)
-			if booster_fuel_remaining < 0:
-				booster_fuel_remaining = 0
+		if booster_fuel_remaining > 0:
+			if Input.is_action_pressed(\"ui_up\"):
+				#add_central_force needs the force in global space
+				add_central_force(self.transform.basis.xform(Vector3(0,get_booster().thrust,0))) 
+				booster_fuel_remaining -= get_booster().fuel_consumption*delta
+				set_particle_mode(ParticleMode.BOOST)
+				if booster_fuel_remaining < 0:
+					booster_fuel_remaining = 0
 			
 		
 			
@@ -226,13 +230,13 @@ func get_booster():
 	return $Boosters.get_child(booster_level)
 	
 func get_head_by_level(level):
-	return $Heads.get_child(level)
+	return $Heads.get_child(min(level, $Heads.get_child_count()-1))
 func get_tank_by_level(level):
-	return $Tanks.get_child(level)
+	return $Tanks.get_child(min(level, $Tanks.get_child_count()-1))
 func get_thruster_by_level(level):
-	return $Thrusters.get_child(level)
+	return $Thrusters.get_child(min(level, $Thrusters.get_child_count()-1))
 func get_booster_by_level(level):
-	return $Boosters.get_child(level)
+	return $Boosters.get_child(min(level, $Boosters.get_child_count()-1))
 	
 func upgrade_head():
 	previous_head_level = head_level
@@ -281,8 +285,8 @@ func _on_Area_body_entered(body):
 			durability-=1
 			if durability <= 0:
 				$Area.set_deferred(\"monitoring\", true)
-				collision_layer = 1
-				collision_mask = 1
+				collision_layer = 3
+				collision_mask = 3
 				
 
 "
@@ -306,8 +310,8 @@ min_value = -1.0
 _data = [ Vector2( 0.00346667, 0.3366 ), 0.0, 0.0, 0, 0, Vector2( 0.622005, 0.6182 ), 0.0, 0.0, 0, 0, Vector2( 0.988021, 0.6006 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Rocket" type="RigidBody"]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 2
+collision_mask = 2
 contacts_reported = 1
 contact_monitor = true
 axis_lock_linear_z = true
@@ -316,7 +320,6 @@ axis_lock_angular_y = true
 script = SubResource( 1 )
 
 [node name="Heads" type="Spatial" parent="."]
-editor/display_folded = true
 
 [node name="Head2" parent="Heads" instance=ExtResource( 1 )]
 mesh_resource = ExtResource( 2 )
@@ -327,6 +330,7 @@ fuel_consumption = 5.0
 durability = 1
 
 [node name="Head3" parent="Heads" instance=ExtResource( 1 )]
+price = 10
 mesh_resource = ExtResource( 3 )
 mesh_offset = Vector3( 0, 0.2, 0 )
 thrust = 2.2
@@ -692,6 +696,7 @@ amount = 16
 speed_scale = 2.0
 local_coords = false
 mesh = ExtResource( 40 )
+angular_velocity = 8.40779e-45
 scale_amount = 0.6
 color_ramp = SubResource( 5 )
 

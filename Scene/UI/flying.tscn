@@ -4,16 +4,13 @@
 [ext_resource path="res://Asset/UI/fuel_under.png" type="Texture" id=2]
 [ext_resource path="res://Asset/UI/fuel_progress.png" type="Texture" id=3]
 
-
-
-
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
 
 var time = 0.0
 var border_height = 27
 var maximum_fuel = 1000
-var maximum_booster_fuel = 1000
+var maximum_booster_fuel = 150
 var minimum_fuel_bar_height = 0.0
 var minimum_booster_fuel_bar_height = 0.0
 
@@ -41,7 +38,7 @@ func set_height_bar(rocket):
 	$height_bar.value = rocket.get_height()/10
 
 func _process(delta):
-	var rocket = get_node(\"../Rocket\")
+	var rocket = get_parent().get_world().get_node(\"Rocket\")
 	set_fuel_bar(rocket)
 	set_booster_fuel_bar(rocket)
 	set_height_bar(rocket)

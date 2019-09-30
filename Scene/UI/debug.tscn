@@ -10,6 +10,7 @@ func _process(delta):
 	s += \"FPS: \"+str(Engine.get_frames_per_second() )+\"\\n\"
 	s += \"Height: \"+str(rocket.get_height())+\"\\n\"
 	s += \"Fuel: \"+str(rocket.get_fuel())+\"\\n\"
+	s += \"BoosterFuel: \"+str(rocket.get_booster_fuel())+\"\\n\"
 	$RichTextLabel.text = s
 "
 
