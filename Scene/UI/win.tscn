@@ -7,16 +7,18 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
 
+func set_topline(text):
+	$topline.text = text
+	
+func set_text(text):
+	$text.text = text
+
+func _on_RestartButton_pressed():
+	get_parent().restart()
 "
 
 [sub_resource type="DynamicFont" id=4]
 size = 35
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 35
-outline_size = 4
-outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -24,6 +26,12 @@ size = 35
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 35
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
 
 [node name="win" type="Control"]
 anchor_right = 1.0
@@ -56,24 +64,23 @@ text = "Back to
 Shop"
 align = 1
 
-[node name="win" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -259.5
-margin_top = 101.902
-margin_right = 259.5
-margin_bottom = 188.902
-custom_fonts/font = SubResource( 2 )
-text = "You've reached the moon!"
-align = 1
-
-[node name="money" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -259.5
-margin_top = 158.378
-margin_right = 259.5
-margin_bottom = 245.378
+[node name="text" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -126.0
+margin_bottom = 50.0
 custom_fonts/font = SubResource( 3 )
 text = "You recieved 1000$!"
 align = 1
+
+[node name="topline" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -182.841
+margin_bottom = -140.841
+custom_fonts/font = SubResource( 2 )
+text = "You've reached the moon!"
+align = 1
+[connection signal="pressed" from="TextureButton" to="." method="_on_RestartButton_pressed"]

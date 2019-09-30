@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scene/World/earth.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scene/UI/shop.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scene/UI/flying.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scene/UI/win.tscn" type="PackedScene" id=4]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
@@ -19,7 +20,7 @@ var highscore = 0
 
 
 
-enum Phase {SHOP, LAUNCHING, FLYING, RESULT}
+enum Phase {SHOP, LAUNCHING, RESULT}
 var phase = null
 onready var world = $Spatial
 
@@ -37,20 +38,16 @@ func set_phase(new_phase):
 		$UI_shop.visible = false
 	elif phase == Phase.LAUNCHING:
 		$UI_flying.visible = false
-	elif phase == Phase.FLYING:
-		$UI_flying.visible = false
 	elif phase == Phase.RESULT:
-		pass#$UI_flying.visible = false
+		$UI_result.visible = false
 		
 	if new_phase == Phase.SHOP:
 		$UI_shop.visible = true
 		$UI_shop.update_all()
 	elif new_phase == Phase.LAUNCHING:
 		$UI_flying.visible = true
-	elif new_phase == Phase.FLYING:
-		$UI_flying.visible = true
 	elif new_phase == Phase.RESULT:
-		pass#$UI_shop.visible = true
+		$UI_result.visible = true
 		
 	phase = new_phase
 
@@ -86,8 +83,19 @@ func restart():
 	add_child(world)
 	set_phase(Phase.SHOP)
 	
-func win():
-	reached_moon = true
+func win(money):
+	if reached_moon:
+		$UI_result.set_topline(\"You did it! You're flying to Mars!\")
+	else:
+		$UI_result.set_topline(\"You've reached the Moon!\")
+		reached_moon = true
+	$UI_result.set_text(\"You gained \"+str(money)+\"$!\")
+	set_phase(Phase.RESULT)
+	
+func fail(money, height):
+	$UI_result.set_topline(\"You crashed!\")
+	$UI_result.set_text(\"You have reached \"+str(height)+\" meters!\\nYou gained \"+str(money)+\"$!\")
+	set_phase(Phase.RESULT)
 "
 
 [node name="Main" type="Node"]
@@ -99,4 +107,7 @@ script = SubResource( 1 )
 visible = false
 
 [node name="UI_flying" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="UI_result" parent="." instance=ExtResource( 4 )]
 visible = false
