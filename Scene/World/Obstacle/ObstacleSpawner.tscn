@@ -7,6 +7,7 @@ export var min_height = 0.0 #minimum height for the obstacles, 0.0, obstacles wi
 export var max_height = 1000.0 #maximum height for the obstacles
 export var max_count = 5 #Maximum count of obstacles in the spawn area
 export var min_distance = 1.0 #minimum distance between two obstacles, not active!
+export var min_distance_to_rocket = 10#only use when spawning on ready 
 export (Resource) var obstacle_resource = null 
 export var rocket_distance_near = 30 #Begin of the spawn-area
 export var rocket_distance_far = 70 #End of the spawn-area, begin of the despawn area
@@ -22,7 +23,7 @@ func _ready():
 			get_parent().spawn_obstacle(self, 
 										obstacle_resource, 
 										rocket_distance_near, 
-										5,
+										min_distance_to_rocket,
 										min_scale,
 										max_scale)
 
