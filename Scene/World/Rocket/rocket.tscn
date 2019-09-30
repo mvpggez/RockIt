@@ -1,38 +1,38 @@
 [gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Scene/World/Rocket/Head.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Asset/Rocket/Head/Head00.gltf" type="PackedScene" id=2]
-[ext_resource path="res://Asset/Rocket/Head/Head01.gltf" type="PackedScene" id=3]
-[ext_resource path="res://Asset/Rocket/Head/Head02.gltf" type="PackedScene" id=4]
-[ext_resource path="res://Asset/Rocket/Head/Head03.gltf" type="PackedScene" id=5]
-[ext_resource path="res://Asset/Rocket/Head/Head04.gltf" type="PackedScene" id=6]
-[ext_resource path="res://Asset/Rocket/Head/Head05.gltf" type="PackedScene" id=7]
-[ext_resource path="res://Asset/Rocket/Head/Head06.gltf" type="PackedScene" id=8]
-[ext_resource path="res://Asset/Rocket/Head/Head07.gltf" type="PackedScene" id=9]
+[ext_resource path="res://Asset/Rocket/Head/Head02.gltf" type="PackedScene" id=2]
+[ext_resource path="res://Asset/Rocket/Head/Head03.gltf" type="PackedScene" id=3]
+[ext_resource path="res://Asset/Rocket/Head/Head04.gltf" type="PackedScene" id=4]
+[ext_resource path="res://Asset/Rocket/Head/Head05.gltf" type="PackedScene" id=5]
+[ext_resource path="res://Asset/Rocket/Head/Head06.gltf" type="PackedScene" id=6]
+[ext_resource path="res://Asset/Rocket/Head/Head07.gltf" type="PackedScene" id=7]
+[ext_resource path="res://Asset/Rocket/Head/Head00.gltf" type="PackedScene" id=8]
+[ext_resource path="res://Asset/Rocket/Head/Head01.gltf" type="PackedScene" id=9]
 [ext_resource path="res://Asset/Rocket/Head/Head08.gltf" type="PackedScene" id=10]
 [ext_resource path="res://Asset/Rocket/Head/Head09.gltf" type="PackedScene" id=11]
 [ext_resource path="res://Asset/Rocket/Head/Head10.gltf" type="PackedScene" id=12]
 [ext_resource path="res://Scene/World/Rocket/Tank.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Asset/Rocket/Tank/Tank00.gltf" type="PackedScene" id=14]
-[ext_resource path="res://Asset/Rocket/Tank/Tank01.gltf" type="PackedScene" id=15]
-[ext_resource path="res://Asset/Rocket/Tank/Tank02.gltf" type="PackedScene" id=16]
-[ext_resource path="res://Asset/Rocket/Tank/Tank03.gltf" type="PackedScene" id=17]
-[ext_resource path="res://Asset/Rocket/Tank/Tank04.gltf" type="PackedScene" id=18]
-[ext_resource path="res://Asset/Rocket/Tank/Tank05.gltf" type="PackedScene" id=19]
-[ext_resource path="res://Asset/Rocket/Tank/Tank06.gltf" type="PackedScene" id=20]
-[ext_resource path="res://Asset/Rocket/Tank/Tank07.gltf" type="PackedScene" id=21]
+[ext_resource path="res://Asset/Rocket/Tank/Tank02.gltf" type="PackedScene" id=14]
+[ext_resource path="res://Asset/Rocket/Tank/Tank03.gltf" type="PackedScene" id=15]
+[ext_resource path="res://Asset/Rocket/Tank/Tank04.gltf" type="PackedScene" id=16]
+[ext_resource path="res://Asset/Rocket/Tank/Tank05.gltf" type="PackedScene" id=17]
+[ext_resource path="res://Asset/Rocket/Tank/Tank06.gltf" type="PackedScene" id=18]
+[ext_resource path="res://Asset/Rocket/Tank/Tank07.gltf" type="PackedScene" id=19]
+[ext_resource path="res://Asset/Rocket/Tank/Tank00.gltf" type="PackedScene" id=20]
+[ext_resource path="res://Asset/Rocket/Tank/Tank01.gltf" type="PackedScene" id=21]
 [ext_resource path="res://Asset/Rocket/Tank/Tank08.gltf" type="PackedScene" id=22]
 [ext_resource path="res://Asset/Rocket/Tank/Tank09.gltf" type="PackedScene" id=23]
 [ext_resource path="res://Asset/Rocket/Tank/Tank10.gltf" type="PackedScene" id=24]
 [ext_resource path="res://Scene/World/Rocket/Thruster.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Asset/Rocket/Thruster/Thruster00.gltf" type="PackedScene" id=26]
-[ext_resource path="res://Asset/Rocket/Thruster/Thruster01.gltf" type="PackedScene" id=27]
-[ext_resource path="res://Asset/Rocket/Thruster/Thruster02.gltf" type="PackedScene" id=28]
-[ext_resource path="res://Asset/Rocket/Thruster/Thruster03.gltf" type="PackedScene" id=29]
-[ext_resource path="res://Asset/Rocket/Thruster/Thruster04.gltf" type="PackedScene" id=30]
-[ext_resource path="res://Asset/Rocket/Thruster/Thruster05.gltf" type="PackedScene" id=31]
-[ext_resource path="res://Asset/Rocket/Thruster/Thruster06.gltf" type="PackedScene" id=32]
-[ext_resource path="res://Asset/Rocket/Thruster/Thruster07.gltf" type="PackedScene" id=33]
+[ext_resource path="res://Asset/Rocket/Thruster/Thruster02.gltf" type="PackedScene" id=26]
+[ext_resource path="res://Asset/Rocket/Thruster/Thruster03.gltf" type="PackedScene" id=27]
+[ext_resource path="res://Asset/Rocket/Thruster/Thruster04.gltf" type="PackedScene" id=28]
+[ext_resource path="res://Asset/Rocket/Thruster/Thruster05.gltf" type="PackedScene" id=29]
+[ext_resource path="res://Asset/Rocket/Thruster/Thruster06.gltf" type="PackedScene" id=30]
+[ext_resource path="res://Asset/Rocket/Thruster/Thruster07.gltf" type="PackedScene" id=31]
+[ext_resource path="res://Asset/Rocket/Thruster/Thruster00.gltf" type="PackedScene" id=32]
+[ext_resource path="res://Asset/Rocket/Thruster/Thruster01.gltf" type="PackedScene" id=33]
 [ext_resource path="res://Asset/Rocket/Thruster/Thruster08.gltf" type="PackedScene" id=34]
 [ext_resource path="res://Asset/Rocket/Thruster/Thruster09.gltf" type="PackedScene" id=35]
 [ext_resource path="res://Asset/Rocket/Thruster/Thruster10.gltf" type="PackedScene" id=36]
@@ -250,207 +250,294 @@ script = SubResource( 1 )
 
 [node name="Heads" type="Spatial" parent="."]
 
-[node name="Head" parent="Heads" instance=ExtResource( 1 )]
-mesh_resource = ExtResource( 2 )
-mesh_offset = Vector3( 0, 0.5, 0 )
-thrust = 1.0
-durability = 1
-
-[node name="Head1" parent="Heads" instance=ExtResource( 1 )]
-mesh_resource = ExtResource( 3 )
-mesh_offset = Vector3( 0, 0.4, 0 )
-thrust = 2.0
-
 [node name="Head2" parent="Heads" instance=ExtResource( 1 )]
-mesh_resource = ExtResource( 4 )
+mesh_resource = ExtResource( 2 )
 mesh_offset = Vector3( 0, 0.15, 0 )
 mesh_height = 2.8
 thrust = 2.0
+fuel_consumption = 5.0
+durability = 1
 
 [node name="Head3" parent="Heads" instance=ExtResource( 1 )]
-mesh_resource = ExtResource( 5 )
+mesh_resource = ExtResource( 3 )
 mesh_offset = Vector3( 0, 0.2, 0 )
-thrust = 2.0
+thrust = 2.2
+fuel_consumption = 6.0
+durability = 2
 
 [node name="Head4" parent="Heads" instance=ExtResource( 1 )]
-mesh_resource = ExtResource( 6 )
+mesh_resource = ExtResource( 4 )
 mesh_offset = Vector3( 0, 0.25, 0 )
-thrust = 2.0
+thrust = 2.4
+fuel_consumption = 7.0
+durability = 2
 
 [node name="Head5" parent="Heads" instance=ExtResource( 1 )]
-mesh_resource = ExtResource( 7 )
+mesh_resource = ExtResource( 5 )
 mesh_offset = Vector3( 0, 0.43, 0 )
 mesh_height = 0.73
-thrust = 2.0
+thrust = 2.6
+fuel_consumption = 8.0
 
 [node name="Head6" parent="Heads" instance=ExtResource( 1 )]
-mesh_resource = ExtResource( 8 )
+mesh_resource = ExtResource( 6 )
 mesh_offset = Vector3( 0, 0.27, 0 )
-thrust = 2.0
+thrust = 2.8
+fuel_consumption = 9.0
 
 [node name="Head7" parent="Heads" instance=ExtResource( 1 )]
-mesh_resource = ExtResource( 9 )
+mesh_resource = ExtResource( 7 )
 mesh_offset = Vector3( 0, 0.38, 0 )
-thrust = 2.0
+thrust = 3.0
+fuel_consumption = 10.0
+durability = 4
+
+[node name="Head" parent="Heads" instance=ExtResource( 1 )]
+mesh_resource = ExtResource( 8 )
+mesh_offset = Vector3( 0, 0.5, 0 )
+thrust = 3.2
+fuel_consumption = 11.0
+durability = 4
+
+[node name="Head1" parent="Heads" instance=ExtResource( 1 )]
+mesh_resource = ExtResource( 9 )
+mesh_offset = Vector3( 0, 0.4, 0 )
+thrust = 3.4
+fuel_consumption = 12.0
+durability = 5
 
 [node name="Head8" parent="Heads" instance=ExtResource( 1 )]
 mesh_resource = ExtResource( 10 )
 mesh_offset = Vector3( 0, 0.74, 0 )
-thrust = 2.0
+thrust = 3.6
+fuel_consumption = 13.0
+durability = 5
 
 [node name="Head9" parent="Heads" instance=ExtResource( 1 )]
 mesh_resource = ExtResource( 11 )
 mesh_offset = Vector3( 0, 0.85, 0 )
-thrust = 2.0
+thrust = 3.8
+fuel_consumption = 14.0
+durability = 6
 
 [node name="Head10" parent="Heads" instance=ExtResource( 1 )]
 mesh_resource = ExtResource( 12 )
 mesh_offset = Vector3( 0, 0.34, 0 )
-thrust = 2.0
+thrust = 4.0
+fuel_consumption = 15.0
+durability = 6
 
 [node name="Tanks" type="Spatial" parent="."]
 
-[node name="Tank" parent="Tanks" instance=ExtResource( 13 )]
-mesh_resource = ExtResource( 14 )
-mesh_offset = Vector3( 0, -0.5, 0 )
-mesh_height = 3.5
-
-[node name="Tank1" parent="Tanks" instance=ExtResource( 13 )]
-mesh_resource = ExtResource( 15 )
-mesh_offset = Vector3( 0, 1.7, 0 )
-mesh_height = 3.5
-capacity = 150.0
-
 [node name="Tank2" parent="Tanks" instance=ExtResource( 13 )]
-mesh_resource = ExtResource( 16 )
+mesh_resource = ExtResource( 14 )
 mesh_offset = Vector3( 0, 0.055, 0 )
 mesh_height = 0.1
-capacity = 150.0
+capacity = 70.0
 
 [node name="Tank3" parent="Tanks" instance=ExtResource( 13 )]
-mesh_resource = ExtResource( 17 )
+mesh_resource = ExtResource( 15 )
 mesh_offset = Vector3( 0, 0.49, 0 )
 mesh_height = 0.97
-capacity = 150.0
 
 [node name="Tank4" parent="Tanks" instance=ExtResource( 13 )]
-mesh_resource = ExtResource( 18 )
+mesh_resource = ExtResource( 16 )
 mesh_offset = Vector3( 0, 0.96, 0 )
 mesh_height = 1.91
 capacity = 150.0
 
 [node name="Tank5" parent="Tanks" instance=ExtResource( 13 )]
-mesh_resource = ExtResource( 19 )
+mesh_resource = ExtResource( 17 )
 mesh_offset = Vector3( 0, 1.26, 0 )
 mesh_height = 2.52
-capacity = 150.0
+capacity = 220.0
 
 [node name="Tank6" parent="Tanks" instance=ExtResource( 13 )]
-mesh_resource = ExtResource( 20 )
+mesh_resource = ExtResource( 18 )
 mesh_offset = Vector3( 0, 1.27, 0 )
 mesh_height = 2.55
-capacity = 150.0
+capacity = 300.0
 
 [node name="Tank7" parent="Tanks" instance=ExtResource( 13 )]
-mesh_resource = ExtResource( 21 )
+mesh_resource = ExtResource( 19 )
 mesh_offset = Vector3( 0, 1.49, 0 )
 mesh_height = 2.98
-capacity = 150.0
+capacity = 390.0
+
+[node name="Tank" parent="Tanks" instance=ExtResource( 13 )]
+mesh_resource = ExtResource( 20 )
+mesh_offset = Vector3( 0, -0.5, 0 )
+mesh_height = 3.5
+capacity = 490.0
+
+[node name="Tank1" parent="Tanks" instance=ExtResource( 13 )]
+mesh_resource = ExtResource( 21 )
+mesh_offset = Vector3( 0, 1.7, 0 )
+mesh_height = 3.5
+capacity = 600.0
 
 [node name="Tank8" parent="Tanks" instance=ExtResource( 13 )]
 mesh_resource = ExtResource( 22 )
 mesh_offset = Vector3( 0, 1.56, 0 )
 mesh_height = 3.1
-capacity = 150.0
+capacity = 720.0
 
 [node name="Tank9" parent="Tanks" instance=ExtResource( 13 )]
 mesh_resource = ExtResource( 23 )
 mesh_offset = Vector3( 0, 1.26, 0 )
 mesh_height = 2.54
-capacity = 150.0
+capacity = 850.0
 
 [node name="Tank10" parent="Tanks" instance=ExtResource( 13 )]
 mesh_resource = ExtResource( 24 )
 mesh_offset = Vector3( 0, 1.4, 0 )
 mesh_height = 3.0
-capacity = 150.0
+capacity = 990.0
 
 [node name="Thrusters" type="Spatial" parent="."]
 
-[node name="Thruster" parent="Thrusters" instance=ExtResource( 25 )]
+[node name="Thruster2" parent="Thrusters" instance=ExtResource( 25 )]
 mesh_resource = ExtResource( 26 )
-mesh_offset = Vector3( 0, 0.5, 0 )
-mesh_height = 1.0
+mesh_offset = Vector3( 0, 0.12, 0 )
+mesh_height = 0.16
 fuel_consumption = 4.0
 thrust = 10.2
 
-[node name="Thruster1" parent="Thrusters" instance=ExtResource( 25 )]
-mesh_resource = ExtResource( 27 )
-mesh_offset = Vector3( 0, 0.5, 0 )
-mesh_height = 1.0
-thrust = 20.0
-
-[node name="Thruster2" parent="Thrusters" instance=ExtResource( 25 )]
-mesh_resource = ExtResource( 28 )
-mesh_offset = Vector3( 0, 0.12, 0 )
-mesh_height = 0.16
-thrust = 20.0
-
 [node name="Thruster3" parent="Thrusters" instance=ExtResource( 25 )]
-mesh_resource = ExtResource( 29 )
+mesh_resource = ExtResource( 27 )
 mesh_offset = Vector3( 0, 0.31, 0 )
 mesh_height = 0.51
-thrust = 20.0
+fuel_consumption = 4.5
+thrust = 10.4
 
 [node name="Thruster4" parent="Thrusters" instance=ExtResource( 25 )]
-mesh_resource = ExtResource( 30 )
+mesh_resource = ExtResource( 28 )
 mesh_offset = Vector3( 0, 0.12, 0 )
 mesh_height = 0.25
-thrust = 20.0
+fuel_consumption = 5.0
+thrust = 10.6
 
 [node name="Thruster5" parent="Thrusters" instance=ExtResource( 25 )]
-mesh_resource = ExtResource( 31 )
+mesh_resource = ExtResource( 29 )
 mesh_offset = Vector3( 0, 0.312, 0 )
 mesh_height = 0.54
-thrust = 20.0
+fuel_consumption = 5.5
+thrust = 10.8
 
 [node name="Thruster6" parent="Thrusters" instance=ExtResource( 25 )]
-mesh_resource = ExtResource( 32 )
+mesh_resource = ExtResource( 30 )
 mesh_offset = Vector3( 0, 0.373, 0 )
 mesh_height = 0.698
-thrust = 20.0
+fuel_consumption = 6.0
+thrust = 11.0
 
 [node name="Thruster7" parent="Thrusters" instance=ExtResource( 25 )]
-mesh_resource = ExtResource( 33 )
+mesh_resource = ExtResource( 31 )
 mesh_offset = Vector3( 0, 0.489, 0 )
 mesh_height = 0.96
-thrust = 20.0
+fuel_consumption = 6.5
+thrust = 11.2
+
+[node name="Thruster" parent="Thrusters" instance=ExtResource( 25 )]
+mesh_resource = ExtResource( 32 )
+mesh_offset = Vector3( 0, 0.5, 0 )
+mesh_height = 1.0
+fuel_consumption = 7.0
+thrust = 11.4
+
+[node name="Thruster1" parent="Thrusters" instance=ExtResource( 25 )]
+mesh_resource = ExtResource( 33 )
+mesh_offset = Vector3( 0, 0.5, 0 )
+mesh_height = 1.0
+fuel_consumption = 7.5
+thrust = 11.6
 
 [node name="Thruster8" parent="Thrusters" instance=ExtResource( 25 )]
 mesh_resource = ExtResource( 34 )
 mesh_offset = Vector3( 0, 0.325, 0 )
 mesh_height = 0.49
-thrust = 20.0
+fuel_consumption = 8.0
+thrust = 11.8
 
 [node name="Thruster9" parent="Thrusters" instance=ExtResource( 25 )]
 mesh_resource = ExtResource( 35 )
 mesh_offset = Vector3( 0, 0.64, 0 )
 mesh_height = 1.28
-thrust = 20.0
+fuel_consumption = 8.5
+thrust = 12.0
 
 [node name="Thruster10" parent="Thrusters" instance=ExtResource( 25 )]
 mesh_resource = ExtResource( 36 )
 mesh_offset = Vector3( 0, 0.636, 0 )
 mesh_height = 1.0
-thrust = 20.0
+fuel_consumption = 9.0
+thrust = 12.2
 
 [node name="Boosters" type="Spatial" parent="."]
 
 [node name="Booster" parent="Boosters" instance=ExtResource( 37 )]
 mesh_resource = ExtResource( 38 )
+fuel_consumption = 50.0
+capacity = 50.0
+thrust = 5.0
 
 [node name="Booster1" parent="Boosters" instance=ExtResource( 37 )]
 mesh_resource = ExtResource( 39 )
+fuel_consumption = 50.0
+capacity = 60.0
+
+[node name="Booster2" parent="Boosters" instance=ExtResource( 37 )]
+mesh_resource = ExtResource( 39 )
+fuel_consumption = 50.0
+capacity = 70.0
+thrust = 15.0
+
+[node name="Booster3" parent="Boosters" instance=ExtResource( 37 )]
+mesh_resource = ExtResource( 39 )
+fuel_consumption = 50.0
+capacity = 80.0
+thrust = 20.0
+
+[node name="Booster4" parent="Boosters" instance=ExtResource( 37 )]
+mesh_resource = ExtResource( 39 )
+fuel_consumption = 50.0
+capacity = 90.0
+thrust = 25.0
+
+[node name="Booster5" parent="Boosters" instance=ExtResource( 37 )]
+mesh_resource = ExtResource( 39 )
+fuel_consumption = 50.0
+thrust = 30.0
+
+[node name="Booster6" parent="Boosters" instance=ExtResource( 37 )]
+mesh_resource = ExtResource( 39 )
+fuel_consumption = 50.0
+capacity = 110.0
+thrust = 35.0
+
+[node name="Booster7" parent="Boosters" instance=ExtResource( 37 )]
+mesh_resource = ExtResource( 39 )
+fuel_consumption = 50.0
+capacity = 120.0
+thrust = 40.0
+
+[node name="Booster8" parent="Boosters" instance=ExtResource( 37 )]
+mesh_resource = ExtResource( 39 )
+fuel_consumption = 50.0
+capacity = 130.0
+thrust = 45.0
+
+[node name="Booster9" parent="Boosters" instance=ExtResource( 37 )]
+mesh_resource = ExtResource( 39 )
+fuel_consumption = 50.0
+capacity = 140.0
+thrust = 50.0
+
+[node name="Booster10" parent="Boosters" instance=ExtResource( 37 )]
+mesh_resource = ExtResource( 39 )
+fuel_consumption = 50.0
+capacity = 150.0
+thrust = 55.0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
@@ -469,6 +556,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 shape = SubResource( 4 )
 
 [node name="waiting" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.606368, 0 )
 
 [node name="CPUParticles_right" type="CPUParticles" parent="waiting"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376674, 0 )
@@ -492,6 +580,7 @@ gravity = Vector3( -2, -0.5, 0 )
 angular_velocity = 0.030303
 
 [node name="prep" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.606368, 0 )
 
 [node name="CPUParticles_right" type="CPUParticles" parent="prep"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376674, 0 )
@@ -518,6 +607,7 @@ scale_amount_random = 1.0
 color_ramp = ExtResource( 42 )
 
 [node name="normal" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.606368, 0 )
 
 [node name="CPUParticles2" type="CPUParticles" parent="normal"]
 emitting = false
@@ -529,6 +619,7 @@ scale_amount = 0.6
 color_ramp = SubResource( 5 )
 
 [node name="fast" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.606368, 0 )
 
 [node name="CPUParticles2" type="CPUParticles" parent="fast"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.68903, 0 )

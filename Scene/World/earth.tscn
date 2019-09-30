@@ -30,15 +30,19 @@ material/0 = null
 
 [node name="Rocket" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.44248, 0 )
+head_level = 10
+tank_level = 10
+thruster_level = 10
+booster_level = 10
 
-[node name="Camera" type="Camera" parent="Rocket"]
+[node name="TESTCamera" type="Camera" parent="Rocket"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.43188 )
 projection = 1
-current = true
 size = 10.0
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.0434, 37.3869 )
+current = true
 size = 10.0
 script = ExtResource( 2 )
 target = NodePath("../Rocket")
@@ -48,15 +52,48 @@ target = NodePath("../Rocket")
 [node name="ObstacleManager" parent="." instance=ExtResource( 4 )]
 
 [node name="ObstacleSpawner" parent="ObstacleManager" instance=ExtResource( 5 )]
+max_height = 50.0
 max_count = 20
-min_distance = 15.0
+min_distance = 30.0
+min_distance_to_rocket = 20
 obstacle_resource = ExtResource( 6 )
 min_scale = 0.4
 max_scale = 0.4
 
 [node name="ObstacleSpawner2" parent="ObstacleManager" instance=ExtResource( 5 )]
-max_count = 1
+min_height = 50.0
+max_height = 300.0
+max_count = 20
+min_distance = 30.0
+obstacle_resource = ExtResource( 7 )
+rocket_distance_near = 40
+rocket_distance_far = 80
+
+[node name="ObstacleSpawner3" parent="ObstacleManager" instance=ExtResource( 5 )]
+min_height = 300.0
+max_height = 800.0
+max_count = 18
+min_distance = 25.0
+obstacle_resource = ExtResource( 7 )
+rocket_distance_near = 40
+rocket_distance_far = 80
+
+[node name="ObstacleSpawner4" parent="ObstacleManager" instance=ExtResource( 5 )]
+min_height = 800.0
+max_height = 1500.0
+max_count = 16
+min_distance = 20.0
+obstacle_resource = ExtResource( 7 )
+rocket_distance_near = 40
+rocket_distance_far = 80
+
+[node name="ObstacleSpawner5" parent="ObstacleManager" instance=ExtResource( 5 )]
+min_height = 1500.0
+max_height = 2500.0
+max_count = 14
 min_distance = 15.0
 obstacle_resource = ExtResource( 7 )
+rocket_distance_near = 40
+rocket_distance_far = 80
 
 [node name="UI_flying" parent="." instance=ExtResource( 8 )]
