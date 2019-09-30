@@ -87,28 +87,28 @@ func _on_HeadButton_pressed():
 	var rocket = get_parent().get_world().get_node(\"Rocket\")
 	rocket.upgrade_head()
 	get_parent().substract_money(rocket.get_head().price)
-	update_head_button(rocket)
+	update_all()
 
 
 func _on_TankButton_pressed():
 	var rocket = get_parent().get_world().get_node(\"Rocket\")
 	rocket.upgrade_tank()
 	get_parent().substract_money(rocket.get_tank().price)
-	update_tank_button(rocket)
+	update_all()
 
 
 func _on_ThrusterButton_pressed():
 	var rocket = get_parent().get_world().get_node(\"Rocket\")
 	rocket.upgrade_thruster()
 	get_parent().substract_money(rocket.get_thruster().price)
-	update_thruster_button(rocket)
+	update_all()
 
 
 func _on_BoosterButton_pressed():
 	var rocket = get_parent().get_world().get_node(\"Rocket\")
 	rocket.upgrade_booster()
 	get_parent().substract_money(rocket.get_booster().price)
-	update_booster_button(rocket)
+	update_all()
 
 
 func _on_LaunchButton_pressed():
