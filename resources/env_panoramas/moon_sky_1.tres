@@ -1,0 +1,4 @@
+[gd_resource type="ProceduralSky" format=2]
+
+[resource]
+sun_color = Color( 0.72549, 0.929412, 1, 1 )

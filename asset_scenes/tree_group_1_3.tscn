@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://resources/meshes/base_tree_group_1_3.mesh" type="ArrayMesh" id=1]
+
+[node name="base_tree_group_1_3001" type="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35028, -2.5415, 0.639641 )
+mesh = ExtResource( 1 )
+material/0 = null

@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://resources/meshes/new_spheremesh.tres" type="SphereMesh" id=1]
+[ext_resource path="res://resources/gradients/gradients_particles/gradient_smoke_soft.tres" type="Gradient" id=2]
+[ext_resource path="res://resources/gradients/gradients_particles/gradient_smoke.tres" type="Gradient" id=3]
+
+
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 1, 0.64093, 0.132813, 1, 1, 0.967773, 0.625, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0.0417707, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.997952, 0.621 ), -0.955493, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=4]
+min_value = -1.0
+_data = [ Vector2( 0.00346667, 0.3366 ), 0.0, 0.0, 0, 0, Vector2( 0.622005, 0.6182 ), 0.0, 0.0, 0, 0, Vector2( 0.988021, 0.6006 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="waiting" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.996, 0, 0 )
+
+[node name="CPUParticles_right" type="CPUParticles" parent="waiting"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376674, 0 )
+speed_scale = 0.9
+mesh = ExtResource( 1 )
+spread = 180.0
+gravity = Vector3( 2, -0.5, 0.5 )
+color_ramp = ExtResource( 2 )
+
+[node name="CPUParticles_left" type="CPUParticles" parent="waiting"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376674, 0 )
+speed_scale = 0.9
+mesh = ExtResource( 1 )
+spread = 180.0
+gravity = Vector3( -2, -0.5, 0 )
+
+[node name="prep" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.57483, 0, 0 )
+
+[node name="CPUParticles_right" type="CPUParticles" parent="prep"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376674, 0 )
+amount = 16
+mesh = ExtResource( 1 )
+spread = 180.0
+gravity = Vector3( 5, -2, 0.5 )
+color_ramp = ExtResource( 3 )
+
+[node name="CPUParticles_left" type="CPUParticles" parent="prep"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376674, 0 )
+amount = 16
+speed_scale = 1.1
+mesh = ExtResource( 1 )
+spread = 180.0
+gravity = Vector3( -5, -2, 0 )
+scale_amount_random = 1.0
+color_ramp = ExtResource( 3 )
+
+[node name="normal" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.139927, 0, 0 )
+
+[node name="CPUParticles2" type="CPUParticles" parent="normal"]
+speed_scale = 2.0
+mesh = ExtResource( 1 )
+color_ramp = SubResource( 1 )
+
+[node name="fast" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.65013, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="fast"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0425568, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="CPUParticles2" type="CPUParticles" parent="fast"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.68903, 0 )
+amount = 4
+speed_scale = 4.0
+mesh = ExtResource( 1 )
+spread = 7.46
+scale_amount_curve = SubResource( 3 )
+hue_variation = 0.56
+hue_variation_curve = SubResource( 4 )
