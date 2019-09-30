@@ -57,7 +57,11 @@ enum ParticleMode {HALT, WAITING, LAUNCHING, NORMAL, BOOST}
 var particle_mode = ParticleMode.HALT
 
 #rocket levels (unsafe)
-export var head_level = 2
+export var previous_head_level = 0
+export var previous_tank_level = 0
+export var previous_thruster_level = 0
+export var previous_booster_level = 0
+export var head_level = 0
 export var tank_level = 0
 export var thruster_level = 0
 export var booster_level = 0
@@ -75,11 +79,11 @@ func rebuildRocket():
 	var booster = get_booster()
 	
 	#clear all parts
-	for child in get_head_by_level(max(0,head_level-1)).get_children():
+	for child in get_head_by_level(previous_head_level).get_children():
 		child.free()
-	for child in get_tank_by_level(max(0,tank_level-1)).get_children():
+	for child in get_tank_by_level(previous_tank_level).get_children():
 		child.free()
-	for child in get_thruster_by_level(max(0,thruster_level-1)).get_children():
+	for child in get_thruster_by_level(previous_thruster_level).get_children():
 		child.free()
 	#for child in $\"Booster\".get_children():
 	#	child.free()
@@ -90,15 +94,15 @@ func rebuildRocket():
 	#instance 3d parts
 	#note, that every part translates by its own offset and the height of the parts underneath
 	thruster.add_child(thruster.mesh_resource.instance())
-	thruster.translate(thruster.mesh_offset)
+	thruster.set_translation(thruster.mesh_offset)
 	height += thruster.mesh_height
 	
 	tank.add_child(tank.mesh_resource.instance())
-	tank.translate(tank.mesh_offset+Vector3(0, height, 0))
+	tank.set_translation(tank.mesh_offset+Vector3(0, height, 0))
 	height += tank.mesh_height
 	
 	head.add_child(head.mesh_resource.instance())
-	head.translate(head.mesh_offset+Vector3(0, height, 0))
+	head.set_translation(head.mesh_offset+Vector3(0, height, 0))
 	
 	#Set startvalue for fuel
 	fuel_remaining = tank.capacity
@@ -218,7 +222,33 @@ func get_thruster_by_level(level):
 func get_booster_by_level(level):
 	return $Boosters.get_child(level)
 	
-
+func upgrade_head():
+	previous_head_level = head_level
+	head_level += 1
+	if head_level > 10:
+		head_level = 10
+	rebuildRocket()
+	
+func upgrade_tank():
+	previous_tank_level = tank_level
+	tank_level += 1
+	if tank_level > 10:
+		tank_level = 10
+	rebuildRocket()
+	
+func upgrade_thruster():
+	previous_thruster_level = thruster_level
+	thruster_level += 1
+	if thruster_level > 10:
+		thruster_level = 10
+	rebuildRocket()
+	
+func upgrade_booster():
+	previous_booster_level = booster_level
+	booster_level += 1
+	if booster_level > 10:
+		booster_level = 10
+	rebuildRocket()
 
 func _on_Area_body_entered(body):
 	if body.is_in_group(\"Obstacle\"):
@@ -226,18 +256,20 @@ func _on_Area_body_entered(body):
 			body.get_parent().free_obstacle(body)
 			durability-=1
 			if durability <= 0:
-				$Area.monitoring = true
+				$Area.set_deferred(\"monitoring\", true)
 				collision_layer = 1
 				collision_mask = 1
+				
+
 "
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 1, 2.5, 1 )
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 2, 5, 2 )
 
 [sub_resource type="PrismMesh" id=3]
-
-[sub_resource type="BoxShape" id=4]
-extents = Vector3( 1, 2.5, 1 )
 
 [sub_resource type="Gradient" id=5]
 colors = PoolColorArray( 1, 0.64093, 0.132813, 1, 1, 0.967773, 0.625, 1 )
@@ -260,6 +292,7 @@ axis_lock_angular_y = true
 script = SubResource( 1 )
 
 [node name="Heads" type="Spatial" parent="."]
+editor/display_folded = true
 
 [node name="Head2" parent="Heads" instance=ExtResource( 1 )]
 mesh_resource = ExtResource( 2 )
@@ -339,6 +372,7 @@ fuel_consumption = 15.0
 durability = 6
 
 [node name="Tanks" type="Spatial" parent="."]
+editor/display_folded = true
 
 [node name="Tank2" parent="Tanks" instance=ExtResource( 13 )]
 mesh_resource = ExtResource( 14 )
@@ -406,6 +440,7 @@ mesh_height = 3.0
 capacity = 990.0
 
 [node name="Thrusters" type="Spatial" parent="."]
+editor/display_folded = true
 
 [node name="Thruster2" parent="Thrusters" instance=ExtResource( 25 )]
 mesh_resource = ExtResource( 26 )
@@ -485,6 +520,7 @@ fuel_consumption = 9.0
 thrust = 12.2
 
 [node name="Boosters" type="Spatial" parent="."]
+editor/display_folded = true
 
 [node name="Booster" parent="Boosters" instance=ExtResource( 37 )]
 mesh_resource = ExtResource( 38 )
@@ -549,6 +585,12 @@ mesh_resource = ExtResource( 39 )
 fuel_consumption = 50.0
 capacity = 150.0
 thrust = 55.0
+
+[node name="Area" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+shape = SubResource( 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
@@ -644,3 +686,5 @@ angular_velocity = -380.001
 scale_amount_curve = SubResource( 6 )
 hue_variation = 0.56
 hue_variation_curve = SubResource( 7 )
+[connection signal="input_event" from="." to="." method="_on_Rocket_input_event"]
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
