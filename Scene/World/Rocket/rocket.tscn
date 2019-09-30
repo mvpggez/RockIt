@@ -1,24 +1,21 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scene/World/Rocket/Head.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Asset/Rocket/Head/Head00.gltf" type="PackedScene" id=2]
-[ext_resource path="res://Asset/Rocket/Head/Head01.gltf" type="PackedScene" id=3]
-[ext_resource path="res://Scene/World/Rocket/Tank.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Asset/Rocket/Tank/Tank00.gltf" type="PackedScene" id=5]
-[ext_resource path="res://Asset/Rocket/Tank/Tank01.gltf" type="PackedScene" id=6]
-[ext_resource path="res://Scene/World/Rocket/Thruster.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Asset/Rocket/Thruster/Thruster00.gltf" type="PackedScene" id=8]
-[ext_resource path="res://Asset/Rocket/Thruster/Thruster01.gltf" type="PackedScene" id=9]
-[ext_resource path="res://Scene/World/Rocket/Booster.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Asset/Rocket/Booster/Booster00.gltf" type="PackedScene" id=11]
-[ext_resource path="res://Asset/Rocket/Booster/Booster01.gltf" type="PackedScene" id=12]
-[ext_resource path="res://Asset/Rocket/Particles/new_spheremesh.tres" type="SphereMesh" id=13]
-[ext_resource path="res://Asset/Rocket/Particles/gradient_smoke_soft.tres" type="Gradient" id=14]
-[ext_resource path="res://Asset/Rocket/Particles/gradient_smoke.tres" type="Gradient" id=15]
-
-
-
-
+[ext_resource path="res://Asset/Rocket/Head/Head02.gltf" type="PackedScene" id=3]
+[ext_resource path="res://Asset/Rocket/Head/Head01.gltf" type="PackedScene" id=4]
+[ext_resource path="res://Scene/World/Rocket/Tank.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Asset/Rocket/Tank/Tank00.gltf" type="PackedScene" id=6]
+[ext_resource path="res://Asset/Rocket/Tank/Tank01.gltf" type="PackedScene" id=7]
+[ext_resource path="res://Scene/World/Rocket/Thruster.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Asset/Rocket/Thruster/Thruster00.gltf" type="PackedScene" id=9]
+[ext_resource path="res://Asset/Rocket/Thruster/Thruster01.gltf" type="PackedScene" id=10]
+[ext_resource path="res://Scene/World/Rocket/Booster.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Asset/Rocket/Booster/Booster00.gltf" type="PackedScene" id=12]
+[ext_resource path="res://Asset/Rocket/Booster/Booster01.gltf" type="PackedScene" id=13]
+[ext_resource path="res://Asset/Rocket/Particles/new_spheremesh.tres" type="SphereMesh" id=14]
+[ext_resource path="res://Asset/Rocket/Particles/gradient_smoke_soft.tres" type="Gradient" id=15]
+[ext_resource path="res://Asset/Rocket/Particles/gradient_smoke.tres" type="Gradient" id=16]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends RigidBody
@@ -34,7 +31,7 @@ enum ParticleMode {HALT, WAITING, LAUNCHING, NORMAL, BOOST}
 var particle_mode = ParticleMode.HALT
 
 #rocket levels (unsafe)
-export var head_level = 0
+export var head_level = 2
 export var tank_level = 0
 export var thruster_level = 0
 export var booster_level = 0
@@ -123,11 +120,7 @@ func _integrate_forces(state):
 			if booster_fuel_remaining < 0:
 				booster_fuel_remaining = 0
 			
-	for collider in get_colliding_bodies():
-		if collider.is_in_group(\"Obstacle\"):
-			if durability > 0:
-				collider.get_parent().free_obstacle(collider)
-				durability-=1
+		
 			
 func get_fuel():
 	return fuel_remaining
@@ -197,15 +190,28 @@ func get_tank_by_level(level):
 func get_thruster_by_level(level):
 	return $Thrusters.get_child(level)
 func get_booster_by_level(level):
-	return $Boosters.get_child(level)"
+	return $Boosters.get_child(level)
+	
+
+
+func _on_Area_body_entered(body):
+	if body.is_in_group(\"Obstacle\"):
+		if durability > 0:
+			body.get_parent().free_obstacle(body)
+			durability-=1
+			if durability <= 0:
+				$Area.monitoring = true
+				collision_layer = 1
+				collision_mask = 1
+"
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 1, 2.5, 1 )
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 2, 5, 2 )
 
 [sub_resource type="PrismMesh" id=3]
-
-[sub_resource type="BoxShape" id=4]
-extents = Vector3( 1, 2.5, 1 )
 
 [sub_resource type="Gradient" id=5]
 colors = PoolColorArray( 1, 0.64093, 0.132813, 1, 1, 0.967773, 0.625, 1 )
@@ -218,6 +224,8 @@ min_value = -1.0
 _data = [ Vector2( 0.00346667, 0.3366 ), 0.0, 0.0, 0, 0, Vector2( 0.622005, 0.6182 ), 0.0, 0.0, 0, 0, Vector2( 0.988021, 0.6006 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Rocket" type="RigidBody"]
+collision_layer = 0
+collision_mask = 0
 contacts_reported = 1
 contact_monitor = true
 axis_lock_linear_z = true
@@ -232,43 +240,59 @@ mesh_resource = ExtResource( 2 )
 mesh_offset = Vector3( 0, 0.5, 0 )
 thrust = 1.0
 
-[node name="Head1" parent="Heads" instance=ExtResource( 1 )]
+[node name="Head2" parent="Heads" instance=ExtResource( 1 )]
 mesh_resource = ExtResource( 3 )
+mesh_offset = Vector3( 0, 0.15, 0 )
+mesh_height = 0.29
+thrust = 2.0
+
+[node name="Head1" parent="Heads" instance=ExtResource( 1 )]
+mesh_resource = ExtResource( 4 )
 mesh_offset = Vector3( 0, 0.4, 0 )
 thrust = 2.0
 
 [node name="Tanks" type="Spatial" parent="."]
 
-[node name="Tank" parent="Tanks" instance=ExtResource( 4 )]
-mesh_resource = ExtResource( 5 )
-mesh_offset = Vector3( 0, 1.3, 0 )
+[node name="Tank" parent="Tanks" instance=ExtResource( 5 )]
+mesh_resource = ExtResource( 6 )
+mesh_offset = Vector3( 0, -0.5, 0 )
 mesh_height = 3.5
 
-[node name="Tank1" parent="Tanks" instance=ExtResource( 4 )]
-mesh_resource = ExtResource( 6 )
+[node name="Tank1" parent="Tanks" instance=ExtResource( 5 )]
+mesh_resource = ExtResource( 7 )
 mesh_offset = Vector3( 0, 1.7, 0 )
 mesh_height = 3.5
 
 [node name="Thrusters" type="Spatial" parent="."]
 
-[node name="Thruster" parent="Thrusters" instance=ExtResource( 7 )]
-mesh_resource = ExtResource( 8 )
+[node name="Thruster" parent="Thrusters" instance=ExtResource( 8 )]
+mesh_resource = ExtResource( 9 )
 mesh_offset = Vector3( 0, 0.5, 0 )
 mesh_height = 1.0
+fuel_consumption = 30.0
 
-[node name="Thruster1" parent="Thrusters" instance=ExtResource( 7 )]
-mesh_resource = ExtResource( 9 )
+[node name="Thruster1" parent="Thrusters" instance=ExtResource( 8 )]
+mesh_resource = ExtResource( 10 )
 mesh_offset = Vector3( 0, 0.5, 0 )
 mesh_height = 1.0
 thrust = 20.0
 
 [node name="Boosters" type="Spatial" parent="."]
 
-[node name="Booster" parent="Boosters" instance=ExtResource( 10 )]
-mesh_resource = ExtResource( 11 )
-
-[node name="Booster1" parent="Boosters" instance=ExtResource( 10 )]
+[node name="Booster" parent="Boosters" instance=ExtResource( 11 )]
 mesh_resource = ExtResource( 12 )
+fuel_consumption = 50.0
+capacity = 1000.0
+
+[node name="Booster1" parent="Boosters" instance=ExtResource( 11 )]
+mesh_resource = ExtResource( 13 )
+
+[node name="Area" type="Area" parent="."]
+monitorable = false
+
+[node name="CollisionShape2" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+shape = SubResource( 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
@@ -293,18 +317,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376674, 0 )
 emitting = false
 speed_scale = 0.9
 local_coords = false
-mesh = ExtResource( 13 )
+mesh = ExtResource( 14 )
 spread = 180.0
 gravity = Vector3( 2, -0.5, 0.5 )
 angular_velocity = 8.40779e-45
-color_ramp = ExtResource( 14 )
+color_ramp = ExtResource( 15 )
 
 [node name="CPUParticles_left" type="CPUParticles" parent="waiting"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376674, 0 )
 emitting = false
 speed_scale = 0.9
 local_coords = false
-mesh = ExtResource( 13 )
+mesh = ExtResource( 14 )
 spread = 180.0
 gravity = Vector3( -2, -0.5, 0 )
 angular_velocity = 0.030303
@@ -316,11 +340,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376674, 0 )
 emitting = false
 amount = 16
 local_coords = false
-mesh = ExtResource( 13 )
+mesh = ExtResource( 14 )
 spread = 180.0
 gravity = Vector3( 5, -2, 0.5 )
 angular_velocity = 0.0185445
-color_ramp = ExtResource( 15 )
+color_ramp = ExtResource( 16 )
 
 [node name="CPUParticles_left" type="CPUParticles" parent="prep"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376674, 0 )
@@ -328,12 +352,12 @@ emitting = false
 amount = 16
 speed_scale = 1.1
 local_coords = false
-mesh = ExtResource( 13 )
+mesh = ExtResource( 14 )
 spread = 180.0
 gravity = Vector3( -5, -2, 0 )
 angular_velocity = 4.58869e-41
 scale_amount_random = 1.0
-color_ramp = ExtResource( 15 )
+color_ramp = ExtResource( 16 )
 
 [node name="normal" type="Spatial" parent="."]
 
@@ -342,7 +366,8 @@ emitting = false
 amount = 16
 speed_scale = 2.0
 local_coords = false
-mesh = ExtResource( 13 )
+mesh = ExtResource( 14 )
+angular_velocity = 0.151515
 scale_amount = 0.6
 color_ramp = SubResource( 5 )
 
@@ -354,9 +379,10 @@ emitting = false
 amount = 4
 speed_scale = 4.0
 local_coords = false
-mesh = ExtResource( 13 )
+mesh = ExtResource( 14 )
 spread = 7.46
 angular_velocity = -380.001
 scale_amount_curve = SubResource( 6 )
 hue_variation = 0.56
 hue_variation_curve = SubResource( 7 )
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
