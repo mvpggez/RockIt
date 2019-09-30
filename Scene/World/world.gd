@@ -28,8 +28,9 @@ func calculate_reward(height):
 func failed():
 	over = true
 	get_parent().add_money(calculate_reward(maximum_height))
-	#var money = 
+	get_parent().restart()
 	
 func won():
 	over = true
 	get_parent().add_money(calculate_reward(1000))
+	get_parent().restart()

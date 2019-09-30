@@ -61,10 +61,6 @@ var previous_head_level = 0
 var previous_tank_level = 0
 var previous_thruster_level = 0
 var previous_booster_level = 0
-export var head_level = 0
-export var tank_level = 0
-export var thruster_level = 0
-export var booster_level = 0
 export var min_tilt_power = 0.02
 export var max_tilt_power = 0.05
 export var tilt_height = 2
@@ -221,13 +217,13 @@ func set_particle_mode(value):
 	particle_mode = value
 
 func get_head():
-	return $Heads.get_child(head_level)
+	return $Heads.get_child(get_parent().get_parent().head_level)#get level from main
 func get_tank():
-	return $Tanks.get_child(tank_level)
+	return $Tanks.get_child(get_parent().get_parent().tank_level)#get level from main
 func get_thruster():
-	return $Thrusters.get_child(thruster_level)
+	return $Thrusters.get_child(get_parent().get_parent().thruster_level)#get level from main
 func get_booster():
-	return $Boosters.get_child(booster_level)
+	return $Boosters.get_child(get_parent().get_parent().booster_level)#get level from main
 	
 func get_head_by_level(level):
 	return $Heads.get_child(min(level, $Heads.get_child_count()-1))
@@ -239,31 +235,31 @@ func get_booster_by_level(level):
 	return $Boosters.get_child(min(level, $Boosters.get_child_count()-1))
 	
 func upgrade_head():
-	previous_head_level = head_level
-	head_level += 1
-	if head_level > 10:
-		head_level = 10
+	previous_head_level = get_parent().get_parent().head_level
+	get_parent().get_parent().head_level += 1
+	if get_parent().get_parent().head_level > 10:
+		get_parent().get_parent().head_level = 10
 	rebuildRocket()
 	
 func upgrade_tank():
-	previous_tank_level = tank_level
-	tank_level += 1
-	if tank_level > 10:
-		tank_level = 10
+	previous_tank_level = get_parent().get_parent().tank_level
+	get_parent().get_parent().tank_level += 1
+	if get_parent().get_parent().tank_level > 10:
+		get_parent().get_parent().tank_level = 10
 	rebuildRocket()
 	
 func upgrade_thruster():
-	previous_thruster_level = thruster_level
-	thruster_level += 1
-	if thruster_level > 10:
-		thruster_level = 10
+	previous_thruster_level = get_parent().get_parent().thruster_level
+	get_parent().get_parent().thruster_level += 1
+	if get_parent().get_parent().thruster_level > 10:
+		get_parent().get_parent().thruster_level = 10
 	rebuildRocket()
 	
 func upgrade_booster():
-	previous_booster_level = booster_level
-	booster_level += 1
-	if booster_level > 10:
-		booster_level = 10
+	previous_booster_level = get_parent().get_parent().booster_level
+	get_parent().get_parent().booster_level += 1
+	if get_parent().get_parent().booster_level > 10:
+		get_parent().get_parent().booster_level = 10
 	rebuildRocket()
 
 func _unhandled_input(event):

@@ -33,12 +33,12 @@ func update_button(button, current, next, category, level, price, statnames, sta
 
 func update_head_button(rocket):
 	var current_head = rocket.get_head()
-	var next_head = rocket.get_head_by_level(rocket.head_level+1)
+	var next_head = rocket.get_head_by_level(get_parent().head_level+1)
 	update_button($HeadButton, 
 				  current_head, 
 				  next_head,
 				  \"Head\",
-				  rocket.head_level,
+				  get_parent().head_level,
 				  next_head.price,
 				  [\"Mobility\", \"Durability\", \"Consumption\"],
 				  [current_head.thrust,current_head.durability,current_head.fuel_consumption],
@@ -46,12 +46,12 @@ func update_head_button(rocket):
 
 func update_tank_button(rocket):
 	var current_tank = rocket.get_tank()
-	var next_tank = rocket.get_tank_by_level(rocket.tank_level+1)
+	var next_tank = rocket.get_tank_by_level(get_parent().tank_level+1)
 	update_button($TankButton, 
 				  current_tank, 
 				  next_tank,
 				  \"Tank\",
-				  rocket.tank_level,
+				  get_parent().tank_level,
 				  next_tank.price,
 				  [\"Capacity\"],
 				  [current_tank.capacity],
@@ -59,12 +59,12 @@ func update_tank_button(rocket):
 	
 func update_thruster_button(rocket):
 	var current_thruster = rocket.get_thruster()
-	var next_thruster = rocket.get_thruster_by_level(rocket.thruster_level+1)
+	var next_thruster = rocket.get_thruster_by_level(get_parent().thruster_level+1)
 	update_button($ThrusterButton, 
 				  current_thruster, 
 				  next_thruster,
 				  \"Thruster\",
-				  rocket.thruster_level,
+				  get_parent().thruster_level,
 				  next_thruster.price,
 				  [\"Thrust\", \"Consumption\"],
 				  [current_thruster.thrust,current_thruster.fuel_consumption],
@@ -72,12 +72,12 @@ func update_thruster_button(rocket):
 
 func update_booster_button(rocket):
 	var current_booster = rocket.get_booster()
-	var next_booster = rocket.get_booster_by_level(rocket.booster_level+1)
+	var next_booster = rocket.get_booster_by_level(get_parent().booster_level+1)
 	update_button($BoosterButton, 
 				  current_booster, 
 				  next_booster,
 				  \"Booster\",
-				  rocket.booster_level,
+				  get_parent().booster_level,
 				  next_booster.price,
 				  [\"Thrust\", \"Capacity\", \"Consumption\"],
 				  [current_booster.thrust,current_booster.capacity,current_booster.fuel_consumption],
@@ -126,28 +126,28 @@ anchor_bottom = 1.0
 script = SubResource( 1 )
 
 [node name="HeadButton" parent="." instance=ExtResource( 1 )]
-margin_left = 75.1222
-margin_top = 111.879
-margin_right = -667.878
-margin_bottom = -317.121
+margin_left = 73.5355
+margin_top = 76.9718
+margin_right = -669.464
+margin_bottom = -352.028
 
 [node name="TankButton" parent="." instance=ExtResource( 1 )]
-margin_left = 614.856
-margin_top = 90.7816
-margin_right = -128.144
-margin_bottom = -338.218
+margin_left = 630.723
+margin_top = 82.8482
+margin_right = -112.277
+margin_bottom = -346.152
 
 [node name="ThrusterButton" parent="." instance=ExtResource( 1 )]
-margin_left = 97.9774
-margin_top = 352.737
-margin_right = -645.023
-margin_bottom = -76.2629
+margin_left = 78.9372
+margin_top = 284.51
+margin_right = -664.063
+margin_bottom = -144.49
 
 [node name="BoosterButton" parent="." instance=ExtResource( 1 )]
 margin_left = 639.469
-margin_top = 366.802
+margin_top = 293.815
 margin_right = -103.531
-margin_bottom = -62.1982
+margin_bottom = -135.185
 
 [node name="LaunchButton" type="TextureButton" parent="."]
 margin_left = 404.132
@@ -164,6 +164,17 @@ margin_right = 185.947
 margin_bottom = 82.2348
 custom_fonts/font = SubResource( 2 )
 text = "ROCK IT!"
+
+[node name="Money" type="Label" parent="."]
+margin_left = 457.947
+margin_top = 486.185
+margin_right = 555.947
+margin_bottom = 500.185
+text = "Current Money:"
+
+[node name="HeightRecord" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
 [connection signal="pressed" from="HeadButton" to="." method="_on_HeadButton_pressed"]
 [connection signal="pressed" from="TankButton" to="." method="_on_TankButton_pressed"]
 [connection signal="pressed" from="ThrusterButton" to="." method="_on_ThrusterButton_pressed"]

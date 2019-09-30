@@ -7,10 +7,17 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
 
+
 export var money = 0
+
+var head_level = 0
+var tank_level = 0
+var thruster_level = 0
+var booster_level = 0
+
 enum Phase {SHOP, LAUNCHING, FLYING, RESULT}
 var phase = null
-
+onready var world = $Spatial
 func _ready():
 	set_phase(Phase.SHOP)
 
@@ -29,6 +36,7 @@ func set_phase(new_phase):
 		
 	if new_phase == Phase.SHOP:
 		$UI_shop.visible = true
+		$UI_shop.update_all()
 	elif new_phase == Phase.LAUNCHING:
 		$UI_flying.visible = true
 	elif new_phase == Phase.FLYING:
@@ -41,20 +49,32 @@ func set_phase(new_phase):
 func add_money(value):
 	print(\"Recieved \",value,\"$\")
 	money += value
+	$\"UI_shop/Money\".text = str(money)
 
 func is_affordable(value):
 	return money >= value
 	
 func substract_money(value):
 	money -= value
+	$\"UI_shop/Money\".text = str(money)
 
 func get_world():
-	return $Spatial
+	if world != null:
+		return world
+	else:
+		return $Spatial
 	
 func launch():
 	get_world().get_node(\"Camera\").set_standing(false)
 	get_world().get_node(\"Rocket\").launched = true
 	set_phase(Phase.LAUNCHING)
+
+func restart():
+	world.queue_free()
+	world = load(\"res://Scene/World/earth.tscn\").instance()
+	add_child(world)
+	set_phase(Phase.SHOP)
+	
 "
 
 [node name="Main" type="Node"]
