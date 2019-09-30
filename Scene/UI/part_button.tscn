@@ -1,0 +1,125 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Asset/UI/button_placeholder.png" type="Texture" id=1]
+[ext_resource path="res://third_party/dejavu-sans/dejavu-sans-fonts-ttf-2.35/ttf/DejaVuSans.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://third_party/dejavu-sans/dejavu-sans-fonts-ttf-2.35/ttf/DejaVuSans-Bold.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends TextureButton
+
+func set_level(level):
+	$Level.text = str(level)
+	
+func set_category(category):
+	$Category.text = category
+
+func set_stats(statlist, valuelist, changelist):
+	if len(statlist) != len(valuelist) or len(statlist) != len(changelist):
+		print(\"Error: set_stats of part_button was called with faulty parameters\")
+	
+	$StatNames.text = \"\"
+	for stat in statlist:
+		$StatNames.text += stat+\":\\n\"
+		
+	$StatValues.text = \"\"
+	for value in valuelist:
+		$StatValues.text += str(value)+\"\\n\"
+		
+	$StatChanges.text = \"\"
+	for change in changelist:
+		if change > 0:
+			$StatChanges.text += \"+\"+str(change)+\"\\n\"
+		elif change == 0:
+			$StatChanges.text += \"+-0\\n\"
+		elif change < 0:
+			$StatChanges.text += \"-\"+str(change)+\"\\n\"
+			
+func set_price(price):
+	$Price.text = str(price)+\"$\"
+	"
+
+[sub_resource type="DynamicFont" id=2]
+size = 43
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 43
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 22
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 30
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="Button" type="TextureButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -632.0
+margin_bottom = -361.0
+texture_normal = ExtResource( 1 )
+script = SubResource( 1 )
+
+[node name="Level" type="Label" parent="."]
+margin_left = 310.558
+margin_top = 25.5198
+margin_right = 369.558
+margin_bottom = 78.5198
+custom_fonts/font = SubResource( 2 )
+text = "00"
+align = 1
+
+[node name="Category" type="Label" parent="."]
+margin_left = 34.0
+margin_top = 29.0
+margin_right = 304.0
+margin_bottom = 82.0
+custom_fonts/font = SubResource( 3 )
+text = "Name"
+
+[node name="StatNames" type="Label" parent="."]
+margin_left = 34.3366
+margin_top = 74.9513
+margin_right = 231.337
+margin_bottom = 165.951
+custom_fonts/font = SubResource( 4 )
+text = "Stat1: 
+Stat2: 
+Stat3: "
+
+[node name="StatValues" type="Label" parent="."]
+margin_left = 97.5885
+margin_top = 75.0
+margin_right = 194.588
+margin_bottom = 166.0
+custom_fonts/font = SubResource( 4 )
+text = "100
+20
+30"
+align = 2
+
+[node name="StatChanges" type="Label" parent="."]
+margin_left = 201.252
+margin_top = 75.0
+margin_right = 276.252
+margin_bottom = 192.0
+custom_fonts/font = SubResource( 4 )
+text = "+10
++1
++-0
+"
+
+[node name="Price" type="Label" parent="."]
+margin_left = 161.0
+margin_top = 164.0
+margin_right = 362.0
+margin_bottom = 200.0
+custom_fonts/font = SubResource( 5 )
+text = "1000 $"
+align = 2
