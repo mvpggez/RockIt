@@ -1,19 +1,33 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scene/World/world.gd" type="Script" id=1]
 [ext_resource path="res://Scene/World/Rocket/rocket.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scene/camera.gd" type="Script" id=3]
-[ext_resource path="res://Scene/World/Obstacle/ObstacleManager.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scene/World/Obstacle/ObstacleSpawner.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scene/World/Obstacle/ballon00.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scene/World/Obstacle/ballon01.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/environment_1_export_1_raw.tscn" type="PackedScene" id=8]
+[ext_resource path="res://sky_group.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scene/World/Obstacle/ObstacleManager.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scene/World/Obstacle/ObstacleSpawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scene/World/Obstacle/ballon00.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scene/World/Obstacle/ballon01.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/environment_1_export_1_raw.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ocean.tscn" type="PackedScene" id=10]
+[ext_resource path="res://clouds_earth.tscn" type="PackedScene" id=11]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 20, 2, 20 )
 
 [sub_resource type="PlaneMesh" id=2]
 size = Vector2( 40, 40 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Spatial
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+func _physics_process(delta):
+	translation.x = $\"../Rocket\".get_center().x
+	translation.z = $\"../Rocket\".get_center().z"
 
 [node name="Spatial" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.111594 )
@@ -49,52 +63,61 @@ size = 10.0
 script = ExtResource( 3 )
 target = NodePath("../Rocket")
 
-[node name="ObstacleManager" parent="." instance=ExtResource( 4 )]
+[node name="sky_group" parent="Camera" instance=ExtResource( 4 )]
 
-[node name="ObstacleSpawner" parent="ObstacleManager" instance=ExtResource( 5 )]
+[node name="ObstacleManager" parent="." instance=ExtResource( 5 )]
+
+[node name="ObstacleSpawner" parent="ObstacleManager" instance=ExtResource( 6 )]
 max_height = 50.0
 max_count = 20
 min_distance = 30.0
 min_distance_to_rocket = 20
-obstacle_resource = ExtResource( 6 )
+obstacle_resource = ExtResource( 7 )
 min_scale = 0.4
 max_scale = 0.4
 
-[node name="ObstacleSpawner2" parent="ObstacleManager" instance=ExtResource( 5 )]
+[node name="ObstacleSpawner2" parent="ObstacleManager" instance=ExtResource( 6 )]
 min_height = 50.0
 max_height = 300.0
 max_count = 20
 min_distance = 30.0
-obstacle_resource = ExtResource( 7 )
+obstacle_resource = ExtResource( 8 )
 rocket_distance_near = 40
 rocket_distance_far = 80
 
-[node name="ObstacleSpawner3" parent="ObstacleManager" instance=ExtResource( 5 )]
+[node name="ObstacleSpawner3" parent="ObstacleManager" instance=ExtResource( 6 )]
 min_height = 300.0
 max_height = 800.0
 max_count = 18
 min_distance = 25.0
-obstacle_resource = ExtResource( 7 )
+obstacle_resource = ExtResource( 8 )
 rocket_distance_near = 40
 rocket_distance_far = 80
 
-[node name="ObstacleSpawner4" parent="ObstacleManager" instance=ExtResource( 5 )]
+[node name="ObstacleSpawner4" parent="ObstacleManager" instance=ExtResource( 6 )]
 min_height = 800.0
 max_height = 1500.0
 max_count = 16
 min_distance = 20.0
-obstacle_resource = ExtResource( 7 )
+obstacle_resource = ExtResource( 8 )
 rocket_distance_near = 40
 rocket_distance_far = 80
 
-[node name="ObstacleSpawner5" parent="ObstacleManager" instance=ExtResource( 5 )]
+[node name="ObstacleSpawner5" parent="ObstacleManager" instance=ExtResource( 6 )]
 min_height = 1500.0
 max_height = 2500.0
 max_count = 14
 min_distance = 15.0
-obstacle_resource = ExtResource( 7 )
+obstacle_resource = ExtResource( 8 )
 rocket_distance_near = 40
 rocket_distance_far = 80
 
-[node name="Scene Root" parent="." instance=ExtResource( 8 )]
+[node name="Scene Root" parent="." instance=ExtResource( 9 )]
 transform = Transform( 0.933632, 0, -0.358232, 0, 1, 0, 0.358232, 0, 0.933632, 16.32, -2.21051, -2.07323 )
+
+[node name="ocean" parent="." instance=ExtResource( 10 )]
+transform = Transform( -0.0451292, 0, 0.998981, 0, 1, 0, -0.998981, 0, -0.0451292, 0, -14.8425, 0 )
+script = SubResource( 3 )
+
+[node name="clouds_earth" parent="ocean" instance=ExtResource( 11 )]
+transform = Transform( -0.0451292, 0, -0.998981, 0, 1, 0, 0.998981, 0, -0.0451292, 0, 14.8425, 0 )

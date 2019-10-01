@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scene/World/world.gd" type="Script" id=1]
 [ext_resource path="res://Scene/World/Rocket/rocket.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scene/camera.gd" type="Script" id=3]
-[ext_resource path="res://Scene/World/Obstacle/ObstacleManager.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scene/World/Obstacle/ObstacleSpawner.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scene/World/Obstacle/ballon00.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scene/World/Obstacle/ballon01.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/environment_2_moon_export.tscn" type="PackedScene" id=8]
+[ext_resource path="res://sky_space.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scene/World/Obstacle/ObstacleManager.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scene/World/Obstacle/ObstacleSpawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scene/World/Obstacle/ballon00.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scene/World/Obstacle/ballon01.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/environment_2_moon_export.tscn" type="PackedScene" id=9]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 20, 2, 20 )
@@ -50,52 +51,55 @@ size = 10.0
 script = ExtResource( 3 )
 target = NodePath("../Rocket")
 
-[node name="ObstacleManager" parent="." instance=ExtResource( 4 )]
+[node name="sky_space" parent="Camera" instance=ExtResource( 4 )]
+transform = Transform( -3.22169e-06, 3.82167e-08, 100, 74.3009, 0.136207, 3.73502e-06, -10.2155, 0.990679, -4.37114e-06, -0.501831, 13.2264, -53.427 )
 
-[node name="ObstacleSpawner" parent="ObstacleManager" instance=ExtResource( 5 )]
+[node name="ObstacleManager" parent="." instance=ExtResource( 5 )]
+
+[node name="ObstacleSpawner" parent="ObstacleManager" instance=ExtResource( 6 )]
 max_height = 50.0
 max_count = 20
 min_distance = 30.0
 min_distance_to_rocket = 20
-obstacle_resource = ExtResource( 6 )
+obstacle_resource = ExtResource( 7 )
 min_scale = 0.4
 max_scale = 0.4
 
-[node name="ObstacleSpawner2" parent="ObstacleManager" instance=ExtResource( 5 )]
+[node name="ObstacleSpawner2" parent="ObstacleManager" instance=ExtResource( 6 )]
 min_height = 50.0
 max_height = 300.0
 max_count = 20
 min_distance = 30.0
-obstacle_resource = ExtResource( 7 )
+obstacle_resource = ExtResource( 8 )
 rocket_distance_near = 40
 rocket_distance_far = 80
 
-[node name="ObstacleSpawner3" parent="ObstacleManager" instance=ExtResource( 5 )]
+[node name="ObstacleSpawner3" parent="ObstacleManager" instance=ExtResource( 6 )]
 min_height = 300.0
 max_height = 800.0
 max_count = 18
 min_distance = 25.0
-obstacle_resource = ExtResource( 7 )
+obstacle_resource = ExtResource( 8 )
 rocket_distance_near = 40
 rocket_distance_far = 80
 
-[node name="ObstacleSpawner4" parent="ObstacleManager" instance=ExtResource( 5 )]
+[node name="ObstacleSpawner4" parent="ObstacleManager" instance=ExtResource( 6 )]
 min_height = 800.0
 max_height = 1500.0
 max_count = 16
 min_distance = 20.0
-obstacle_resource = ExtResource( 7 )
+obstacle_resource = ExtResource( 8 )
 rocket_distance_near = 40
 rocket_distance_far = 80
 
-[node name="ObstacleSpawner5" parent="ObstacleManager" instance=ExtResource( 5 )]
+[node name="ObstacleSpawner5" parent="ObstacleManager" instance=ExtResource( 6 )]
 min_height = 1500.0
 max_height = 2500.0
 max_count = 14
 min_distance = 15.0
-obstacle_resource = ExtResource( 7 )
+obstacle_resource = ExtResource( 8 )
 rocket_distance_near = 40
 rocket_distance_far = 80
 
-[node name="environment_2_moon" parent="." instance=ExtResource( 8 )]
+[node name="environment_2_moon" parent="." instance=ExtResource( 9 )]
 transform = Transform( 0.951268, 0, -0.308366, 0, 1, 0, 0.308366, 0, 0.951268, 16.1754, -2.33496, -2.86249 )
