@@ -1,0 +1,49 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://resources/shader/shader_sky_1.shader" type="Shader" id=1]
+[ext_resource path="res://sky_5.tres" type="Texture" id=2]
+[ext_resource path="res://sky_1.tres" type="Texture" id=3]
+[ext_resource path="res://sky_3.tres" type="Texture" id=4]
+
+
+
+
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/gradient = ExtResource( 2 )
+
+[sub_resource type="PlaneMesh" id=2]
+material = SubResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
+shader_param/gradient = ExtResource( 3 )
+
+[sub_resource type="PlaneMesh" id=4]
+material = SubResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 1 )
+shader_param/gradient = ExtResource( 4 )
+
+[sub_resource type="PlaneMesh" id=6]
+material = SubResource( 5 )
+
+[node name="sky_group" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 0.999999, 2.98023e-008, 0, -2.98023e-008, 0.999999, 319.941, -3.13702, -13.5394 )
+
+[node name="skyplane" type="MeshInstance" parent="."]
+transform = Transform( -3.22169e-006, 3.82167e-008, 100, 74.301, 0.136207, 3.73502e-006, -10.2155, 0.990679, -4.37114e-006, -315.147, 163.998, -78.8853 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="skyplane3" type="MeshInstance" parent="."]
+transform = Transform( -3.22169e-006, 3.82167e-008, 100, 74.301, 0.136207, 3.73502e-006, -10.2155, 0.99068, -4.37114e-006, -315.197, 16.3266, -58.5821 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="skyplane7" type="MeshInstance" parent="."]
+transform = Transform( -3.22169e-006, 3.82167e-008, 100, 74.301, 0.136207, 3.73502e-006, -10.2155, 0.990679, -4.37114e-006, -315.075, 311.657, -100.174 )
+mesh = SubResource( 6 )
+material/0 = null

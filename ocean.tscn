@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ocean.shader" type="Shader" id=1]
+[ext_resource path="res://ocean_1.tres" type="Texture" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/gradient = ExtResource( 2 )
+
+[sub_resource type="PlaneMesh" id=2]
+resource_local_to_scene = true
+material = SubResource( 1 )
+size = Vector2( 200, 200 )
+subdivide_width = 60
+subdivide_depth = 60
+
+[node name="ocean" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0031811, 10.4112, 0.00324246 )
+mesh = SubResource( 2 )
+material/0 = null

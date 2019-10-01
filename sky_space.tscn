@@ -1,0 +1,138 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://resources/shader/shader_sky_1.shader" type="Shader" id=1]
+[ext_resource path="res://sky_3.tres" type="Texture" id=2]
+[ext_resource path="res://stars_2.tres" type="Texture" id=3]
+[ext_resource path="res://import/stars.png" type="Texture" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/gradient = ExtResource( 2 )
+
+[sub_resource type="PlaneMesh" id=2]
+material = SubResource( 1 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type spatial;
+render_mode unshaded;
+
+uniform sampler2D tex: hint_black;
+uniform sampler2D gradient: hint_white;
+
+void fragment()
+{
+	vec4 original_texture = texture(tex, UV);
+	vec4 gradient_texture = texture(gradient, UV);
+	
+	EMISSION = gradient_texture.rgb*sin(TIME);
+	ALBEDO = gradient_texture.rgb*(sin(TIME*2.0)*0.1+0.7);
+	ALPHA = original_texture.a;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/tex = ExtResource( 4 )
+shader_param/gradient = ExtResource( 3 )
+
+[sub_resource type="PlaneMesh" id=5]
+material = SubResource( 4 )
+
+[node name="sky_space" type="MeshInstance"]
+transform = Transform( -3.22169e-06, 3.82167e-08, 100, 74.3009, 0.136207, 3.73502e-06, -10.2155, 0.990679, -4.37114e-06, 276.463, 13.2264, -71.8531 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="skyplane9" type="MeshInstance" parent="."]
+transform = Transform( 0.0626037, -3.48553e-07, 0.12096, -0.00370853, 0.408601, 0.00265616, -0.0907201, -1.80617e-06, 0.0469527, 0.29438, 25.6316, -0.106529 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane24" type="MeshInstance" parent="."]
+transform = Transform( 0.0626037, -3.48547e-07, 0.12096, -0.0037083, 0.408601, 0.00265622, -0.0907201, -1.80617e-06, 0.0469527, -0.582959, 16.5848, -0.121003 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane25" type="MeshInstance" parent="."]
+transform = Transform( 0.135168, -0.000327497, 0.0146023, 0.731905, 0.405189, -1.09523, -0.0102021, 0.000466158, 0.100969, -0.59783, 16.4315, -0.0148602 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane23" type="MeshInstance" parent="."]
+transform = Transform( -0.0616363, 3.69584e-07, -0.121456, -0.00370814, 0.408601, 0.00265725, 0.091092, 1.80382e-06, -0.0462271, 0.712789, 25.4715, -0.019995 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane21" type="MeshInstance" parent="."]
+transform = Transform( 0.184331, 3.98021e-06, -0.125121, -0.00606538, 0.668354, 0.00434571, 0.0938409, -7.62557e-08, 0.138248, 0.614907, 12.5302, 0.713483 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane22" type="MeshInstance" parent="."]
+transform = Transform( 0.184331, 3.9806e-06, -0.125121, -0.00606538, 0.668354, 0.00434511, 0.0938409, -7.62557e-08, 0.138248, -0.129482, 12.5302, -0.584547 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane18" type="MeshInstance" parent="."]
+transform = Transform( -0.0616363, 3.69485e-07, -0.121456, -0.00370802, 0.408601, 0.0026576, 0.091092, 1.80382e-06, -0.0462271, 0.0598388, 13.7795, 0.193309 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane19" type="MeshInstance" parent="."]
+transform = Transform( -0.0616363, 3.69485e-07, -0.121456, -0.00370802, 0.408601, 0.00265737, 0.091092, 1.80382e-06, -0.0462271, 0.217811, 12.9826, -0.236706 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane20" type="MeshInstance" parent="."]
+transform = Transform( 0.0624624, 2.16736e-06, -0.121033, -0.00370724, 0.408601, 0.0026576, 0.0907749, 8.30576e-07, 0.0468467, 0.584306, 12.0031, 0.0100207 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane7" type="MeshInstance" parent="."]
+transform = Transform( 0.110836, -3.99944e-07, 0.193257, -0.00606607, 0.668354, 0.00434623, -0.144943, -2.9696e-06, 0.0831271, -0.125277, 12.5302, -0.266045 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane13" type="MeshInstance" parent="."]
+transform = Transform( 0.00652051, -2.22097e-06, 0.222689, -0.00606616, 0.668354, 0.00434491, -0.167017, -2.47614e-06, 0.00489037, -0.568567, 12.5302, -0.266045 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane8" type="MeshInstance" parent="."]
+transform = Transform( 0.0883492, 3.41267e-06, -0.204518, -0.00606516, 0.668353, 0.00434648, 0.153388, 1.53748e-06, 0.0662618, 0.282588, 12.5302, 0.179331 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane10" type="MeshInstance" parent="."]
+transform = Transform( 0.065365, -1.26511e-06, 0.21298, -0.00606711, 0.668353, 0.00434673, -0.159735, -2.82978e-06, 0.0490237, 0.51505, 12.5302, -0.308839 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane11" type="MeshInstance" parent="."]
+transform = Transform( 0.222782, 3.24717e-06, -0.00114945, -0.0060659, 0.668354, 0.00434559, 0.000862114, -1.72603e-06, 0.167086, 0.463062, 11.7912, 0.31938 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane14" type="MeshInstance" parent="."]
+transform = Transform( -0.0850762, 9.07683e-07, -0.205901, -0.00606596, 0.668353, 0.00434407, 0.154425, 2.9059e-06, -0.063807, 0.007824, 12.5302, 0.623125 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane16" type="MeshInstance" parent="."]
+transform = Transform( 0.210495, 2.29886e-06, 0.0729709, -0.00606637, 0.668353, 0.00434497, -0.0547282, -2.43716e-06, 0.157871, 0.435863, 12.5302, -0.844395 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane12" type="MeshInstance" parent="."]
+transform = Transform( -0.0140471, 2.11011e-06, -0.222341, -0.00606558, 0.668353, 0.00434376, 0.166756, 2.5308e-06, -0.0105353, -0.59624, 12.5302, 0.171825 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane15" type="MeshInstance" parent="."]
+transform = Transform( -0.196481, -1.75963e-06, -0.105016, -0.00606604, 0.668353, 0.0043437, 0.078762, 2.6759e-06, -0.14736, -0.277156, 12.5302, 0.700061 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="skyplane17" type="MeshInstance" parent="."]
+transform = Transform( 0.208938, 3.83934e-06, -0.0773163, -0.00606571, 0.668353, 0.00434528, 0.0579873, -7.87995e-07, 0.156704, 0.701701, 12.5302, -0.735538 )
+mesh = SubResource( 5 )
+material/0 = null
