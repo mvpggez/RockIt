@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scene/World/Obstacle/hovering.gd" type="Script" id=1]
+[ext_resource path="res://Asset/Obstacle/meteor00.gltf" type="PackedScene" id=2]
+
+[sub_resource type="SphereShape" id=1]
+radius = 1.14534
+
+[node name="Obstacle" type="RigidBody" groups=[
+"Obstacle",
+]]
+script = ExtResource( 1 )
+
+[node name="Scene Root" parent="." instance=ExtResource( 2 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )

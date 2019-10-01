@@ -8,9 +8,10 @@
 [ext_resource path="res://Scene/World/Obstacle/ObstacleSpawner.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scene/World/Obstacle/ballon00.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scene/World/Obstacle/ballon01.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/environment_1_export_1_raw.tscn" type="PackedScene" id=9]
-[ext_resource path="res://ocean.tscn" type="PackedScene" id=10]
-[ext_resource path="res://clouds_earth.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scene/World/Obstacle/ballon02.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scene/World/Obstacle/satelite00.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scene/World/Obstacle/yellow_box_mad_man_not_included00.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/environment_1_export_1_raw.tscn" type="PackedScene" id=12]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 20, 2, 20 )
@@ -18,21 +19,10 @@ extents = Vector3( 20, 2, 20 )
 [sub_resource type="PlaneMesh" id=2]
 size = Vector2( 40, 40 )
 
-[sub_resource type="GDScript" id=3]
-script/source = "extends Spatial
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-
-func _physics_process(delta):
-	translation.x = $\"../Rocket\".get_center().x
-	translation.z = $\"../Rocket\".get_center().z"
-
 [node name="Spatial" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.111594 )
 script = ExtResource( 1 )
-money_ranges = PoolVector2Array( 1, 100, 1, 200, 1, 300 )
+money_ranges = PoolVector2Array( 1.2, 0, 1, 200, 1.1, 300, 1.2, 600 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
 collision_layer = 3
@@ -69,10 +59,11 @@ target = NodePath("../Rocket")
 
 [node name="ObstacleSpawner" parent="ObstacleManager" instance=ExtResource( 6 )]
 max_height = 50.0
-max_count = 20
-min_distance = 30.0
+max_count = 30
+min_distance = 25.0
 min_distance_to_rocket = 20
 obstacle_resource = ExtResource( 7 )
+rocket_distance_near = 50
 min_scale = 0.4
 max_scale = 0.4
 
@@ -80,44 +71,36 @@ max_scale = 0.4
 min_height = 50.0
 max_height = 300.0
 max_count = 20
-min_distance = 30.0
+min_distance = 35.0
 obstacle_resource = ExtResource( 8 )
 rocket_distance_near = 40
 rocket_distance_far = 80
 
 [node name="ObstacleSpawner3" parent="ObstacleManager" instance=ExtResource( 6 )]
 min_height = 300.0
-max_height = 800.0
+max_height = 600.0
 max_count = 18
-min_distance = 25.0
-obstacle_resource = ExtResource( 8 )
+min_distance = 30.0
+obstacle_resource = ExtResource( 9 )
 rocket_distance_near = 40
 rocket_distance_far = 80
 
 [node name="ObstacleSpawner4" parent="ObstacleManager" instance=ExtResource( 6 )]
-min_height = 800.0
-max_height = 1500.0
-max_count = 16
-min_distance = 20.0
-obstacle_resource = ExtResource( 8 )
-rocket_distance_near = 40
+min_height = 600.0
+max_count = 20
+min_distance = 30.0
+obstacle_resource = ExtResource( 10 )
+rocket_distance_near = 60
+rocket_distance_far = 100
+min_scale = 2.0
+max_scale = 2.0
+
+[node name="SecretObstacleSpawner5" parent="ObstacleManager" instance=ExtResource( 6 )]
+min_height = 600.0
+max_count = 1
+obstacle_resource = ExtResource( 11 )
+rocket_distance_near = 60
 rocket_distance_far = 80
 
-[node name="ObstacleSpawner5" parent="ObstacleManager" instance=ExtResource( 6 )]
-min_height = 1500.0
-max_height = 2500.0
-max_count = 14
-min_distance = 15.0
-obstacle_resource = ExtResource( 8 )
-rocket_distance_near = 40
-rocket_distance_far = 80
-
-[node name="Scene Root" parent="." instance=ExtResource( 9 )]
+[node name="Scene Root" parent="." instance=ExtResource( 12 )]
 transform = Transform( 0.933632, 0, -0.358232, 0, 1, 0, 0.358232, 0, 0.933632, 16.32, -2.21051, -2.07323 )
-
-[node name="ocean" parent="." instance=ExtResource( 10 )]
-transform = Transform( -0.0451292, 0, 0.998981, 0, 1, 0, -0.998981, 0, -0.0451292, 0, -14.8425, 0 )
-script = SubResource( 3 )
-
-[node name="clouds_earth" parent="ocean" instance=ExtResource( 11 )]
-transform = Transform( -0.0451292, 0, -0.998981, 0, 1, 0, 0.998981, 0, -0.0451292, 0, 14.8425, 0 )
