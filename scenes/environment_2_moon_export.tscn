@@ -245,3 +245,6 @@ transform = Transform( 0.39216, -0.00276071, -0.182169, -0.0204102, 0.428978, -0
 
 [node name="crate_4" parent="assets/crates" instance=ExtResource( 10 )]
 transform = Transform( 0.310627, -0.00233698, 0.0378479, -0.000874402, 0.311814, 0.026429, -0.03791, -0.02634, 0.309509, -1.93192, -4.12594, -20.9173 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 27.5257 )

@@ -73,6 +73,7 @@ func launch():
 	get_world().get_node(\"Camera\").set_standing(false)
 	get_world().get_node(\"Rocket\").launched = true
 	set_phase(Phase.LAUNCHING)
+	animationplayer.play(\"tower_start_rotation_1\")
 
 func restart():
 	world.queue_free()
@@ -89,14 +90,18 @@ func win(money):
 	else:
 		$UI_result.set_topline(\"You've reached the Moon!\")
 		reached_moon = true
-	$UI_result.set_text(\"You gained \"+str(money)+\"$!\")
+	$UI_result.set_text(\"You gained \"+str(int(money))+\"$!\")
 	set_phase(Phase.RESULT)
 	
 func fail(money, height):
 	$UI_result.set_topline(\"You crashed!\")
-	$UI_result.set_text(\"You have reached \"+str(height)+\" meters!\\nYou gained \"+str(money)+\"$!\")
+	$UI_result.set_text(\"You have reached \"+str(int(height))+\" meters!\\nYou gained \"+str(int(money))+\"$!\")
 	set_phase(Phase.RESULT)
-"
+
+var animationplayer = null
+
+func register_animationplayer(player):
+	animationplayer = player"
 
 [node name="Main" type="Node"]
 script = SubResource( 1 )

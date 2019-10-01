@@ -39,7 +39,6 @@ directional_shadow_max_distance = 50.0
 [node name="specials" type="Spatial" parent="assets"]
 
 [node name="animated" type="Spatial" parent="assets/specials"]
-editor/display_folded = true
 
 [node name="bird_1_animated" parent="assets/specials/animated" instance=ExtResource( 2 )]
 transform = Transform( 0.244088, 0, -0.258535, 0, 0.355555, 0, 0.258535, 0, 0.244088, -13.378, 2.59167, 7.23404 )
@@ -55,7 +54,6 @@ transform = Transform( 0.232279, 0.0126406, -0.0778591, -0.0169672, 0.244475, -0
 transform = Transform( 0.426925, 0, -0.253954, 0, 0.496747, 0, 0.253954, 0, 0.426925, -13.8823, 2.27931, 3.92226 )
 
 [node name="groups" type="Spatial" parent="assets"]
-editor/display_folded = true
 
 [node name="tree_3" type="Spatial" parent="assets/groups"]
 editor/display_folded = true
@@ -510,7 +508,6 @@ transform = Transform( 0.68726, 0.126432, 0.715325, -0.0270825, 0.988512, -0.148
 transform = Transform( 0.922219, -0.0326911, -0.385283, -0.0270822, 0.988512, -0.148699, 0.385718, 0.147568, 0.910739, -11.6513, 1.86961, 5.36448 )
 
 [node name="rock_face_2" type="Spatial" parent="assets/groups"]
-editor/display_folded = true
 
 [node name="rock_face_base_2" parent="assets/groups/rock_face_2" instance=ExtResource( 16 )]
 transform = Transform( 4.48127, 0.124858, 0.013824, -0.121415, 4.43151, -0.666617, -0.0322417, 0.665981, 4.43314, -20.4184, 2.25879, -0.988045 )
